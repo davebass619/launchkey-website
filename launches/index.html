@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BONDED — Your Launches</title>
+<link rel="canonical" href="https://launchkey.fun/launches/">
+<meta name="description" content="The record for one key: its grade, its counts, and every launch it filed on Launchkey.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* BONDED — Your launches. The connected key's record page.
+   Same production design tokens as the door (P9 system):
+   ink #0a0a0c · off-white #f2f2f0 · gold #f0b90b · red #e5484d ·
+   green #3fb96f. Data: /data/keys.json (the record of authority
+   for the counts) + /data/board.json (the filed launches). */
+:root{
+  --ink:#0a0a0c;
+  --panel:#101014;
+  --panel2:#131318;
+  --line:rgba(242,242,240,.09);
+  --line2:rgba(242,242,240,.16);
+  --txt:#f2f2f0;
+  --mut:#9a9aa0;
+  --dim:#63636a;
+  --gold:#f0b90b;
+  --gold-ink:#161006;
+  --red:#e5484d;
+  --green:#3fb96f;
+  --r-lg:18px;
+  --r-md:14px;
+  --r-sm:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink); color:var(--txt);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  font-size:15.5px; line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.wordmark,.btn,.chip{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif}
+a{color:inherit;text-decoration:none}
+.mono{font-family:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;word-break:break-all}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px 72px}
+.hidden{display:none !important}
+
+/* ---------- header ---------- */
+header.site{
+  position:sticky;top:0;z-index:20;
+  background:rgba(10,10,12,.86);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.header-in{max-width:1120px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;gap:18px}
+.wordmark{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:1.6px;font-size:19px;white-space:nowrap}
+.wordmark .mark-tile{width:30px;height:30px;border-radius:8px;flex:none;background:var(--panel2);
+  border:1px solid rgba(240,185,11,.55);display:flex;align-items:center;justify-content:center}
+.wordmark .key{color:var(--gold)}
+.wordmark small{font-size:9px;font-weight:600;letter-spacing:2.4px;color:var(--dim);display:block;line-height:1;margin-top:2px}
+.wordmark small b{color:var(--red)}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:16px}
+.header-tag{color:var(--mut);font-size:13.5px;font-weight:600;white-space:nowrap}
+.header-tag b{color:var(--txt)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;cursor:pointer;
+  font-weight:700;border-radius:12px;padding:11px 20px;font-size:15px;line-height:1;white-space:nowrap}
+.btn-gold{background:var(--gold);color:var(--gold-ink)}
+.btn-gold:hover{background:#ffc81f}
+.btn-ghost{background:transparent;color:var(--txt);border-color:var(--line2)}
+.btn-ghost:hover{border-color:var(--mut)}
+.btn-quiet{background:var(--panel2);color:var(--txt);border-color:var(--line)}
+.btn-sm{padding:8px 14px;font-size:13.5px;border-radius:10px}
+.btn[disabled]{opacity:.42;cursor:not-allowed}
+
+/* ---------- chips ---------- */
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;letter-spacing:1.2px;
+  padding:4px 10px;border-radius:999px;border:1px solid var(--line2);color:var(--mut);white-space:nowrap}
+.chip .dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.chip-proven{color:var(--gold);border-color:rgba(240,185,11,.55)}
+.chip-pillar{color:var(--gold-ink);background:var(--gold);border-color:var(--gold)}
+.chip-probation{color:var(--mut)}
+
+/* ---------- the record ---------- */
+.panel{margin-top:30px;background:var(--panel);border:1px solid var(--line2);border-radius:var(--r-lg);padding:26px;position:relative}
+.panel-tag{position:absolute;top:-11px;right:22px;background:var(--ink);border:1px solid rgba(240,185,11,.55);
+  color:var(--gold);font-size:10.5px;font-weight:700;letter-spacing:2px;padding:3px 10px;border-radius:999px}
+.sec-label{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:14px}
+.entry-row{display:flex;gap:10px;flex-wrap:wrap}
+.entry-row .input{flex:1;min-width:260px;background:var(--panel2);border:1px solid var(--line);border-radius:var(--r-sm);
+  padding:11px 13px;font-size:15px;color:var(--txt);font-family:inherit}
+.entry-row .input:focus{outline:none;border-color:rgba(240,185,11,.55)}
+#wl-connect{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.hint{color:var(--dim);font-size:13.5px}
+.problem{color:#ff8589;font-size:13.5px;margin-top:12px}
+.grade-panel{margin-top:20px;background:var(--panel2);border:1px solid var(--line);border-radius:var(--r-md);padding:18px}
+.grade-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.grade-top .g-key{font-size:17px;font-weight:700}
+.grade-top .g-label{color:var(--mut);font-size:13.5px}
+.grade-stats{display:flex;gap:0;flex-wrap:wrap;margin-top:14px;border-top:1px solid var(--line)}
+.grade-stats .gs{flex:1;min-width:110px;padding:11px 14px 2px 0}
+.grade-stats .gs .n{font-family:'Space Grotesk',sans-serif;font-size:21px;font-weight:700}
+.grade-stats .gs .l{color:var(--dim);font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.wallet-line{color:var(--dim);font-size:12.5px;margin-top:12px}
+.list-head{display:flex;align-items:baseline;gap:12px;margin-top:26px;margin-bottom:6px}
+.list-head h3{font-size:16.5px;font-weight:700}
+.list-head .lh-note{color:var(--dim);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-left:auto}
+.lrow{display:flex;align-items:center;gap:14px;padding:13px 4px;border-bottom:1px solid var(--line)}
+.lrow:hover{background:rgba(242,242,240,.03)}
+.lrow .lr-num{color:var(--dim);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13.5px;flex:none;width:44px}
+.lrow .lr-main{flex:1;min-width:0}
+.lrow .lr-name{font-weight:700}
+.lrow .lr-tick{color:var(--gold);font-weight:600}
+.lrow .lr-meta{color:var(--mut);font-size:13.5px;display:block}
+.lrow .lr-mint{color:var(--dim);font-size:12.5px;flex:none}
+.lrow .lr-file{color:var(--gold);font-weight:700;font-size:13.5px;flex:none;white-space:nowrap}
+.list-line{color:var(--mut);font-size:14.5px;padding:14px 4px;border-bottom:1px solid var(--line)}
+.note{color:var(--dim);font-size:13px;margin-top:14px}
+
+/* ---------- footer ---------- */
+footer.site{border-top:1px solid var(--line);margin-top:40px;padding-top:22px}
+footer.site .fl{color:var(--dim);font-size:13.5px;line-height:1.6;max-width:720px}
+footer.site .fl b{color:var(--mut)}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  .header-tag{display:none}
+  .panel{padding:20px 16px}
+  .grade-stats .gs{min-width:88px}
+  .lrow .lr-mint{display:none}
+}
+</style>
+<style id="bonded-unify">
+/* ===== BONDED UNIFY (Nov 7 2026 site audit): shared theme layer — the
+   homepage (Proxima format) is the reference: near-black ground, steel
+   text, gold accents, Space Grotesk + IBM Plex Mono. Presentation only;
+   no wording on this page was changed. ===== */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;600;700&display=swap');
+body{background:linear-gradient(180deg,#070a10 0%,#050506 55%,#000000 100%)!important;background-color:#050506!important;color:#e8edf5!important;font-family:'Space Grotesk',-apple-system,'Segoe UI',Roboto,sans-serif!important}
+header.site{background:rgba(7,10,16,.88)!important;border-bottom:1px solid #232b38!important}
+header.site .wordmark,header.site .wordmark span{color:#fdfcf9!important;font-family:'Space Grotesk',sans-serif!important}
+header.site .wordmark .key{color:#f0b90b!important}
+header.site .wordmark small{color:#9aa7ba!important}
+header.site nav a,header.site .header-tag{color:#9aa7ba!important;font-family:'IBM Plex Mono',monospace}
+header.site .btn-gold,header.site a.btn[href="/door/"],header.site a.btn[href="/door"]{background:linear-gradient(180deg,#ffffff,#dfe8f4)!important;border-color:#dfe8f4!important;color:#0a0f16!important;border-radius:8px!important;font-family:'IBM Plex Mono',monospace!important}
+.pfoot{margin-top:26px;padding:22px 16px 8px;border-top:1px solid #232b38;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;color:#7d8698;line-height:1.9}
+.pfoot-a{color:#9cc8ff;text-decoration:none}
+.pfoot-a:hover{color:#5ea8ff}
+html,body{overflow-x:hidden}
+table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:640px){
+  .header-in{flex-wrap:wrap!important;height:auto!important;min-height:0!important;padding-top:10px!important;padding-bottom:10px!important;row-gap:8px!important}
+  .header-in>.btn{margin-left:auto;padding:9px 13px!important;font-size:13.5px!important}
+  nav.mainnav{order:3;width:100%;margin-left:0!important;gap:8px 16px!important;flex-wrap:wrap}
+  .header-right{flex-wrap:wrap;row-gap:6px}
+  .header-tag{display:none}
+  .wordmark{font-size:16px!important}
+  img,video,canvas,svg{max-width:100%}
+  input,select,textarea{max-width:100%}
+}
+header.site .wordmark,header.site nav.mainnav,header.site .header-in>.btn,header.site .header-right{display:none!important}
+header.site .wordmark,header.site nav.mainnav,header.site .header-in>.btn,header.site .header-right{display:none!important}
+.ptop-in{flex-wrap:wrap;row-gap:8px}.ptop-in>a{flex:none;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-in"><div class="ptop-in" style="display:flex;align-items:center;gap:12px;max-width:1180px;margin:0 auto;padding:14px 18px 10px"><a href="/" aria-label="BONDED home" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#fdfcf9;font-weight:700;font-size:20px;letter-spacing:.02em;font-family:'Space Grotesk',sans-serif"><img src="/bonded-mark3.png" alt="" width="72" height="72" style="flex:none"></a><span class="ptop-nav" style="margin-left:auto;display:flex;gap:22px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:12.5px;flex-wrap:wrap;justify-content:flex-end"><a href="/" style="color:#9aa7ba;text-decoration:none">Home</a><a class="tellslink" href="/tells" style="color:#ffe98a;font-weight:700;letter-spacing:.08em;text-decoration:none">Tells App</a><a href="/bonds/" style="color:#9aa7ba;text-decoration:none">Bonds</a><a href="/bond-rules" style="color:#9aa7ba;text-decoration:none">Rules</a><a href="/methodology.html" style="color:#9aa7ba;text-decoration:none">Methodology</a><a href="/door/" style="color:#0a0f16;background:linear-gradient(180deg,#ffffff,#dfe8f4);border-radius:8px;padding:9px 16px;font-weight:700;text-decoration:none">Post a Bond</a></span></div>
+    <a class="wordmark" href="/">
+      <span class="mark-tile" aria-hidden="true">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#f0b90b" stroke-width="2.4" stroke-linecap="round">
+          <circle cx="8" cy="14" r="4.5"/><path d="M11.5 10.5 L20 2"/><path d="M16.5 5.5 L20 9"/><path d="M13.8 8.2 L17 11.4"/>
+        </svg>
+      </span>
+      <span>BONDED</span>
+    </a>
+    <div class="header-right">
+      <span class="header-tag">Born on <b>pump.fun</b> · Filed by <b>BONDED</b></span>
+      <a class="btn btn-ghost btn-sm" href="/why.html" style="text-decoration:none">Why</a>
+      <a class="btn btn-gold btn-sm" href="/door/" style="text-decoration:none">Post a Bond</a>
+    </div>
+  </div></header>
+
+<div class="wrap">
+
+  <section class="panel" aria-label="Your launches">
+    <span class="panel-tag">YOUR LAUNCHES</span>
+
+    <div class="sec-label">One key. Its record.</div>
+    <div class="entry-row">
+      <input class="input" id="wl-input" type="text" autocomplete="off" spellcheck="false" placeholder="Wallet address">
+      <button class="btn btn-gold" type="button" id="wl-lookup">Look up</button>
+    </div>
+    <div id="wl-connect"></div>
+    <p class="problem hidden" id="wl-problem"></p>
+
+    <div class="grade-panel" id="wl-panel">
+      <div class="grade-top">
+        <span class="g-key" id="wl-key">No wallet</span>
+        <span class="chip chip-probation hidden" id="wl-chip"><span class="dot"></span><span id="wl-grade">PROBATION</span></span>
+        <span class="g-label" id="wl-label"></span>
+      </div>
+      <div class="grade-stats">
+        <div class="gs"><div class="n" id="wl-launches">—</div><div class="l">Launches</div></div>
+        <div class="gs"><div class="n" id="wl-grads">—</div><div class="l">Graduations</div></div>
+        <div class="gs"><div class="n" id="wl-adverse">—</div><div class="l">Adverse exits</div></div>
+      </div>
+      <p class="wallet-line mono" id="wl-wallet"></p>
+    </div>
+
+    <div class="list-head">
+      <h3>Filed launches</h3>
+      <span class="lh-note">Newest first</span>
+    </div>
+    <div id="wl-rows">
+      <p class="list-line">Connect or paste a wallet. Its launches print here.</p>
+    </div>
+    <p class="note">Counts are the key's full record. The list shows its filed launches.</p>
+  </section>
+
+  <footer class="site">
+    <p class="fl"><b>Your launches.</b> The grade and the launches for one key, read from the same public record the door prints at birth. Nothing here is hidden. Corrections append to the record. They do not rewrite it.</p>
+  </footer>
+<div class="pfoot">BONDED · <a class="pfoot-a" href="/methodology.html">Methodology</a> · <a class="pfoot-a" href="/door/">Post a Bond</a></div>
+
+</div>
+
+<script>
+// === MERGE LOGIC BEGIN (extracted and exercised by verify-site.mjs) ===
+// The merge this page renders: a wallet resolves through the keys
+// snapshot (the record of authority for key number, grade and the
+// counts), and the filed list is the board snapshot filtered to
+// that key number (board entries carry keyNum, not the wallet).
+// An unknown wallet is the honest new-key state, the same model
+// the door's panel prints: PROBATION, zero counts, no rows.
+function keyRecordModel(keysDoc, boardDoc, wallet) {
+  var keys = (keysDoc && keysDoc.keys) || {};
+  var rec = wallet ? keys[wallet] || null : null;
+  var entries = (boardDoc && boardDoc.entries) || [];
+  if (!rec) {
+    return { isNew: true, key: null, grade: 'PROBATION', launches: 0, graduated: 0, harmfulExits: 0, rows: [] };
+  }
+  var rows = entries
+    .filter(function (e) { return e.keyNum === rec.key; })
+    .map(function (e) {
+      return {
+        num: e.num, name: e.name, ticker: e.ticker, mint: e.mint, born: e.born, pair: e.pair,
+        file: e.file ? (/^https?:\/\//.test(e.file) ? e.file : (e.file.charAt(0) === '/' ? e.file : '/' + e.file)) : '/file.html?mint=' + e.mint,
+      };
+    })
+    .sort(function (a, b) { return b.num - a.num; });
+  return {
+    isNew: false,
+    key: rec.key != null ? rec.key : null,
+    grade: rec.grade || 'PROBATION',
+    launches: rec.launches || 0,
+    graduated: rec.graduated || 0,
+    harmfulExits: rec.harmfulExits || 0,
+    rows: rows,
+  };
+}
+// === MERGE LOGIC END ===
+</script>
+
+<script>
+(function () {
+  var $ = function (s) { return document.querySelector(s); };
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  };
+  var BASE58 = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
+  var shortAddr = function (a) { return a ? a.slice(0, 6) + '…' + a.slice(-6) : '—'; };
+
+  // Data: the homepage lookup pattern (manifest, then every shard,
+  // merged into one document), at absolute /data/ paths — this page
+  // lives at /launches/, where a relative "data/" would not resolve.
+  function getJson(url) {
+    return fetch(url).then(function (r) {
+      if (!r.ok) throw new Error(url + ' HTTP ' + r.status);
+      return r.json();
+    });
+  }
+  function loadKeys() {
+    return getJson('/data/keys.json').then(function (m) {
+      if (!m || !Array.isArray(m.shards)) return m;
+      return Promise.all(m.shards.map(function (s) { return getJson('/data/' + s); })).then(function (parts) {
+        var merged = {};
+        parts.forEach(function (p) {
+          var ks = (p && p.keys) || {};
+          Object.keys(ks).forEach(function (k) { merged[k] = ks[k]; });
+        });
+        return { keys: merged };
+      });
+    });
+  }
+  var dataPromise = null;
+  function loadData() {
+    if (!dataPromise) {
+      dataPromise = Promise.all([loadKeys(), getJson('/data/board.json')]);
+    }
+    return dataPromise;
+  }
+
+  function problem(msg) {
+    var el = $('#wl-problem');
+    if (msg) {
+      el.textContent = msg;
+      el.classList.remove('hidden');
+    } else {
+      el.classList.add('hidden');
+    }
+  }
+
+  function render(model, wallet) {
+    var chip = $('#wl-chip');
+    $('#wl-key').textContent = model.isNew ? 'New key' : 'Key #' + String(model.key).padStart(3, '0');
+    $('#wl-grade').textContent = model.grade;
+    chip.className =
+      'chip ' + (model.grade === 'PILLAR' ? 'chip-pillar' : model.grade === 'PROVEN' ? 'chip-proven' : 'chip-probation');
+    chip.classList.remove('hidden');
+    $('#wl-label').textContent = '';
+    $('#wl-launches').textContent = model.launches;
+    $('#wl-grads').textContent = model.graduated;
+    $('#wl-adverse').textContent = model.harmfulExits;
+    $('#wl-wallet').textContent = wallet || '';
+    var host = $('#wl-rows');
+    if (model.isNew) {
+      host.innerHTML = '<p class="list-line">No record yet. This key opens at PROBATION.</p>';
+      return;
+    }
+    if (!model.rows.length) {
+      host.innerHTML = '<p class="list-line">No filed launches yet.</p>';
+      return;
+    }
+    host.innerHTML = model.rows
+      .map(function (r) {
+        return (
+          '<a class="lrow" href="' + esc(r.file) + '">' +
+          '<span class="lr-num">#' + String(r.num).padStart(3, '0') + '</span>' +
+          '<span class="lr-main"><span class="lr-name">' + esc(r.name) + '</span> ' +
+          '<span class="lr-tick">$' + esc(r.ticker) + '</span>' +
+          '<span class="lr-meta">' + esc(r.born) + ' · paired ' + esc(r.pair) + '</span></span>' +
+          '<span class="lr-mint mono">' + esc(shortAddr(r.mint)) + '</span>' +
+          '<span class="lr-file">' + (/^https?:\/\//.test(r.file) ? 'pump.fun →' : 'File →') + '</span></a>'
+        );
+      })
+      .join('');
+  }
+
+  function resolve(wallet) {
+    problem(null);
+    $('#wl-key').textContent = 'Reading the record…';
+    $('#wl-chip').classList.add('hidden');
+    $('#wl-rows').innerHTML = '<p class="list-line">Reading…</p>';
+    loadData().then(
+      function (docs) {
+        render(keyRecordModel(docs[0], docs[1], wallet), wallet);
+      },
+      function () {
+        $('#wl-key').textContent = 'Record unavailable';
+        $('#wl-rows').innerHTML = '<p class="list-line">The record did not load. Nothing is guessed.</p>';
+      }
+    );
+  }
+
+  function resolveFromInput() {
+    var v = $('#wl-input').value.trim();
+    if (!BASE58.test(v)) {
+      problem('That is not a wallet address.');
+      return;
+    }
+    try {
+      history.replaceState(null, '', '/launches/?key=' + v);
+    } catch (e) { /* the URL is a convenience, never a requirement */ }
+    resolve(v);
+  }
+  $('#wl-lookup').addEventListener('click', resolveFromInput);
+  $('#wl-input').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') resolveFromInput();
+  });
+
+  // Connect: the injected providers a wallet browser exposes. The
+  // door (wallet-standard) is the launch surface; this page only
+  // needs an address to read a public record with.
+  function renderConnect() {
+    var host = $('#wl-connect');
+    host.innerHTML = '';
+    var found = [];
+    if (window.solflare && window.solflare.isSolflare) found.push({ name: 'Solflare', p: window.solflare });
+    if (window.phantom && window.phantom.solana) found.push({ name: 'Phantom', p: window.phantom.solana });
+    if (!found.length && window.solana) found.push({ name: 'Wallet', p: window.solana });
+    if (!found.length) {
+      host.innerHTML = '<span class="hint">No wallet found here. Paste an address above.</span>';
+      return;
+    }
+    found.forEach(function (w) {
+      var b = document.createElement('button');
+      b.className = 'btn btn-ghost btn-sm';
+      b.type = 'button';
+      b.textContent = 'Connect ' + w.name;
+      b.addEventListener('click', function () {
+        Promise.resolve(w.p.connect())
+          .then(function (resp) {
+            var pk = (resp && resp.publicKey) || w.p.publicKey;
+            var addr = pk ? pk.toString() : '';
+            if (!addr) throw new Error('no address');
+            $('#wl-input').value = addr;
+            try {
+              history.replaceState(null, '', '/launches/?key=' + addr);
+            } catch (e) { /* as above */ }
+            resolve(addr);
+          })
+          .catch(function () {
+            problem('Connect failed. Paste the address instead.');
+          });
+      });
+      host.appendChild(b);
+    });
+  }
+  renderConnect();
+
+  var param = new URLSearchParams(location.search).get('key');
+  if (param && BASE58.test(param.trim())) {
+    $('#wl-input').value = param.trim();
+    resolve(param.trim());
+  } else if (param) {
+    problem('That is not a wallet address.');
+  }
+})();
+</script>
+</body>
+</html>

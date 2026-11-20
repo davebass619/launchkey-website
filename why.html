@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BONDED — Why Launch Through the Door</title>
+<link rel="canonical" href="https://launchkey.fun/why">
+<meta name="description" content="Why launch on pump.fun through Launchkey. Born with a record.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* LAUNCHKEY pump door, PAGE 2 — WHY.
+   The pitch behind the door, per the owner's ruling: page 1 is the
+   launchpad itself. Reuses the production design tokens from
+   landing/index.html (P9 system): ink #0a0a0c · off-white #f2f2f0 ·
+   gold #f0b90b · red #e5484d (VET.O dot only) · green #3fb96f.
+   Static page. No wallet code. */
+:root{
+  --ink:#0a0a0c;
+  --panel:#101014;
+  --panel2:#131318;
+  --line:rgba(242,242,240,.09);
+  --line2:rgba(242,242,240,.16);
+  --txt:#f2f2f0;
+  --mut:#9a9aa0;
+  --dim:#63636a;
+  --gold:#f0b90b;
+  --gold-ink:#161006;
+  --red:#e5484d;
+  --green:#3fb96f;
+  --r-lg:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink); color:var(--txt);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  font-size:15.5px; line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.wordmark,.btn,.chip{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px 72px}
+
+/* ---------- header ---------- */
+header.site{
+  position:sticky;top:0;z-index:20;
+  background:rgba(10,10,12,.86);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.header-in{max-width:1120px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;gap:18px}
+.wordmark{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:1.6px;font-size:19px;white-space:nowrap}
+.wordmark .mark-tile{width:30px;height:30px;border-radius:8px;flex:none;background:var(--panel2);
+  border:1px solid rgba(240,185,11,.55);display:flex;align-items:center;justify-content:center}
+.wordmark .key{color:var(--gold)}
+.wordmark small{font-size:9px;font-weight:600;letter-spacing:2.4px;color:var(--dim);display:block;line-height:1;margin-top:2px}
+.wordmark small b{color:var(--red)}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:16px}
+.header-tag{color:var(--mut);font-size:13.5px;font-weight:600;white-space:nowrap}
+.header-tag b{color:var(--txt)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;cursor:pointer;
+  font-weight:700;border-radius:12px;padding:11px 20px;font-size:15px;line-height:1;white-space:nowrap}
+.btn-ghost{background:transparent;color:var(--txt);border-color:var(--line2)}
+.btn-ghost:hover{border-color:var(--mut)}
+.btn-sm{padding:8px 14px;font-size:13.5px;border-radius:10px}
+
+/* ---------- chips ---------- */
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;letter-spacing:1.2px;
+  padding:4px 10px;border-radius:999px;border:1px solid var(--line2);color:var(--mut);white-space:nowrap}
+.chip .dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.chip-live{color:var(--green);border-color:rgba(63,185,111,.45)}
+.chip-proven{color:var(--gold);border-color:rgba(240,185,11,.55)}
+.chip-pillar{background:var(--gold);color:var(--gold-ink);border-color:var(--gold)}
+.chip-probation{color:var(--mut)}
+.chip-bad{color:var(--red);border-color:rgba(229,72,77,.5)}
+
+/* ---------- sections ---------- */
+.sec-label{font-size:12px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--dim);margin:46px 0 14px}
+
+/* ---------- back link ---------- */
+.back-line{margin-top:24px;font-size:14px;color:var(--dim)}
+.back-line a{color:var(--gold);font-weight:600}
+.back-line a:hover{text-decoration:underline}
+
+/* ---------- hero ---------- */
+.hero{padding:34px 0 6px;max-width:760px}
+.hero h1{font-size:50px;font-weight:700;line-height:1.05;letter-spacing:-.5px}
+.hero h1 .gold{color:var(--gold)}
+.hero .sub{color:var(--mut);font-size:17px;line-height:1.6;margin-top:16px}
+.hero .sub b{color:var(--txt)}
+
+/* ---------- includes ---------- */
+.includes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.benefit-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px}
+.benefit-card .b-big{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-size:19px;font-weight:700;line-height:1.25}
+.benefit-card .b-big .gold{color:var(--gold)}
+.benefit-card p{color:var(--mut);font-size:13.5px;line-height:1.55;margin-top:7px}
+
+/* ---------- coming line ---------- */
+.coming{color:var(--dim);font-size:13.5px;margin-top:14px}
+
+/* ---------- footer ---------- */
+footer.site{border-top:1px solid var(--line);margin-top:56px;padding-top:22px}
+footer.site .fl{color:var(--dim);font-size:13.5px;line-height:1.6;max-width:720px}
+footer.site .fl b{color:var(--mut)}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  .hero{padding-top:26px}
+  .hero h1{font-size:36px}
+  .header-tag{display:none}
+  .includes{grid-template-columns:1fr}
+}
+</style>
+<style id="bonded-unify">
+/* ===== BONDED UNIFY (Nov 7 2026 site audit): shared theme layer — the
+   homepage (Proxima format) is the reference: near-black ground, steel
+   text, gold accents, Space Grotesk + IBM Plex Mono. Presentation only;
+   no wording on this page was changed. ===== */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;600;700&display=swap');
+body{background:linear-gradient(180deg,#070a10 0%,#050506 55%,#000000 100%)!important;background-color:#050506!important;color:#e8edf5!important;font-family:'Space Grotesk',-apple-system,'Segoe UI',Roboto,sans-serif!important}
+header.site{background:rgba(7,10,16,.88)!important;border-bottom:1px solid #232b38!important}
+header.site .wordmark,header.site .wordmark span{color:#fdfcf9!important;font-family:'Space Grotesk',sans-serif!important}
+header.site .wordmark .key{color:#f0b90b!important}
+header.site .wordmark small{color:#9aa7ba!important}
+header.site nav a,header.site .header-tag{color:#9aa7ba!important;font-family:'IBM Plex Mono',monospace}
+header.site .btn-gold,header.site a.btn[href="/door/"],header.site a.btn[href="/door"]{background:linear-gradient(180deg,#ffffff,#dfe8f4)!important;border-color:#dfe8f4!important;color:#0a0f16!important;border-radius:8px!important;font-family:'IBM Plex Mono',monospace!important}
+.pfoot{margin-top:26px;padding:22px 16px 8px;border-top:1px solid #232b38;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;color:#7d8698;line-height:1.9}
+.pfoot-a{color:#9cc8ff;text-decoration:none}
+.pfoot-a:hover{color:#5ea8ff}
+html,body{overflow-x:hidden}
+table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:640px){
+  .header-in{flex-wrap:wrap!important;height:auto!important;min-height:0!important;padding-top:10px!important;padding-bottom:10px!important;row-gap:8px!important}
+  .header-in>.btn{margin-left:auto;padding:9px 13px!important;font-size:13.5px!important}
+  nav.mainnav{order:3;width:100%;margin-left:0!important;gap:8px 16px!important;flex-wrap:wrap}
+  .header-right{flex-wrap:wrap;row-gap:6px}
+  .header-tag{display:none}
+  .wordmark{font-size:16px!important}
+  img,video,canvas,svg{max-width:100%}
+  input,select,textarea{max-width:100%}
+}
+header.site .wordmark,header.site nav.mainnav,header.site .header-in>.btn,header.site .header-right{display:none!important}
+header.site .wordmark,header.site nav.mainnav,header.site .header-in>.btn,header.site .header-right{display:none!important}
+.ptop-in{flex-wrap:wrap;row-gap:8px}.ptop-in>a{flex:none;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-in"><div class="ptop-in" style="display:flex;align-items:center;gap:12px;max-width:1180px;margin:0 auto;padding:14px 18px 10px"><a href="/" aria-label="BONDED home" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#fdfcf9;font-weight:700;font-size:20px;letter-spacing:.02em;font-family:'Space Grotesk',sans-serif"><img src="/bonded-mark3.png" alt="" width="72" height="72" style="flex:none"></a><span class="ptop-nav" style="margin-left:auto;display:flex;gap:22px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:12.5px;flex-wrap:wrap;justify-content:flex-end"><a href="/" style="color:#9aa7ba;text-decoration:none">Home</a><a class="tellslink" href="/tells" style="color:#ffe98a;font-weight:700;letter-spacing:.08em;text-decoration:none">Tells App</a><a href="/bonds/" style="color:#9aa7ba;text-decoration:none">Bonds</a><a href="/bond-rules" style="color:#9aa7ba;text-decoration:none">Rules</a><a href="/methodology.html" style="color:#9aa7ba;text-decoration:none">Methodology</a><a href="/door/" style="color:#0a0f16;background:linear-gradient(180deg,#ffffff,#dfe8f4);border-radius:8px;padding:9px 16px;font-weight:700;text-decoration:none">Post a Bond</a></span></div>
+    <a class="wordmark" href="/">
+      <span class="mark-tile" aria-hidden="true">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#f0b90b" stroke-width="2.4" stroke-linecap="round">
+          <circle cx="8" cy="14" r="4.5"/><path d="M11.5 10.5 L20 2"/><path d="M16.5 5.5 L20 9"/><path d="M13.8 8.2 L17 11.4"/>
+        </svg>
+      </span>
+      <span>BONDED</span>
+    </a>
+    <div class="header-right">
+      <span class="header-tag">Born on <b>pump.fun</b> · Through <b>BONDED</b></span>
+    </div>
+  </div></header>
+
+<div class="wrap">
+
+  <p class="back-line"><a href="/door/">← Back to the door</a></p>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Launch on pump.fun.<br>Born with a <span class="gold">record.</span></h1>
+    <p class="sub">Your coin is born on pump.fun, in front of its crowd. Our door prints your grade, runs the name guards, and refuses what fails them. <b>We cannot gate the chain. The stamp is the product.</b></p>
+  </section>
+
+  <!-- WHAT THE DOOR DOES -->
+  <div class="sec-label">What the door does</div>
+  <section class="includes">
+    <div class="benefit-card">
+      <div class="b-big">The guards, <span class="gold">first</span></div>
+      <p>Clone, impersonation, and reserved names are checked before the create. A refusal prints with its reason.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="b-big">Your grade at <span class="gold">birth</span></div>
+      <p>The record your key already carries prints in the door when your coin is born.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="b-big">Born <span class="gold">through</span> the door</div>
+      <p>Your mint is ground to end in bond. There is no door fee. The coin is born on pump.fun.</p>
+      <p>When the bond joins this door, it is one standard size for everyone: 5 SOL, held for 24 hours.</p>
+    </div>
+  </section>
+  <p class="coming">Coming: a permanent file for every birth, a birth certificate, and a launch kit.</p>
+
+  <!-- FOOTER -->
+  <footer class="site">
+    <p class="fl"><b>BONDED is a door, not a promise.</b> Most coins go to zero. The grade prints where everyone can see it.</p>
+  </footer>
+<div class="pfoot">BONDED · <a class="pfoot-a" href="/methodology.html">Methodology</a> · <a class="pfoot-a" href="/door/">Post a Bond</a></div>
+
+</div>
+</body>
+</html>

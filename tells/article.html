@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TELLS · Every Dev Has a Tell</title>
+<link rel="canonical" href="https://launchkey.fun/tells/article">
+<meta name="description" content="Every dev has a tell. He funds a fresh wallet, splits his bag, and sells from the side. TELLS watches the whole pattern. The full story of what TELLS is and how it works.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* TELLS page. Same production design tokens as the rest of the site:
+   ink #0a0a0c, off-white #f2f2f0, site gold #f0b90b, plus the TELLS
+   gold #edc966 for this product's own accents. Static page. No
+   wallet code, no forms, nothing collected here. */
+:root{
+  --ink:#0a0a0c;
+  --panel:#101014;
+  --panel2:#131318;
+  --line:rgba(242,242,240,.09);
+  --line2:rgba(242,242,240,.16);
+  --txt:#f2f2f0;
+  --mut:#9a9aa0;
+  --dim:#63636a;
+  --gold:#f0b90b;
+  --tgold:#edc966;
+  --gold-ink:#161006;
+  --red:#e5484d;
+  --green:#3fb96f;
+  --r-lg:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink); color:var(--txt);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  font-size:15.5px; line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.wordmark,.btn,.chip{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px 72px}
+
+/* ---------- header ---------- */
+header.site{
+  position:sticky;top:0;z-index:20;
+  background:rgba(10,10,12,.86);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.header-in{max-width:1120px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;gap:18px}
+.wordmark{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:1.6px;font-size:19px;white-space:nowrap}
+.wordmark .mark-tile{width:30px;height:30px;border-radius:8px;flex:none;background:var(--panel2);
+  border:1px solid rgba(240,185,11,.55);display:flex;align-items:center;justify-content:center}
+.wordmark .key{color:var(--gold)}
+.wordmark small{font-size:9px;font-weight:600;letter-spacing:2.4px;color:var(--dim);display:block;line-height:1;margin-top:2px}
+.wordmark small b{color:var(--red)}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:16px}
+.header-tag{color:var(--mut);font-size:13.5px;font-weight:600;white-space:nowrap}
+.header-tag b{color:var(--txt)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;cursor:pointer;
+  font-weight:700;border-radius:12px;padding:11px 20px;font-size:15px;line-height:1;white-space:nowrap}
+.btn-ghost{background:transparent;color:var(--txt);border-color:var(--line2)}
+.btn-ghost:hover{border-color:var(--mut)}
+.btn-tgold{background:var(--tgold);color:var(--gold-ink);border-color:var(--tgold)}
+.btn-tgold:hover{filter:brightness(1.07)}
+.btn-sm{padding:8px 14px;font-size:13.5px;border-radius:10px}
+
+/* ---------- chips ---------- */
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;letter-spacing:1.2px;
+  padding:4px 10px;border-radius:999px;border:1px solid var(--line2);color:var(--mut);white-space:nowrap}
+.chip .dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.chip-live{color:var(--green);border-color:rgba(63,185,111,.45)}
+.chip-tgold{color:var(--tgold);border-color:rgba(237,201,102,.55)}
+
+/* ---------- sections ---------- */
+.sec-label{font-size:12px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--dim);margin:46px 0 14px}
+
+/* ---------- back link ---------- */
+.back-line{margin-top:24px;font-size:14px;color:var(--dim)}
+.back-line a{color:var(--gold);font-weight:600}
+.back-line a:hover{text-decoration:underline}
+
+/* ---------- hero ---------- */
+.hero{padding:34px 0 6px;max-width:760px}
+.hero .eye{width:124px;height:124px;border-radius:22px;display:block;margin-bottom:22px}
+.hero h1{font-size:50px;font-weight:700;line-height:1.05;letter-spacing:-.5px}
+.hero h1 .gold{color:var(--tgold)}
+.hero .sub{color:var(--mut);font-size:17px;line-height:1.6;margin-top:16px}
+.hero .sub b{color:var(--txt)}
+.hero .chips{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+
+/* ---------- prose ---------- */
+.prose{max-width:720px}
+.prose p{color:var(--mut);font-size:15.5px;line-height:1.65;margin-top:12px}
+.prose p:first-child{margin-top:0}
+.prose p b{color:var(--txt)}
+.prose .big{font-size:19px;color:var(--txt);font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-weight:600;line-height:1.45}
+
+/* ---------- cards ---------- */
+.includes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.benefit-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px}
+.benefit-card .b-big{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-size:19px;font-weight:700;line-height:1.25}
+.benefit-card .b-big .gold{color:var(--tgold)}
+.benefit-card p{color:var(--mut);font-size:13.5px;line-height:1.55;margin-top:7px}
+.benefit-card p b{color:var(--txt)}
+
+/* ---------- separation panel ---------- */
+.sep-panel{background:var(--panel);border:1px solid rgba(237,201,102,.35);border-radius:var(--r-lg);padding:22px;max-width:760px}
+.sep-panel p{font-size:17px;line-height:1.6;color:var(--txt)}
+.sep-panel p b{color:var(--tgold)}
+
+/* ---------- close ---------- */
+.close-line{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-size:30px;font-weight:700;line-height:1.25;max-width:720px;margin-top:10px}
+.close-line .gold{color:var(--tgold)}
+.cta-row{margin-top:22px}
+
+/* ---------- footer ---------- */
+footer.site{border-top:1px solid var(--line);margin-top:56px;padding-top:22px}
+footer.site .fl{color:var(--dim);font-size:13.5px;line-height:1.6;max-width:720px}
+footer.site .fl b{color:var(--mut)}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  .hero{padding-top:26px}
+  .hero h1{font-size:36px}
+  .hero .eye{width:96px;height:96px}
+  .header-tag{display:none}
+  .includes{grid-template-columns:1fr}
+  .close-line{font-size:25px}
+}
+</style>
+<style>
+.article h2{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;
+  font-size:24px;font-weight:700;line-height:1.2;margin:38px 0 4px;color:var(--txt)}
+.article .lede{font-size:19px;color:var(--txt);line-height:1.6;margin-top:14px}
+.article .sep-wrap{margin-top:38px}
+.article p a{color:var(--gold);font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<p class="back-line"><a href="/tells">&larr; TELLS</a></p>
+<section class="hero">
+  <img class="eye" src="/tells-eye-web-v1.png" alt="The TELLS eye">
+  <h1>Every dev has a <span class="gold">tell</span>.</h1>
+  <div class="chips">
+    <span class="chip chip-live"><span class="dot"></span>PILOT LIVE</span>
+    <span class="chip chip-tgold">GRADED THROUGH NOV 24</span>
+    <span class="chip">FULL STORY</span>
+  </div>
+</section>
+<div class="prose article">
+<p class="lede">It is 2am. Your phone is face down. Somewhere, a wallet you have never seen sells a piece of a coin you hold.</p>
+<p>That wallet is three days old. The creator funded it himself. He did not sell from the wallet everyone watches. He never does. He moved supply sideways days ago, quiet, and now the side wallet does the selling while the front wallet looks clean.</p>
+<p>By morning, the chart tells you what happened. The chart is always the last to know.</p>
+<h2>The tell</h2>
+<p>In poker, a tell is the move a player makes without knowing he made it. It gives away his hand before the cards do.</p>
+<p>On chain, a dev makes the same kind of move. He funds a fresh wallet. He splits his bag across five wallets so the holder chart looks honest. He loads a side wallet an hour before he needs it. Each move is small. Each move is visible. Nobody is watching for it, because watching one wallet is easy and watching the whole pattern is work.</p>
+<p>TELLS does that work.</p>
+<h2>What TELLS watches</h2>
+<p>Three things, on every coin you hold.</p>
+<p><b>The dev, and everyone tied to him.</b> Not just the creator wallet. The whole cluster: who funded him, which fresh wallets he funded, where his exits go. A wallet joins the watch list with evidence, a transaction that ties it to the cluster. When a cluster wallet sells, moves coin to a fresh wallet, or starts loading up, you hear about it.</p>
+<p><b>The top holders, as a living list.</b> The list is re-read from the chain every cycle. A whale climbing in gets watched. A whale heading out stays watched until it is truly gone. Wallets that share one funder count as one holder, so five wallets at just under 1 percent each read as what they are: one holder at 4.5 percent. When new money arrives, the alert says where it came from. Independent money with a real history is one thing. A fresh wallet the dev cluster funded an hour ago is another thing, and the alert says which one it is.</p>
+<p><b>The coin itself, and your own lines.</b> Liquidity pulled. A lock about to expire, flagged before the date, not after. Mint or freeze authority moving. Migration. A pool draining fast. And the lines you set from your own entry: a stop, a first take profit, a second. When price touches your line, your phone buzzes.</p>
+<p>Your lines never execute. TELLS holds nothing, signs nothing, trades nothing. It watches and it reports. The call is always yours.</p>
+<h2>Three kinds of loud</h2>
+<p>Not every event deserves to wake you. TELLS sorts what it sees into three tiers.</p>
+<p><b>INFO</b> is the quiet note. New money arriving. A move worth knowing about tomorrow. It batches into a daily digest.</p>
+<p><b>ALERT</b> is delivered now. A probable side wallet loading. Your take profit line touched. A lock ending inside a day.</p>
+<p><b>FIRE</b> is the one that has to get through. A dev cluster selling size. Several top holders leaving together. Liquidity pulled. Your stop touched. FIRE is rare on purpose. It only fires on size, on cluster evidence, or on several wallets moving at once. A small wallet doing a small thing is never FIRE.</p>
+<h2>Where it reaches you</h2>
+<p>Telegram and Discord are free. Every alert, instantly, forever. Nothing about the warning is paid, and nothing about its speed is paid.</p>
+<p>The phone channel is the paid part. A text to your number, and if you want it, a call behind it that rings until you answer or tell it to stop. No app to download. The front door is your phone number. You enter it, you prove it is yours with one code text, and that is the whole setup.</p>
+<p>What is sold is the wake-up channel. Never the warning. Never its speed.</p>
+<h2>The record</h2>
+<p>Every alert TELLS sends is written to a catch log first, before it is delivered. The log is public at launchkey.fun/tells/log. It shows the date, the coin, the event, and what happened next. Misses get logged too, in the same format. A catch log with no misses in it is a lie, and nobody should trust one.</p>
+<h2>Where it stands</h2>
+<p>TELLS is live in a public pilot. It watches seven coins around the clock, $PUSSY, $FLOAT, Dacity, $X, $GTA, $mihao and AudaCity, and every catch and every miss goes on the public log the same day. (An earlier watch, $CONDUIT, was closed when the coin died. The closing is on the log.) The pilot is graded through November 24: catches, misses, false alarms, all of it on the record. It has to prove it catches real tells and stays quiet when nothing is happening. The beta is open now: anyone can join the alerts bot while the grading runs.</p>
+<p>Proof before promises. That is the whole business model.</p>
+<div class="sep-panel sep-wrap"><div class="sec-label" style="margin:0 0 10px">One line of separation</div>
+<p>TELLS is not BONDED. A TELLS alert says something moved. It says nothing about any bond. The two products share a builder and nothing else.</p>
+<p>Every dev has a tell. Now something is watching for it.</p>
+</div>
+</div>
+<div class="cta-row">
+  <a class="btn btn-tgold" href="https://t.me/tellsapp_alerts_bot?start=article">Get TELLS alerts on Telegram</a>
+  <a class="btn btn-ghost" href="/tells/log">Read the public catch log</a>
+  <a class="btn btn-ghost" href="/tells/xray">Run the X-ray</a>
+</div>
+<div class="cta-row" style="margin-top:12px">
+  <a class="btn btn-tgold" href="https://discord.gg/8wD4H64uf7">Get TELLS alerts on Discord</a>
+</div>
+<footer class="site">
+    <p class="fl"><b>TELLS watches and reports. It does not trade, and it does not promise.</b> Most coins go to zero. A guard is not a guarantee.</p>
+    <p class="fl" style="margin-top:10px"><a href="/tells/security" style="color:var(--gold);font-weight:600">Security</a> · What TELLS never asks for, and what joining stores.</p>
+  </footer>
+<div class="pfoot">BONDED · <a class="pfoot-a" href="/methodology.html">Methodology</a> · <a class="pfoot-a" href="/door/">Post a Bond</a></div>
+
+</div>
+</body>
+</html>

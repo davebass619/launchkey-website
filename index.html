@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BONDED — Home</title>
+<link rel="canonical" href="https://launchkey.fun/">
+<meta name="description" content="BONDED is live. The first bonded coin launched on November 11, 2026, and its 5 SOL bond is being measured now.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://launchkey.fun/#org",
+      "name": "BONDED",
+      "url": "https://launchkey.fun/",
+      "logo": "https://launchkey.fun/bonded-logo.png",
+      "description": "BONDED is live. Before a coin launches through the door, the developer posts a bond in SOL, under terms fixed before it is posted. If a breach is confirmed, the program automatically distributes the forfeited share of the bond and the same share of the creator's fees still held in the vault to the eligible wallets, pro rata. If no breach is confirmed, the bond returns to the developer.",
+      "sameAs": [
+        "https://x.com/postthebond"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://launchkey.fun/#site",
+      "name": "BONDED",
+      "url": "https://launchkey.fun/",
+      "publisher": { "@id": "https://launchkey.fun/#org" }
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#050506;--panel:#101012;--line:#3d3b34;--gold:#f0b90b;--gold2:#ffe98a;--goldhi:#fff6bf;--golddk:#d9a50a;--cyan:#f0b90b;--green:#4ade80;--cream:#fdfcf9;--dim:#aaa8a2;--r-lg:20px;--r-md:14px;--r-sm:10px}
+html{text-rendering:optimizeLegibility}
+body{background:
+ radial-gradient(1000px 460px at 50% -140px,rgba(255,217,77,.13),transparent 60%),
+ radial-gradient(900px 700px at 88% 30%,rgba(255,255,255,.03),transparent 60%),
+ radial-gradient(760px 620px at 8% 62%,rgba(255,255,255,.02),transparent 62%),
+ linear-gradient(180deg,#0b0b0d 0%,#050506 46%,#000000 100%);
+ background-color:var(--bg);color:var(--cream);font-family:'Space Grotesk',-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body::before{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E")}
+body::after{content:"";position:fixed;inset:0;z-index:59;pointer-events:none;background:radial-gradient(125% 92% at 50% 42%,transparent 56%,rgba(0,0,0,.45) 100%)}
+::selection{background:rgba(240,185,11,.9);color:#171300}
+a{color:inherit}
+a:focus-visible,.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.wrap{max-width:1060px;margin:0 auto;padding:0 16px 56px}
+.wrap>*{animation:rise .55s cubic-bezier(.22,.8,.32,1) both}
+.wrap>*:nth-child(2){animation-delay:.05s}
+.wrap>*:nth-child(3){animation-delay:.1s}
+.wrap>*:nth-child(4){animation-delay:.15s}
+.wrap>*:nth-child(5){animation-delay:.2s}
+.wrap>*:nth-child(6){animation-delay:.25s}
+.wrap>*:nth-child(7){animation-delay:.3s}
+.wrap>*:nth-child(8){animation-delay:.35s}
+.wrap>*:nth-child(9){animation-delay:.4s}
+.wrap>*:nth-child(10){animation-delay:.45s}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.ribbon{position:relative;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;text-align:center;padding:8px 12px;background:linear-gradient(180deg,#111113,#060607);border-bottom:1px solid #3a382f;color:var(--dim);font-family:'IBM Plex Mono',monospace;box-shadow:0 1px 0 rgba(255,255,255,.07),0 10px 24px rgba(0,0,0,.35)}
+.ribbon a{color:var(--gold2)}
+.boardtop{position:relative;overflow:hidden;border:1px solid #8a6d1c;border-top:none;background:linear-gradient(180deg,#161617 0%,#0c0c0d 42%,#050506 100%);padding:40px 16px 32px;text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -28px 44px rgba(0,0,0,.45),0 24px 54px rgba(0,0,0,.6),0 0 30px rgba(240,185,11,.16)}
+.boardtop::before{content:"";position:absolute;inset:0;background:radial-gradient(640px 190px at 50% -40px,rgba(255,224,130,.20),transparent 70%);pointer-events:none}
+.boardtop::after{content:"";position:absolute;top:0;bottom:0;width:30%;left:-45%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.05),transparent);transform:skewX(-14deg);animation:boardsheen 14s ease-in-out infinite;pointer-events:none}
+@keyframes boardsheen{0%,58%{left:-45%}88%,100%{left:115%}}
+.brandmark{position:relative;font-weight:700;font-size:clamp(56px,16vw,118px);letter-spacing:.045em;line-height:1;background:linear-gradient(180deg,#ffffff 0%,#fffbe0 18%,#ffec9e 38%,#ffd94d 55%,var(--gold) 72%,#d9a50a 88%,#a87e08 100%);background-size:100% 230%;-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 5px rgba(255,233,154,.6)) drop-shadow(0 0 18px rgba(240,185,11,.45)) drop-shadow(0 8px 30px rgba(0,0,0,.6));animation:signshimmer 12s ease-in-out infinite}
+@keyframes signshimmer{0%,100%{background-position:50% 0%}50%{background-position:50% 30%}}
+.boardsub{margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.34em;color:var(--gold2);text-transform:uppercase;text-shadow:0 0 12px rgba(240,185,11,.35)}
+.oneline{margin-top:16px;font-size:clamp(26px,6.8vw,42px);font-weight:700;line-height:1.15;letter-spacing:-.015em;color:#ffffff;text-shadow:0 1px 0 rgba(255,255,255,.14),0 3px 16px rgba(0,0,0,.55)}
+.oneline .g{background:linear-gradient(180deg,#fff7cc 0%,var(--gold2) 34%,#ffd94d 58%,var(--gold) 78%,#c9960a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 10px rgba(240,185,11,.35))}
+.ticker{overflow:hidden;border:1px solid #554a1e;border-top:none;border-radius:0 0 var(--r-lg) var(--r-lg);background:linear-gradient(180deg,#0a0a0b,#050505);padding:8px 0;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 -12px 20px rgba(0,0,0,.5),0 12px 26px rgba(0,0,0,.35);font-variant-numeric:tabular-nums;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.ticker .track{display:flex;width:max-content;white-space:nowrap;animation:tick 38s linear infinite;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--dim)}
+.ticker span{padding:0 16px}.ticker b{color:var(--cream)}.ticker .up{color:var(--green);text-shadow:0 0 10px rgba(74,222,128,.5)}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.featured{position:relative;overflow:hidden;display:grid;grid-template-columns:104px 1fr;gap:24px;align-items:center;border:1px solid transparent;border-radius:var(--r-lg);background:linear-gradient(165deg,#17171a 0%,#101012 55%,#080809 100%) padding-box,linear-gradient(155deg,rgba(255,255,255,.85),rgba(255,217,77,.5) 32%,rgba(240,185,11,.55) 68%,rgba(140,110,20,.8)) border-box;padding:24px;margin-top:24px;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),inset 0 0 34px rgba(240,185,11,.05),0 0 26px rgba(240,185,11,.16),0 24px 48px rgba(0,0,0,.6);backdrop-filter:saturate(1.4)}
+.featured::before{content:"";position:absolute;inset:0;background:radial-gradient(340px 140px at 50% 0%,rgba(255,233,154,.10),transparent 70%),radial-gradient(260px 120px at 8% 100%,rgba(255,255,255,.04),transparent 70%),radial-gradient(260px 120px at 92% 100%,rgba(255,255,255,.04),transparent 70%);pointer-events:none}
+.featured::after{content:"";position:absolute;top:0;bottom:0;width:22%;left:-40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.05),transparent);transform:skewX(-14deg);animation:boardsheen 16s ease-in-out infinite;pointer-events:none}
+.featured img{position:relative;width:104px;height:104px;display:block;border:3px solid transparent;border-radius:16px;background:conic-gradient(from 215deg,#7c6410,#ffe98a 18%,#f0b90b 34%,#9a7b16 52%,#fff6bf 68%,#d9a50a 84%,#7c6410) border-box;box-shadow:0 0 18px rgba(240,185,11,.28),0 12px 24px rgba(0,0,0,.55)}
+.featured h1{position:relative;font-size:clamp(34px,9.6vw,52px);line-height:1;letter-spacing:-.01em;text-shadow:0 1px 0 rgba(255,255,255,.12),0 3px 14px rgba(0,0,0,.55)}
+.pill{position:relative;display:inline-flex;align-items:center;gap:8px;border:1px solid #7a6414;border-radius:999px;background:linear-gradient(180deg,#17171a,#0c0c0d);padding:8px 16px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;margin-top:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 6px 14px rgba(0,0,0,.4)}
+.pill .gdot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 6px rgba(74,222,128,.7)}50%{box-shadow:0 0 16px rgba(74,222,128,1)}}
+.facts{position:relative;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#ffd94d;margin-top:16px;letter-spacing:.06em;line-height:1.7;font-variant-numeric:tabular-nums}
+.facts b{color:var(--cream)}
+.brainline{position:relative;margin-top:16px;border-left:3px solid var(--gold);padding-left:16px;box-shadow:-3px 0 12px -4px rgba(240,185,11,.45)}
+.brainline .lab{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.26em;color:var(--gold2);text-transform:uppercase;text-shadow:0 0 10px rgba(240,185,11,.3)}
+.brainline blockquote{margin-top:8px;font-size:clamp(18px,5vw,23px);line-height:1.4;font-weight:600;color:#ffffff}
+.btn{position:relative;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:16px 24px;border:1px solid #ffe98a;border-radius:var(--r-sm);color:#171200;background:linear-gradient(180deg,#ffffff 0%,#fff8d6 22%,var(--gold2) 45%,#ffd94d 66%,var(--gold) 84%,#d9a50a 100%);font-weight:700;display:inline-block;box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -3px 7px rgba(120,85,0,.35),0 12px 24px rgba(0,0,0,.5),0 0 16px rgba(240,185,11,.28);text-shadow:0 1px 0 rgba(255,255,255,.35);transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
+.btn:active{transform:translateY(2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),inset 0 -1px 3px rgba(120,85,0,.3),0 4px 10px rgba(0,0,0,.5),0 0 10px rgba(240,185,11,.2)}
+.featured .btn{margin-top:24px}
+/* Legacy reel styles retained for other pages. The homepage reel was
+   removed Nov 9 2026; the hero is BONDED only. */
+.reel{position:relative;margin-top:24px}
+.reel .featured{margin-top:0}
+.reel .slides{display:grid}
+.reel .slide{grid-area:1/1;opacity:0;visibility:hidden;transform:translateX(14px);transition:opacity .6s ease,transform .6s ease,visibility 0s linear .6s;pointer-events:none}
+.reel .slide.on{opacity:1;visibility:visible;transform:none;transition:opacity .6s ease,transform .6s ease;pointer-events:auto}
+.reeldots{display:flex;gap:10px;justify-content:center;margin-top:14px}
+.reeldots button{flex:none;width:9px;height:9px;padding:0;border-radius:50%;border:1px solid var(--golddk);background:transparent;cursor:pointer;transition:background .3s ease,box-shadow .3s ease,transform .3s ease}
+.reeldots button.on{background:var(--gold);box-shadow:0 0 10px rgba(240,185,11,.55);transform:scale(1.2)}
+.pill .kdot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px rgba(240,185,11,.85)}
+.pill.goldpill{color:var(--gold2)}
+.ticker .track.off{display:none}
+.ticker b.goldtx{color:var(--gold2)}
+@media (prefers-reduced-motion: reduce){.reel .slide{transition:none}}
+.bandhead{display:flex;align-items:center;gap:16px;margin:64px 0 16px}
+.bandhead h2{font-family:'IBM Plex Mono',monospace;font-size:19px;letter-spacing:.16em;text-transform:uppercase;color:#ffffff;white-space:nowrap;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.bandhead .rule{flex:1;height:1px;background:linear-gradient(90deg,rgba(255,217,77,.5),rgba(255,255,255,.05))}
+.roster{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.roster .slot{flex:0 0 calc((100% - 8px)/2)}
+@media(min-width:820px){.roster .slot{flex-basis:calc((100% - 24px)/4)}}
+.slot{border:1px solid transparent;border-radius:var(--r-md);background:linear-gradient(170deg,#151517,#101012 70%) padding-box,linear-gradient(180deg,rgba(255,255,255,.35),rgba(240,185,11,.18)) border-box;padding:20px 13px;min-height:105px;display:flex;flex-direction:column;gap:7px;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 14px 28px rgba(0,0,0,.5);backdrop-filter:saturate(1.3);transition:transform .35s ease,box-shadow .35s ease}
+.slot .nm{font-size:clamp(16px,4.2vw,20px);font-weight:700;line-height:1.1;letter-spacing:-.01em;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.slot .st{font-family:'IBM Plex Mono',monospace;font-size:8.3px;letter-spacing:.12em;white-space:nowrap;text-transform:uppercase;color:var(--green);text-shadow:0 0 10px rgba(74,222,128,.4)}
+.slot.idle{background:linear-gradient(170deg,#0c0c0e,#080809 75%);border:1px dashed #55503e;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 10px 20px rgba(0,0,0,.4)}
+.slot.idle .nm{color:#8f8c84;text-shadow:none}
+.slot.idle .st{color:#7d7a70;text-shadow:none}
+.slot .st.goldst{color:var(--gold);text-shadow:0 0 10px rgba(240,185,11,.35)}
+.slot .st.mut{color:#7d7a70;text-shadow:none}
+.doorband{margin-top:24px;border:1px solid transparent;border-radius:var(--r-lg);background:linear-gradient(180deg,#141416,#080809) padding-box,linear-gradient(180deg,rgba(255,255,255,.4),rgba(240,185,11,.2)) border-box;padding:32px 16px;text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -22px 36px rgba(0,0,0,.4),0 18px 36px rgba(0,0,0,.55)}
+.backroom{margin-top:24px;border:1px solid #33322e;border-radius:var(--r-md);background:linear-gradient(180deg,#0d0d0f,#080809);padding:24px 16px;text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 12px 24px rgba(0,0,0,.45)}
+.backroom .lab{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.26em;color:#7d7a70;text-transform:uppercase}
+.backroom nav{display:flex;flex-wrap:wrap;gap:16px 32px;margin-top:16px;justify-content:center}
+.backroom a{color:var(--cream);text-decoration:none;font-size:15px}
+footer{margin-top:64px;border-top:1px solid #3d3b34;padding-top:24px;color:var(--dim);font-size:14px;line-height:1.6;text-align:center}
+footer .mono{font-size:11.5px;color:#7d7a70;margin-top:8px}
+@media(hover:hover){.slot:hover{transform:translateY(-3px);box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 20px 34px rgba(0,0,0,.55)}.btn:hover{transform:translateY(-1px);filter:brightness(1.05)}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#050506;--panel:#101012;--line:#3d3b34;--gold:#f0b90b;--gold2:#ffe98a;--goldhi:#fff6bf;--golddk:#d9a50a;--green:#4ade80;--cream:#fdfcf9;--dim:#aaa8a2;--r-lg:20px;--r-md:14px;--r-sm:10px}
+html{text-rendering:optimizeLegibility}
+body{background:
+ radial-gradient(1000px 460px at 50% -140px,rgba(255,217,77,.13),transparent 60%),
+ radial-gradient(900px 700px at 88% 30%,rgba(255,255,255,.03),transparent 60%),
+ radial-gradient(760px 620px at 8% 62%,rgba(255,255,255,.02),transparent 62%),
+ linear-gradient(180deg,#0b0b0d 0%,#050506 46%,#000000 100%);
+ background-color:var(--bg);color:var(--cream);font-family:'Space Grotesk',-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body::before{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E")}
+body::after{content:"";position:fixed;inset:0;z-index:59;pointer-events:none;background:radial-gradient(125% 92% at 50% 42%,transparent 56%,rgba(0,0,0,.45) 100%)}
+::selection{background:rgba(240,185,11,.9);color:#171300}
+a{color:inherit}
+a:focus-visible,.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.wrap{max-width:1060px;margin:0 auto;padding:0 16px 56px}
+.wrap>*{animation:rise .55s cubic-bezier(.22,.8,.32,1) both}
+.wrap>*:nth-child(2){animation-delay:.05s}
+.wrap>*:nth-child(3){animation-delay:.1s}
+.wrap>*:nth-child(4){animation-delay:.15s}
+.wrap>*:nth-child(5){animation-delay:.2s}
+.wrap>*:nth-child(6){animation-delay:.25s}
+.wrap>*:nth-child(7){animation-delay:.3s}
+.wrap>*:nth-child(8){animation-delay:.35s}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.ribbon{position:relative;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;text-align:center;padding:8px 12px;background:linear-gradient(180deg,#111113,#060607);border-bottom:1px solid #3a382f;color:var(--dim);font-family:'IBM Plex Mono',monospace;box-shadow:0 1px 0 rgba(255,255,255,.07),0 10px 24px rgba(0,0,0,.35)}
+.ribbon a{color:var(--gold2)}
+.boardtop{position:relative;overflow:hidden;border:1px solid #8a6d1c;border-top:none;background:linear-gradient(180deg,#161617 0%,#0c0c0d 42%,#050506 100%);padding:56px 16px 48px;text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -28px 44px rgba(0,0,0,.45),0 24px 54px rgba(0,0,0,.6),0 0 30px rgba(240,185,11,.16)}
+.boardtop::before{content:"";position:absolute;inset:0;background:radial-gradient(640px 190px at 50% -40px,rgba(255,224,130,.20),transparent 70%);pointer-events:none}
+.boardtop::after{content:"";position:absolute;top:0;bottom:0;width:30%;left:-45%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.05),transparent);transform:skewX(-14deg);animation:boardsheen 14s ease-in-out infinite;pointer-events:none}
+@keyframes boardsheen{0%,58%{left:-45%}88%,100%{left:115%}}
+.brandmark{position:relative;font-weight:700;font-size:clamp(56px,16vw,118px);letter-spacing:.045em;line-height:1;background:linear-gradient(180deg,#ffffff 0%,#fffbe0 18%,#ffec9e 38%,#ffd94d 55%,var(--gold) 72%,#d9a50a 88%,#a87e08 100%);background-size:100% 230%;-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 5px rgba(255,233,154,.6)) drop-shadow(0 0 18px rgba(240,185,11,.45)) drop-shadow(0 8px 30px rgba(0,0,0,.6));animation:signshimmer 12s ease-in-out infinite}
+@keyframes signshimmer{0%,100%{background-position:50% 0%}50%{background-position:50% 30%}}
+.boardsub{margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.34em;color:var(--gold2);text-transform:uppercase;text-shadow:0 0 12px rgba(240,185,11,.35)}
+.oneline{margin-top:22px;font-size:clamp(26px,6.8vw,42px);font-weight:700;line-height:1.15;letter-spacing:-.015em;color:#ffffff;text-shadow:0 1px 0 rgba(255,255,255,.14),0 3px 16px rgba(0,0,0,.55)}
+.oneline .g{background:linear-gradient(180deg,#fff7cc 0%,var(--gold2) 34%,#ffd94d 58%,var(--gold) 78%,#c9960a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 10px rgba(240,185,11,.35))}
+.statusline{position:relative;margin:22px auto 0;max-width:640px;font-size:15.5px;line-height:1.55;color:var(--dim)}
+.herocta{position:relative;margin-top:28px}
+.featured{position:relative;overflow:hidden;display:grid;grid-template-columns:104px 1fr;gap:24px;align-items:center;border:1px solid transparent;border-radius:var(--r-lg);background:linear-gradient(165deg,#17171a 0%,#101012 55%,#080809 100%) padding-box,linear-gradient(155deg,rgba(255,255,255,.85),rgba(255,217,77,.5) 32%,rgba(240,185,11,.55) 68%,rgba(140,110,20,.8)) border-box;padding:24px;margin-top:24px;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),inset 0 0 34px rgba(240,185,11,.05),0 0 26px rgba(240,185,11,.16),0 24px 48px rgba(0,0,0,.6);backdrop-filter:saturate(1.4)}
+.featured::before{content:"";position:absolute;inset:0;background:radial-gradient(340px 140px at 50% 0%,rgba(255,233,154,.10),transparent 70%),radial-gradient(260px 120px at 8% 100%,rgba(255,255,255,.04),transparent 70%),radial-gradient(260px 120px at 92% 100%,rgba(255,255,255,.04),transparent 70%);pointer-events:none}
+.featured::after{content:"";position:absolute;top:0;bottom:0;width:22%;left:-40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.05),transparent);transform:skewX(-14deg);animation:boardsheen 16s ease-in-out infinite;pointer-events:none}
+.featured img{position:relative;width:104px;height:104px;display:block;border:3px solid transparent;border-radius:16px;background:conic-gradient(from 215deg,#7c6410,#ffe98a 18%,#f0b90b 34%,#9a7b16 52%,#fff6bf 68%,#d9a50a 84%,#7c6410) border-box;box-shadow:0 0 18px rgba(240,185,11,.28),0 12px 24px rgba(0,0,0,.55)}
+.featured h3{position:relative;font-size:clamp(34px,9.6vw,52px);line-height:1;letter-spacing:-.01em;text-shadow:0 1px 0 rgba(255,255,255,.12),0 3px 14px rgba(0,0,0,.55)}
+.pill{position:relative;display:inline-flex;align-items:center;gap:8px;border:1px solid #7a6414;border-radius:999px;background:linear-gradient(180deg,#17171a,#0c0c0d);padding:8px 16px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;margin-top:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 6px 14px rgba(0,0,0,.4)}
+.pill .gdot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 6px rgba(74,222,128,.7)}50%{box-shadow:0 0 16px rgba(74,222,128,1)}}
+.facts{position:relative;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#ffd94d;margin-top:16px;letter-spacing:.06em;line-height:1.7;font-variant-numeric:tabular-nums}
+.facts b{color:var(--cream)}
+.brainline{position:relative;margin-top:16px;border-left:3px solid var(--gold);padding-left:16px;box-shadow:-3px 0 12px -4px rgba(240,185,11,.45)}
+.brainline .lab{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.26em;color:var(--gold2);text-transform:uppercase;text-shadow:0 0 10px rgba(240,185,11,.3)}
+.brainline blockquote{margin-top:8px;font-size:clamp(18px,5vw,23px);line-height:1.4;font-weight:600;color:#ffffff}
+.btn{position:relative;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:16px 24px;border:1px solid #ffe98a;border-radius:var(--r-sm);color:#171200;background:linear-gradient(180deg,#ffffff 0%,#fff8d6 22%,var(--gold2) 45%,#ffd94d 66%,var(--gold) 84%,#d9a50a 100%);font-weight:700;display:inline-block;box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -3px 7px rgba(120,85,0,.35),0 12px 24px rgba(0,0,0,.5),0 0 16px rgba(240,185,11,.28);text-shadow:0 1px 0 rgba(255,255,255,.35);transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
+.btn:active{transform:translateY(2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),inset 0 -1px 3px rgba(120,85,0,.3),0 4px 10px rgba(0,0,0,.5),0 0 10px rgba(240,185,11,.2)}
+.featured .btn{margin-top:24px}
+/* Legacy reel styles retained for other pages. The homepage reel was
+   removed Nov 9 2026; the hero is BONDED only. */
+.reel{position:relative;margin-top:32px}
+.reel .featured{margin-top:0}
+.reel .slides{display:grid}
+.reel .slide{grid-area:1/1;opacity:0;visibility:hidden;transform:translateX(14px);transition:opacity .6s ease,transform .6s ease,visibility 0s linear .6s;pointer-events:none}
+.reel .slide.on{opacity:1;visibility:visible;transform:none;transition:opacity .6s ease,transform .6s ease;pointer-events:auto}
+.reeldots{display:flex;gap:10px;justify-content:center;margin-top:14px}
+.reeldots button{flex:none;width:9px;height:9px;padding:0;border-radius:50%;border:1px solid var(--golddk);background:transparent;cursor:pointer;transition:background .3s ease,box-shadow .3s ease,transform .3s ease}
+.reeldots button.on{background:var(--gold);box-shadow:0 0 10px rgba(240,185,11,.55);transform:scale(1.2)}
+.pill .kdot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px rgba(240,185,11,.85)}
+.pill.goldpill{color:var(--gold2)}
+.bandhead{display:flex;align-items:center;gap:16px;margin:64px 0 16px}
+.bandhead h2{font-family:'IBM Plex Mono',monospace;font-size:19px;letter-spacing:.16em;text-transform:uppercase;color:#ffffff;white-space:nowrap;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.bandhead .rule{flex:1;height:1px;background:linear-gradient(90deg,rgba(255,217,77,.5),rgba(255,255,255,.05))}
+.roster{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.roster .slot{flex:0 0 calc((100% - 8px)/2)}
+@media(min-width:820px){.roster .slot{flex-basis:calc((100% - 24px)/4)}}
+.slot{border:1px solid transparent;border-radius:var(--r-md);background:linear-gradient(170deg,#151517,#101012 70%) padding-box,linear-gradient(180deg,rgba(255,255,255,.35),rgba(240,185,11,.18)) border-box;padding:20px 13px;min-height:105px;display:flex;flex-direction:column;gap:7px;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 14px 28px rgba(0,0,0,.5);backdrop-filter:saturate(1.3);transition:transform .35s ease,box-shadow .35s ease}
+.slot .nm{font-size:clamp(16px,4.2vw,20px);font-weight:700;line-height:1.1;letter-spacing:-.01em;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.slot .st{font-family:'IBM Plex Mono',monospace;font-size:8.3px;letter-spacing:.12em;white-space:nowrap;text-transform:uppercase;color:var(--green);text-shadow:0 0 10px rgba(74,222,128,.4)}
+.slot.idle{background:linear-gradient(170deg,#0c0c0e,#080809 75%);border:1px dashed #55503e;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 10px 20px rgba(0,0,0,.4)}
+.slot.idle .nm{color:#8f8c84;text-shadow:none}
+.slot.idle .st{color:#7d7a70;text-shadow:none}
+.slot .st.goldst{color:var(--gold);text-shadow:0 0 10px rgba(240,185,11,.35)}
+.slot .st.mut{color:#7d7a70;text-shadow:none}
+.statusband{margin-top:24px;border:1px solid #33322e;border-radius:var(--r-md);background:linear-gradient(180deg,#0d0d0f,#080809);padding:28px 24px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 12px 24px rgba(0,0,0,.45)}
+.statusband .lab{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.26em;color:var(--gold2);text-transform:uppercase;text-align:center}
+.statusband p{margin:16px auto 0;max-width:720px;font-size:15px;line-height:1.65;color:var(--cream)}
+.backroom{margin-top:24px;border:1px solid #33322e;border-radius:var(--r-md);background:linear-gradient(180deg,#0d0d0f,#080809);padding:24px 16px;text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 12px 24px rgba(0,0,0,.45)}
+.backroom .lab{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.26em;color:#7d7a70;text-transform:uppercase}
+.backroom nav{display:flex;flex-wrap:wrap;gap:16px 32px;margin-top:16px;justify-content:center}
+.backroom a{color:var(--cream);text-decoration:none;font-size:15px}
+footer{margin-top:64px;border-top:1px solid #3d3b34;padding-top:24px;color:var(--dim);font-size:14px;line-height:1.6;text-align:center}
+footer .mono{font-size:11.5px;color:#7d7a70;margin-top:8px}
+@media(hover:hover){.slot:hover{transform:translateY(-3px);box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 20px 34px rgba(0,0,0,.55)}.btn:hover{transform:translateY(-1px);filter:brightness(1.05)}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}.reel .slide{transition:none}}
+
+/* ===== PROXIMA LAYOUT (David, Nov 7 2026): light steel hero on
+   near-black, product below the fold. Gold finish kept throughout. ===== */
+:root{--lblue:#5ea8ff;--lblue2:#9cc8ff;--steel:#e8edf5;--steeldim:#9aa7ba}
+body{background:linear-gradient(180deg,#070a10 0%,#050506 55%,#000000 100%);background-color:#050506}
+.wrap{max-width:1180px}
+.ptop{display:flex;align-items:center;justify-content:space-between;padding:26px 4px 8px}
+.pbrand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:22px;letter-spacing:.02em;color:#fdfcf9}
+.pbrand .mark{width:124px;height:124px;flex:none}
+.pnav{display:flex;gap:30px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:13px}
+.pnav a{color:var(--steeldim);text-decoration:none}
+.pnav a.opencta{color:#0a0f16;background:linear-gradient(180deg,#ffffff,#dfe8f4);border-radius:8px;padding:10px 18px;font-weight:700;letter-spacing:.04em}
+.pnav a.tellslink{color:var(--gold2);font-weight:700;letter-spacing:.08em}
+.phero{padding:96px 4px 24px;max-width:920px}
+.phero h1{font-size:clamp(48px,8.5vw,88px);line-height:1.04;font-weight:700;letter-spacing:-.02em;color:var(--steel);text-shadow:0 2px 24px rgba(94,168,255,.14)}
+.phero h1 .b1{color:var(--lblue2)}
+.phero h1 .b2{color:var(--lblue)}
+.phero .sub{margin-top:30px;font-size:clamp(17px,2.6vw,21px);line-height:1.55;color:var(--steeldim);max-width:660px}
+.phero .cred{margin-top:38px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.06em;color:var(--steeldim)}
+.phero .cred b{color:var(--gold2);font-weight:600}
+.phero .cta{margin-top:46px}
+.pbelow{margin-top:76px}
+.pframe{border:1px solid #232b38;border-radius:18px;background:linear-gradient(180deg,#0d1219,#0a0e14);box-shadow:0 30px 70px rgba(0,0,0,.65);padding:8px 8px 30px}
+.pframe .reel{margin-top:20px}
+.trailerband{margin-top:24px}
+.trailerband video{display:block;width:100%;max-width:920px;height:auto;margin:0 auto;border:1px solid #232b38;border-radius:18px;background:#000;box-shadow:0 30px 70px rgba(0,0,0,.65)}
+.coinband{max-width:920px;margin:0 auto;border:1px solid #232b38;border-radius:18px;background:linear-gradient(180deg,#0d1219,#0a0e14);box-shadow:0 30px 70px rgba(0,0,0,.65);padding:28px 24px;text-align:center}
+.coinband p{font-size:17px;line-height:1.55;color:var(--steeldim)}
+.coinband .calabel{margin-top:24px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.26em;color:var(--gold2);text-transform:uppercase}
+.coinband .cabtn{display:block;width:100%;margin-top:10px;border:1px solid #554a1e;border-radius:var(--r-sm);background:#050506;color:var(--gold2);padding:16px 12px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:clamp(11px,3.1vw,14px);line-height:1.55;letter-spacing:0;overflow-wrap:anywhere;word-break:break-all;cursor:pointer}
+.coinband .cabtn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.coinband .castatus{min-height:22px;margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--steeldim)}
+.coinband .btn{margin-top:14px}
+.coinband .lockhead{margin-top:36px;font-size:21px;font-weight:700;letter-spacing:-.01em;color:var(--steel)}
+@media (max-width:640px){.coinband{padding:24px 16px}.coinband .cabtn{font-size:11px;padding:14px 10px}.coinband .btn{display:block;text-align:center}}
+
+/* ===== PHONE FIT (Nov 7 2026 audit): top bar wraps instead of clipping,
+   hero scales, reel card stacks, no horizontal overflow. ===== */
+html,body{overflow-x:hidden}
+@media (max-width:640px){
+  .ptop{flex-wrap:wrap;row-gap:10px;padding:18px 2px 4px}
+  .pbrand{font-size:19px}
+  .pbrand .mark{width:124px;height:124px}
+  .pnav{flex-wrap:wrap;gap:8px 16px;font-size:12px;margin-left:auto;justify-content:flex-end}
+  .pnav a.opencta{padding:8px 13px}
+  .phero{padding:52px 2px 16px}
+  .phero h1{font-size:clamp(38px,11.5vw,54px)}
+  .phero .sub{margin-top:22px}
+  .phero .cred{margin-top:28px;gap:10px 18px}
+  .phero .cta{margin-top:34px}
+  .pbelow{margin-top:48px}
+  .pframe{padding:4px 4px 22px;border-radius:14px}
+  .featured{grid-template-columns:1fr;gap:14px;padding:18px 14px;text-align:center}
+  .featured img{width:84px;height:84px;margin:0 auto}
+  .featured h3{font-size:clamp(28px,8.4vw,38px)}
+  .featured .btn{display:block;text-align:center}
+  .brainline{text-align:left}
+  .boardtop{padding:32px 10px 26px}
+  .boardsub{letter-spacing:.18em}
+  .bandhead{margin:44px 0 14px;gap:10px}
+  .bandhead h2{font-size:16px}
+  .slot .st{white-space:normal}
+  .statusband{padding:22px 16px}
+  .backroom nav{gap:12px 20px}
+  .btn{max-width:100%}
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- TOP BAR: logo left, plain nav, white Open button (Proxima geometry) -->
+  <div class="ptop">
+    <div class="pbrand"><img class="mark" src="/bonded-mark3.png" alt=""></div>
+    <nav class="pnav">
+
+      <a href="/">Home</a>
+      <a class="tellslink" href="/tells">Tells App</a>
+      <a href="/bonds/">Bonds</a>
+      <a href="/bond-rules">Rules</a>
+      <a href="/methodology.html">Methodology</a>
+      <a class="opencta" href="/door/">Post a Bond</a>
+    </nav>
+  </div>
+
+  <!-- HERO: BONDED only. Wording is the cleared tagline plus two
+       sentences taken verbatim from the counsel-approved status copy. -->
+  <div class="phero">
+    <h1>BONDED</h1>
+    <p class="sub">BONDED is live. The first bonded coin launched on November 11, 2026, and its 5 SOL bond is being measured now. The rules measure activity from the developer wallet and a fixed set of wallets linked by a published funding rule. A link under that rule does not prove common ownership.</p>
+    <div class="cta"><a class="btn" href="/door/">Post a Bond</a></div>
+  </div>
+
+  <!-- TRAILER: approved cut, click-to-play, no autoplay -->
+  <div class="bandhead"><h2>The Trailer</h2><div class="rule"></div></div>
+  <div class="trailerband">
+    <video controls playsinline preload="none" poster="/bonded-trailer-poster.jpg" src="/bonded-trailer.mp4"></video>
+  </div>
+
+  <!-- THE BONDED COIN: live on pump.fun; contract address, tap to copy -->
+  <div class="bandhead"><h2>The Bonded Coin</h2><div class="rule"></div></div>
+  <div class="coinband">
+    <p>The first coin launched on BONDED is live on pump.fun.</p>
+    <div class="calabel">Contract Address</div>
+    <button class="cabtn" type="button" id="coin-ca" aria-label="Copy the Bonded coin contract address">BAiZ5e6oYjyn4NBhQNX2FYp5ck9nRY5DTrxv5Db3bond</button>
+    <div class="castatus" id="coin-ca-status" role="status">Tap the address to copy it.</div>
+    <a class="btn" href="https://pump.fun/coin/BAiZ5e6oYjyn4NBhQNX2FYp5ck9nRY5DTrxv5Db3bond">View on pump.fun</a>
+    <h3 class="lockhead">Dev position: locked</h3>
+    <p>The full dev buy, 75,298,895 BONDED (7.5 percent of supply), sits in a Streamflow lock for 7 days. It unlocks Wednesday, November 18, 2026 at 5:14 PM PT. It cannot be cancelled, by the sender or the recipient.</p>
+    <div class="calabel">Streamflow Lock</div>
+    <button class="cabtn" type="button" id="coin-lock" aria-label="Copy the Streamflow lock address">EMi3dt9meJyoAcTS5nZ3zbSUa2LfKEj8UrqVQRKykk5y</button>
+    <div class="castatus" id="coin-lock-status" role="status">Tap the address to copy it.</div>
+    <a class="btn" href="https://solscan.io/account/EMi3dt9meJyoAcTS5nZ3zbSUa2LfKEj8UrqVQRKykk5y">Verify the lock on Solscan</a>
+    <a class="btn" href="https://app.streamflow.finance/contract/solana/mainnet/EMi3dt9meJyoAcTS5nZ3zbSUa2LfKEj8UrqVQRKykk5y">View the lock on Streamflow</a>
+    <h3 class="lockhead">The bond: posted</h3>
+    <p>Bond: 5 SOL, held in the coin's own program vault.</p>
+    <p>Window: Nov 11, 2026, 5:51 PM PT to Nov 12, 2026, 5:51 PM PT (24 hours).</p>
+    <p>Terms: exits at or under 20 percent return the bond in full. Past that, the program pays holders from the bond and the held fees.</p>
+    <div class="calabel">Bond Account</div>
+    <button class="cabtn" type="button" id="coin-bond" aria-label="Copy the bond account address">5iCwin61MCAnSZuDHk5xoRUZszS9ZueCeRVsjSdLgmj9</button>
+    <div class="castatus" id="coin-bond-status" role="status">Tap the address to copy it.</div>
+    <a class="btn" href="https://solscan.io/account/5iCwin61MCAnSZuDHk5xoRUZszS9ZueCeRVsjSdLgmj9">Verify the bond on Solscan</a>
+    <a class="btn" href="https://solscan.io/tx/2SL9LJQeJnquxZGZ49Hqn6GUb1cC5fjzQXqMka1pzKu8ZwePoxApEokBav1UA1HwBqaAtfkv1rKavRuDH3j4axYj">Bond transaction</a>
+  </div>
+  <script>
+  (function(){
+    function wire(btnId,statusId){
+      var btn=document.getElementById(btnId);
+      var status=document.getElementById(statusId);
+      if(!btn||!status){return;}
+      btn.addEventListener('click',function(){
+        var text=btn.textContent.trim();
+        function done(){status.textContent='Copied';}
+        function fallback(){
+          var ta=document.createElement('textarea');
+          ta.value=text;ta.setAttribute('readonly','');ta.style.position='absolute';ta.style.left='-9999px';
+          document.body.appendChild(ta);ta.select();
+          try{document.execCommand('copy');done();}catch(e){status.textContent='Copy failed. Long-press the address to copy it.';}
+          document.body.removeChild(ta);
+        }
+        if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,fallback);}else{fallback();}
+      });
+    }
+    wire('coin-ca','coin-ca-status');
+    wire('coin-lock','coin-lock-status');
+    wire('coin-bond','coin-bond-status');
+  })();
+  </script>
+
+  <!-- BONDED STATUS, BELOW THE FOLD: framed panel -->
+  <div class="pbelow"><div class="pframe">
+<!-- BOARD TOP: one brand, one headline, one sentence, one action -->
+  
+
+  <!-- STATUS: counsel-approved wording, verbatim -->
+  <div class="bandhead"><h2>Status</h2><div class="rule"></div></div>
+  <div class="statusband">
+    <div class="lab">Where BONDED Stands</div>
+    <p>BONDED is live. The first bonded coin launched on November 11, 2026, and its 5 SOL bond is being measured now. The rules measure activity from the developer wallet and a fixed set of wallets linked by a published funding rule. A link under that rule does not prove common ownership. Activity from wallets outside the set is not covered. The proposed design has no challenge or appeal stage. A published execution can be voided only if its measurement fails the stated recomputation test against chain data. Outcomes execute through the program.</p>
+  </div>
+
+  <!-- HOW IT WORKS: explainer, terminology approved by counsel Nov 9 2026 -->
+  <div class="bandhead"><h2>How BONDED Works</h2><div class="rule"></div></div>
+  <div class="statusband">
+    <div class="lab">The Proposed Design, Step by Step</div>
+    <p><b style="color:var(--gold)">1.</b> Before a coin launches through the door, the developer posts a bond in SOL. The terms for that bond are fixed before it is posted.</p>
+    <p><b style="color:var(--gold)">2.</b> During the bond window, the program tracks selling and transfers out of the launch position by the developer wallet and a fixed set of wallets linked under a published funding rule. A link under that rule does not prove common ownership. Activity from wallets outside the set is not covered.</p>
+    <p><b style="color:var(--gold)">3.</b> If a breach is confirmed, the program automatically distributes the forfeited share of the bond and the same share of the creator's fees still held in the vault to the eligible wallets in the execution block snapshot, pro rata. Holders do not need to claim.</p>
+    <p><b style="color:var(--gold)">4.</b> If no breach is confirmed, the bond returns to the developer.</p>
+    <p><b style="color:var(--gold)">5.</b> There is no challenge or appeal stage, and nobody at BONDED decides the outcome by hand.</p>
+  </div>
+  <div class="statusband">
+    <div class="lab">The Standard Bond</div>
+    <p>5 SOL. A 24 hour window. The same for every dev.</p>
+    <p>A break never raises it. The next launch posts the same 5 SOL.</p>
+    <p>A dev can buy the window down: 2 SOL for each hour, down to 12 hours.</p>
+    <p>Creator fees on a bonded launch sit in the coin's own bond vault. They release to the dev in quarters as the window runs, the rest at close. Released fees are the dev's to keep. Creator fees still held at a confirmed breach pay out to the holders with the bond, under the same forfeited share.</p>
+    <p>There is no door fee and no bond fee.</p>
+  </div>
+
+  <!-- WHY: the trenches case, operator's voice -->
+  <div class="bandhead"><h2>Why the Trenches Need It</h2><div class="rule"></div></div>
+  <div class="statusband">
+    <div class="lab">The Problem BONDED Is Built For</div>
+    <p>Launching a coin costs a dev nothing. He can sell into his own buyers, walk away, and launch again tomorrow under a fresh wallet. The buyers carry the loss.</p>
+    <p>A bond changes who pays for failure. The dev puts real money down before the first buy. If he does what he said, he gets it back. If he does not, the bond is what his holders are paid from.</p>
+    <p>No promises to trust. Money posted up front, rules published in advance, outcomes that execute on their own.</p>
+  </div>
+
+  <!-- THE BACK ROOM -->
+  <div class="bandhead"><h2>The Back Room</h2><div class="rule"></div></div>
+  <div class="backroom">
+    <div class="lab">Reference</div>
+    <nav>
+      
+      <a href="/board/">The Board</a>
+      <a href="/lookup">Check a key</a>
+      <a href="/rules.html">The Rules</a>
+      <a href="/methodology.html">Methodology</a>
+    </nav>
+  </div>
+
+  <footer>
+    BONDED is live.
+  </footer>
+  </div></div>
+
+</div>
+</body>
+</html>
+

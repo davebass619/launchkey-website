@@ -1,0 +1,1491 @@
+{
+ "generated_ts": 1794780106.855519,
+ "coins": [
+  {
+   "symbol": "HOGE",
+   "mint": "FVzqGqRmr4UH1Fif6dewmwbJ1p4YUZCu8dcw4Efopump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794737165.6633415,
+   "created_ts": 1794719264,
+   "seeded_ts": 1794737167.3720698
+  },
+  {
+   "symbol": "Nigghao",
+   "mint": "9J41toneswGA3hZJyfYiWkC9jMm8doMDP3QEBYM1pump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794654575.5194857,
+   "created_ts": 1794592537,
+   "seeded_ts": 1794654576.9175706
+  },
+  {
+   "symbol": "BLACKOUT",
+   "mint": "HJWMayjf5H6EzuNTbpk4uq9Dfp4P5CLnjZCpZvKHpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794654452.1581063,
+   "created_ts": 1794612016,
+   "seeded_ts": 1794654453.2792888
+  },
+  {
+   "symbol": "SAI",
+   "mint": "6EK6KzPzCSFWx9tyXdaP2zNXPqt4ZNihFo1CJzacmmsQ",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794654326.7046897,
+   "created_ts": 1794638991,
+   "seeded_ts": 1794654328.3537734
+  },
+  {
+   "symbol": "PEACEFROG",
+   "mint": "m7SihqeaWimE1zpBzjHBwKJbbhuaczX5fHvGoNupump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794654138.5371387,
+   "created_ts": 1794600339,
+   "seeded_ts": 1794654140.0906713
+  },
+  {
+   "symbol": "SCRAP",
+   "mint": "7x8HCyf5Z3JYWXmC7p6C4w11Hw6JAXFEiZy6PCDBpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794653992.9793174,
+   "created_ts": 1794641278,
+   "seeded_ts": 1794653994.748097
+  },
+  {
+   "symbol": "GR00T2",
+   "mint": "EtVFUXdLwKEwNXg7eoQ1JJX2BG6LCUxRq5oxBuSnpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794653780.6126852,
+   "created_ts": 1794596532,
+   "seeded_ts": 1794653782.118779
+  },
+  {
+   "symbol": "VICECITY",
+   "mint": "Ep13piLgesAxM32dB4hVAsmhfWcsTJqVKmQHkYCKpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794653642.1998975,
+   "created_ts": 1794643293,
+   "seeded_ts": 1794653643.6134279
+  },
+  {
+   "symbol": "FUND",
+   "mint": "Aq38XaBAkzAtwbpvFKEzKg9hp1eZrEFV5W9H6XJjFUND",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794653511.954012,
+   "created_ts": 1794643835,
+   "seeded_ts": 1794653514.3598623
+  },
+  {
+   "symbol": "FASTMOON",
+   "mint": "2QCcwbZL7YgovUqvXmxoKJR8AZoHeGMtt4vj2YGSpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794653265.9721649,
+   "created_ts": 1794568851,
+   "seeded_ts": 1794653267.4219387
+  },
+  {
+   "symbol": "WANTED",
+   "mint": "BeLVQE2tK7fVvg6EpVgUzUWhSi95XpL7mqJM3nANpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794653130.3339415,
+   "created_ts": 1794575228,
+   "seeded_ts": 1794653131.9207995
+  },
+  {
+   "symbol": "ASTRALIS",
+   "mint": "DWsutTNJSjG5mkhGsPevvT8xbRtVYQBLZdxqxm2Upump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794651785.3332913,
+   "created_ts": 1794627207,
+   "seeded_ts": 1794651787.0737944
+  },
+  {
+   "symbol": "JENSEN",
+   "mint": "B2YpP21vQBESJ2jtnuhPujEUT61KVRxZ2X5gsDcUpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794651027.7680597,
+   "created_ts": 1794617623,
+   "seeded_ts": 1794651029.5238643
+  },
+  {
+   "symbol": "AMC",
+   "mint": "HWya5CpQiQWLnJfJVRDF9o8AHaUPnPMRa3vfQRczpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794650777.7844071,
+   "created_ts": 1794595198,
+   "seeded_ts": 1794650779.6192472
+  },
+  {
+   "symbol": "POOR",
+   "mint": "9oJk7eMccQchx3evoN5C5pKQD5Xodb4C1qkhemjjpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794598244.1102283,
+   "created_ts": 1794595146,
+   "seeded_ts": 1794598245.9061348
+  },
+  {
+   "symbol": "RWA",
+   "mint": "6N8Qeb4i5bNmRRRvbKSSEhfVc12J8qW5hSmo1cHjpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794567880.313885,
+   "created_ts": 1794552416,
+   "seeded_ts": 1794567881.5345654
+  },
+  {
+   "symbol": "JewForce",
+   "mint": "ErTBzXHZ1Gqss99KEq4QwaBqHrUZt7dHzgd89t7TwU7d",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794567740.7342136,
+   "created_ts": 1794435962,
+   "seeded_ts": 1794567742.2344773
+  },
+  {
+   "symbol": "NETWORK",
+   "mint": "8THZ69JP2ErZuHVj4G5rcwkFfsQafp5mQsaoQReApump",
+   "creator": "DivtDdZ2ZRZB2xZYpFeNz7e91q3KJZHqCpoY4ZGpfZKJ",
+   "cluster_size": 8,
+   "members_by_role": {
+    "creator": 1,
+    "funded": 7
+   },
+   "watched": false,
+   "creator_balance_ui": 204052.371772,
+   "creator_status": "holds",
+   "creator_balance_read_ts": 1794567598.3889964,
+   "created_ts": 1792878523.0,
+   "seeded_ts": 1794567612.7609227
+  },
+  {
+   "symbol": "LADIESMAN",
+   "mint": "EsrKGvMkC2w58rHLWQ32sthXer5RHaecYhLQ2iorpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794567490.1581635,
+   "created_ts": 1794525040,
+   "seeded_ts": 1794567491.3806794
+  },
+  {
+   "symbol": "NIHAOSON",
+   "mint": "EW1BXS4USU1qyCLybEpxzM7vmqhAAZhv5wDXxsjNYwXz",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794567373.2338204,
+   "created_ts": 1794539457,
+   "seeded_ts": 1794567374.5771549
+  },
+  {
+   "symbol": "Work",
+   "mint": "4CWicFTfu5vs7nZd649J81skDM6yBMi94mMxRuyJpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794567248.762081,
+   "created_ts": 1794527554,
+   "seeded_ts": 1794567250.2338047
+  },
+  {
+   "symbol": "DOWN",
+   "mint": "7NcKYrsu1J4f137HR3mRXd4LqumBvjBknLvsdHZtjLP2",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794567127.7984626,
+   "created_ts": 1794562547,
+   "seeded_ts": 1794567129.0489566
+  },
+  {
+   "symbol": "CAT",
+   "mint": "77RoiSTasJzDdAgS9cWbEdUKiSPbQdafKjyqdXWHpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794566997.738197,
+   "created_ts": 1794533620,
+   "seeded_ts": 1794566999.296863
+  },
+  {
+   "symbol": "ROCKY",
+   "mint": "7By4nMjyfbFHsWMqQikpcd4P1MZQMaRFo2Z3L6jZpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794566867.1355443,
+   "created_ts": 1794551496,
+   "seeded_ts": 1794566868.615811
+  },
+  {
+   "symbol": "TrumpWars",
+   "mint": "31HzUsjzTt7FBCGnDy68cBnELayVsnd3zYEBtsXXpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794566733.3160489,
+   "created_ts": 1793586000,
+   "seeded_ts": 1794566735.032955
+  },
+  {
+   "symbol": "Chip",
+   "mint": "25PjgJ34yD7vbzqbV38cDA3YGHQxi9wLVsDJBQwCpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794566672.9959433,
+   "created_ts": 1794536539,
+   "seeded_ts": 1794566674.454409
+  },
+  {
+   "symbol": "Sakura",
+   "mint": "BKn5Lbn8thpk4LKwBWFYfCQtDepGF1evjrro73oupump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794566540.221219,
+   "created_ts": 1794245907,
+   "seeded_ts": 1794566541.6164188
+  },
+  {
+   "symbol": "TREECOIN",
+   "mint": "CmsVQy7fDFAEn9GnXWGUfUwQeZHbVs9JPP6WcaBDpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794566411.4479783,
+   "created_ts": 1794555231,
+   "seeded_ts": 1794566412.745467
+  },
+  {
+   "symbol": "Hugh",
+   "mint": "BYeDusCxeuzfZeBy8n6EVeH9yhYcVCn8xMfiGMakpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794566271.158512,
+   "created_ts": 1794556389,
+   "seeded_ts": 1794566272.4832952
+  },
+  {
+   "symbol": "WRENCHP",
+   "mint": "45yf6UuhLUfkDKrNDUq4WSiLxb1e1NiggpyWjiRKpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794566108.3877192,
+   "created_ts": 1794554031,
+   "seeded_ts": 1794566109.8964531
+  },
+  {
+   "symbol": "Cole",
+   "mint": "3AETZKQs6HUaf7XDZfDDZJ6Yo7Pcv7kf3z2Df9KApump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794565936.5144808,
+   "created_ts": 1794554977,
+   "seeded_ts": 1794565937.9916759
+  },
+  {
+   "symbol": "CS",
+   "mint": "GsuDgP89rWTYrsGCZ3VMtfnD7mAeDLfe6qiJ6KLKpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794565768.1627738,
+   "created_ts": 1794503478,
+   "seeded_ts": 1794565769.5142014
+  },
+  {
+   "symbol": "jjaemu",
+   "mint": "AWuUCEXwrCvbixzMY5sQfNEY7hf6j8aeiDubv5Hhpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794565593.5165431,
+   "created_ts": 1794496701,
+   "seeded_ts": 1794565595.3209553
+  },
+  {
+   "symbol": "Christmax",
+   "mint": "D7MyAD7k3AqJpg4uxjUcmL51EDHrEsJxkjUynsxcpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794565438.4590592,
+   "created_ts": 1794521787,
+   "seeded_ts": 1794565440.2958503
+  },
+  {
+   "symbol": "Shitcoin",
+   "mint": "8p7GCo3fWJ55LFQbhkBd8hCpw3ACk98PgK7Lsd6Upump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794565018.3071554,
+   "created_ts": 1794472205,
+   "seeded_ts": 1794565019.8369894
+  },
+  {
+   "symbol": "CHARITY",
+   "mint": "G9E8zzhdqCGpGqrHSgL2CKW1MuAbCVTQPFUhFk72pump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794564858.4934027,
+   "created_ts": 1794534998,
+   "seeded_ts": 1794564860.0360184
+  },
+  {
+   "symbol": "AMD",
+   "mint": "H2SQUiRy8bvAv2yARwajptdLKi9BTYDoWLvu5cbpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794540500.9491627,
+   "created_ts": 1794537091,
+   "seeded_ts": 1794540502.9300895
+  },
+  {
+   "symbol": "Timsen",
+   "mint": "2eBGQFFjmARa2kPECwLhMiuz7WZaSvgncH3nSruLpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794533814.8626146,
+   "created_ts": 1794529761,
+   "seeded_ts": 1794533816.3309472
+  },
+  {
+   "symbol": "THRONG",
+   "mint": "FQbUZry4SJTzxS1GxAeZGLW2ngzDnwxv3XDNVXa4pump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794533652.3908076,
+   "created_ts": 1794530792,
+   "seeded_ts": 1794533654.0648286
+  },
+  {
+   "symbol": "GTAINU",
+   "mint": "AY2P2J79jdLWib4yYwMDApCmq9GorZhddDXerca3pump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794533414.8733346,
+   "created_ts": 1794530260,
+   "seeded_ts": 1794533416.5866833
+  },
+  {
+   "symbol": "SHARKBUX",
+   "mint": "ttwocSxKgj4NpQEUzBaFzLxEFzVdLytUbLsnnjGew9v",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794529739.7621477,
+   "created_ts": 1794526371,
+   "seeded_ts": 1794529741.5982475
+  },
+  {
+   "symbol": "UODF",
+   "mint": "uodFgQimViwTWwsjK2nEnZdiu6HxtEWpknAaJ6oELMj",
+   "creator": "8MEBm6wKJAqDEa1boTrrCpMt2HckmkX9wS9YCZok8ScJ",
+   "cluster_size": 4,
+   "members_by_role": {
+    "creator": 1,
+    "funded": 2,
+    "funder": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0.0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794519471.6070585,
+   "created_ts": 1794502688,
+   "seeded_ts": 1794519478.6331456
+  },
+  {
+   "symbol": "HENSEN",
+   "mint": "J9t2LsAZLrNHocuvoyEKoiyS7RKXLJv2u9bnFJTCpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794508335.6572473,
+   "created_ts": 1794505751,
+   "seeded_ts": 1794508337.5659568
+  },
+  {
+   "symbol": "BALLS",
+   "mint": "5ZA32FxzsxcSXZuYDbrxa9QVVvzkiLbisDb5VKmNpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794504460.949554,
+   "created_ts": 1794500569,
+   "seeded_ts": 1794504465.3109844
+  },
+  {
+   "symbol": "blackswan",
+   "mint": "Bbh2kpPTxuf3DxcutYq3DofKmeJm5ptCZUUMAF6kpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794493787.5022676,
+   "created_ts": 1794491291,
+   "seeded_ts": 1794493788.9872522
+  },
+  {
+   "symbol": "CLAUDE",
+   "mint": "FyAT8ti3LqzQW5Kdkjnr2XBp35qhJqwm2m7jiR91pump",
+   "creator": "GFs8Fybt9kTCjAzLNLGDsK1p8KPWLgo3wXD8oAatUEad",
+   "cluster_size": 29,
+   "members_by_role": {
+    "creator": 1,
+    "funded": 25,
+    "funder": 3
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794481067.6853032,
+   "created_ts": 1792432345.0,
+   "seeded_ts": 1794481107.6273525
+  },
+  {
+   "symbol": "STC",
+   "mint": "Dcipe1FNimmVAnVfPWuhqHx4M3P9SCz647FDGWptpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794480832.2188764,
+   "created_ts": 1794474163,
+   "seeded_ts": 1794480833.633089
+  },
+  {
+   "symbol": "arigato",
+   "mint": "HEDuqMZYBdQztyF1sj1gHz6BEFWRKVdBD87AdBfgpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794480715.5116415,
+   "created_ts": 1794464612,
+   "seeded_ts": 1794480716.9868102
+  },
+  {
+   "symbol": "Ricehat",
+   "mint": "7tg8gm8LPw6N6CsRZGDxnykABpBqfqxdbTAvFemHpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794480586.6002667,
+   "created_ts": 1794465862,
+   "seeded_ts": 1794480587.7948282
+  },
+  {
+   "symbol": "SKUNK",
+   "mint": "BetzJU2X9UEgG2qdo8UKbJ6q1iiFGs23axh8vRqEpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794480460.7634158,
+   "created_ts": 1794430074,
+   "seeded_ts": 1794480461.9589288
+  },
+  {
+   "symbol": "VI",
+   "mint": "8DwAf1oQ11Ch86SNGcbBppFqf1RZJ74T7mdNuNBtpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794480344.3023148,
+   "created_ts": 1794380535,
+   "seeded_ts": 1794480345.571031
+  },
+  {
+   "symbol": "Shiqi",
+   "mint": "4Q9b2CGx5HXP36BFMx6uWMrGK4arKChfWg8dzZKYpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794480220.3036478,
+   "created_ts": 1794464865,
+   "seeded_ts": 1794480221.5341246
+  },
+  {
+   "symbol": "\u5341\u4e03",
+   "mint": "A1xwre2K5WBQr5MwrBYDSHYjrvH8m8rbu1X3Nbg9pump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794480090.6975188,
+   "created_ts": 1794338622,
+   "seeded_ts": 1794480092.1209724
+  },
+  {
+   "symbol": "MRPENIS",
+   "mint": "HFcyhe28iLYRhac2W5FBdtDGFunWDJesCR7f6EZJpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794479966.9892828,
+   "created_ts": 1794453723,
+   "seeded_ts": 1794479968.3725479
+  },
+  {
+   "symbol": "FlyDog",
+   "mint": "5tePJcGmdKAoNVXe3fp2tmf8n7cmr5d3YBkYKj4Cpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794479848.960088,
+   "created_ts": 1794466148,
+   "seeded_ts": 1794479850.5686092
+  },
+  {
+   "symbol": "ape hao",
+   "mint": "Fkc9FKhK1K8FSPtKkcjfGkpeb4waa3DspRXHmwvvpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794479616.386742,
+   "created_ts": 1794402396,
+   "seeded_ts": 1794479617.584968
+  },
+  {
+   "symbol": "GACHAZ",
+   "mint": "bn5DhJnkB8EVDoAgV9qCV3Kbv7XmEEp7mxW4npDpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794479491.1474032,
+   "created_ts": 1794420889,
+   "seeded_ts": 1794479492.4034145
+  },
+  {
+   "symbol": "Mustache",
+   "mint": "7r3Hcmzzko9UrCvbCAN3QhUfojs2RqpnzH8tfeyRpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794478947.0774508,
+   "created_ts": 1794422430,
+   "seeded_ts": 1794478948.5485244
+  },
+  {
+   "symbol": "Madison",
+   "mint": "9j3EyQXC4ff2gZDgMWg2RUjujLUKaKkNFY5REgPFpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794478704.4384694,
+   "created_ts": 1794463132,
+   "seeded_ts": 1794478706.1668115
+  },
+  {
+   "symbol": "LuckyCoin",
+   "mint": "89iRVoDVPd8tuRrMyhgPfe58eDneasPsdEVu5AUMpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794478559.1021926,
+   "created_ts": 1794412541,
+   "seeded_ts": 1794478561.1065865
+  },
+  {
+   "symbol": "M\u0101o",
+   "mint": "AWL7bYYUH3StCYySsyHPb5Gog5VC7SxWrbR3TTHspump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794478231.3626008,
+   "created_ts": 1794408080,
+   "seeded_ts": 1794478232.919432
+  },
+  {
+   "symbol": "AIB",
+   "mint": "AJFnmpiF4VTKeqEWtwBUarib5zKKbXcs594UyrMHpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794477797.3763483,
+   "created_ts": 1794446341,
+   "seeded_ts": 1794477798.9905374
+  },
+  {
+   "symbol": "WASTED",
+   "mint": "GexThZHgaswpAQ7Fi8QrHFubjPimUNSYhJiAA7XZpump",
+   "creator": "7h7NEaW9v6kzSUqoSvuAZBMLmxVA74fdJ394yrU7MJt5",
+   "cluster_size": 3,
+   "members_by_role": {
+    "creator": 1,
+    "funded": 2
+   },
+   "watched": false,
+   "creator_balance_ui": 0.189139,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794407335.899779,
+   "created_ts": 1793383737.0,
+   "seeded_ts": 1794407341.0630229
+  },
+  {
+   "symbol": "FUCAT",
+   "mint": "2UcqYeGG2waJRagLdqRxHjQ3umwqacF4TmqmRTtppump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794395299.7335858,
+   "created_ts": 1794388931,
+   "seeded_ts": 1794395300.9292634
+  },
+  {
+   "symbol": "CatFu",
+   "mint": "FP7NvFXQXoZL1nQC5QZtE1bzwgALdxj1TeA9J25epump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794395146.7773438,
+   "created_ts": 1772329790,
+   "seeded_ts": 1794395148.223779
+  },
+  {
+   "symbol": "xihao",
+   "mint": "7x3ujazwvFMvbM3akMVDHGbaXK1aDgzxQ5966seppump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794395038.5274577,
+   "created_ts": 1794389860,
+   "seeded_ts": 1794395039.6770117
+  },
+  {
+   "symbol": "Vicemas",
+   "mint": "GWxceEVSTHLvhFi9z6pbwgUNYRgXBMrwCXTXcS1Upump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794394895.985055,
+   "created_ts": 1794336353,
+   "seeded_ts": 1794394897.3283923
+  },
+  {
+   "symbol": "MOCHI",
+   "mint": "zHU8ocUYexYxiaKM5Yysf1USZVd2batkN7UPS5tpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794394761.5771334,
+   "created_ts": 1794381412,
+   "seeded_ts": 1794394763.4495852
+  },
+  {
+   "symbol": "BIG",
+   "mint": "34DXEU2ttEtBSb1TqGJm7izgvYTTkqKcCoiNWdPDpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": true,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794394696.9419956,
+   "created_ts": 1794142003,
+   "seeded_ts": 1794394698.6506307
+  },
+  {
+   "symbol": "Utility",
+   "mint": "r9fkdXyGKrvgkXBzLNUJBYEFUUppZgK8wtetDampump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794394595.9056005,
+   "created_ts": 1794388798,
+   "seeded_ts": 1794394597.359635
+  },
+  {
+   "symbol": "woohao",
+   "mint": "BLVpn8ofkjnAzpWGaVpspZ5bHTeXDbXFgX4vn3fkpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794394426.1754334,
+   "created_ts": 1794387559,
+   "seeded_ts": 1794394427.6872857
+  },
+  {
+   "symbol": "ClapCat",
+   "mint": "5BjfgmtfqvNpAWx1CnZynoWLWNMnrwHLhTFzQ81vkEc8",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794394282.3458216,
+   "created_ts": 1790546721,
+   "seeded_ts": 1794394283.6735675
+  },
+  {
+   "symbol": "xfill",
+   "mint": "5obfMMi4cm9dkt6DQcWTunS5JQNJiBiHKghYb194pump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794393917.3930066,
+   "created_ts": 1794386480,
+   "seeded_ts": 1794393919.007154
+  },
+  {
+   "symbol": "greg",
+   "mint": "4Ye6Y6Vaic8cyPdfW2f9PcLhXkysBtSmV84G8X7spump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794393736.6841657,
+   "created_ts": 1794363886,
+   "seeded_ts": 1794393738.4791675
+  },
+  {
+   "symbol": "APE",
+   "mint": "9c5JteS7LDobkcxXKdkfgrxeebxEruAQJ6x9F7Tupump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794393598.5360715,
+   "created_ts": 1794381860,
+   "seeded_ts": 1794393600.056941
+  },
+  {
+   "symbol": "\u6708\u85aa\u55b5",
+   "mint": "4qperWiuSvkn1r3T6ZZkWThzadoxttAeNbPdbDJTpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794393400.7530525,
+   "created_ts": 1794377613,
+   "seeded_ts": 1794393402.0659418
+  },
+  {
+   "symbol": "forg",
+   "mint": "2HhH7LwfNHrxqMrSoXZ6Ri7GdmRYSJ4e8qSra9Krpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794393241.6079955,
+   "created_ts": 1794148508,
+   "seeded_ts": 1794393242.764106
+  },
+  {
+   "symbol": "TI",
+   "mint": "7cin51XTpSkesiZMLJvEGNXqd5DFFqSBixcvn7Ppump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794393073.67733,
+   "created_ts": 1794389084,
+   "seeded_ts": 1794393075.2626188
+  },
+  {
+   "symbol": "BULLHARIS",
+   "mint": "6mwuYnY3fHdxed9GnrdY5BkXhJwMi1uz39MPsYUcpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794392765.9406807,
+   "created_ts": 1794334172,
+   "seeded_ts": 1794392767.4452736
+  },
+  {
+   "symbol": "Leonida",
+   "mint": "BWJfBNeXpapG7uoqByp5KSwWgCQba8QcDmA2DQiEpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794392550.8758428,
+   "created_ts": 1793906941,
+   "seeded_ts": 1794392552.7107995
+  },
+  {
+   "symbol": "DIGS",
+   "mint": "9QT8K685Hrae4k11dhGXirdtpfAaimExtyfwt8cPpump",
+   "creator": "9cE3QMYTN49NJwdbFcs61DZPzJvV8X3SvSw6VvTBXR7",
+   "cluster_size": 9,
+   "members_by_role": {
+    "creator": 1,
+    "funded": 6,
+    "funder": 2
+   },
+   "watched": false,
+   "creator_balance_ui": 10799742.239683,
+   "creator_status": "holds",
+   "creator_balance_read_ts": 1794392096.3165853,
+   "created_ts": 1793013226.0,
+   "seeded_ts": 1794392111.8175917
+  },
+  {
+   "symbol": "GTA",
+   "mint": "EJv8TgQfN6gtYN8Z6KGyBeNPbVYmogmudfxiRA2Fpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": true,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794392055.6825798,
+   "created_ts": 1794234821,
+   "seeded_ts": 1794392057.2270513
+  },
+  {
+   "symbol": "\u54aa\u597d",
+   "mint": "Hg3w7GdPViZ5URuCNnK6EwXLzSTmVwX6UXLeD6Pbpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794391871.76181,
+   "created_ts": 1794356774,
+   "seeded_ts": 1794391873.1120212
+  },
+  {
+   "symbol": "Mony",
+   "mint": "7sfmvAmGae6Fq6KQ5z3T2Vi6hQJ7jSEB5uGBVQXapump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794391681.4460614,
+   "created_ts": 1794382691,
+   "seeded_ts": 1794391683.1734908
+  },
+  {
+   "symbol": "NIHAO",
+   "mint": "8yLBuP74RnFmjSRS8BGFebvyoTo8uiEjPB71h3Zgpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794391447.3561413,
+   "created_ts": 1794355156,
+   "seeded_ts": 1794391449.1790493
+  },
+  {
+   "symbol": "AgenC",
+   "mint": "5yC9BM8KUsJTPbWPLfA2N8qH1s9V8DQ3Vcw1G6Jdpump",
+   "creator": "8ZN71XTdVo8yRovnGLmNgW3Tgniw6A4J3JGLvPD686FP",
+   "cluster_size": 34,
+   "members_by_role": {
+    "creator": 1,
+    "funded-live": 33
+   },
+   "watched": true,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794382672.1221673,
+   "created_ts": 1792453792.0,
+   "seeded_ts": 1794382673.6149724
+  },
+  {
+   "symbol": "ORVIX",
+   "mint": "4f2KsphcoyUCWRh9UEFiALJ338E3ShfWXWRkqwSvpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794378690.3080406,
+   "created_ts": 1794368739,
+   "seeded_ts": 1794378691.9228177
+  },
+  {
+   "symbol": "If",
+   "mint": "66KbLTkLpPBPdhkRZs8XZk7Yw1DwuV3KYHKNTvmbpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794375362.6407433,
+   "created_ts": 1794312267,
+   "seeded_ts": 1794375364.344778
+  },
+  {
+   "symbol": "VEYL",
+   "mint": "GHtnAtTCPFz8MRTMQiEyuEob283EUgqd1d1Fysnhpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794375146.5445526,
+   "created_ts": 1793708243,
+   "seeded_ts": 1794375148.4499433
+  },
+  {
+   "symbol": "HOLD",
+   "mint": "4iJ7xEQrUvVUQH9KVStvw3FaY2PZDd7RtR4L9zx2pump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": true,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794364538.7259552,
+   "created_ts": 1794344274,
+   "seeded_ts": 1794364540.9286969
+  },
+  {
+   "symbol": "FLOAT",
+   "mint": "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr",
+   "creator": "WLHv2UAZm6z4KyaaELi5pjdbJh6RESMva1Rnn8pJVVh",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": true,
+   "creator_balance_ui": 963804.26314,
+   "creator_status": "holds",
+   "creator_balance_read_ts": 1794359720.6337929,
+   "created_ts": 1793224397.0,
+   "seeded_ts": 1794359720.6337905
+  },
+  {
+   "symbol": "AudaCity",
+   "mint": "5tBXkPVh716zSXHNZSr8i1PX7e6Uuj46JnBLdYchpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794359075.4336386,
+   "created_ts": 1794337390,
+   "seeded_ts": 1794359077.0450637
+  },
+  {
+   "symbol": "mihao",
+   "mint": "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump",
+   "creator": "9tH2zRYdS3X7PEcsPno3GST1EHe8GX8CSNih1pKpamAp",
+   "cluster_size": 9,
+   "members_by_role": {
+    "creator": 1,
+    "funded-live": 8
+   },
+   "watched": true,
+   "creator_balance_ui": 84027182.333211,
+   "creator_status": "holds",
+   "creator_balance_read_ts": 1794356686.9249496,
+   "created_ts": 1792934860.0,
+   "seeded_ts": 1794356688.9958987
+  },
+  {
+   "symbol": "BANDANA",
+   "mint": "D4dpAsrR4BDtMoHFxZV7SMJ49HPLhupsDa4cww1Jpump",
+   "creator": "gVDXhoGbePACvSqN7CZBtQXFW9eyJwsgudPEwSydAkx",
+   "cluster_size": 7,
+   "members_by_role": {
+    "creator-launcher": 1,
+    "creator-of-record": 1,
+    "mint-authority-at-birth": 1,
+    "funded": 3,
+    "funded-fee": 1
+   },
+   "watched": false,
+   "creator_balance_ui": 0.0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794352067.463726,
+   "created_ts": 1794347751,
+   "seeded_ts": 1794351021.2760875
+  },
+  {
+   "symbol": "X",
+   "mint": "9VZerdNL1x6EjetDqRnh5bYcdmk1y8sLAGs1ybzGpump",
+   "creator": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": true,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794343618.9901116,
+   "created_ts": 1794299900,
+   "seeded_ts": 1794343620.7633734
+  },
+  {
+   "symbol": "Dacity",
+   "mint": "nxPqZ4F7ux8Vph5NFu25rEP6Kx9Gr1U6Fmj36Rjpump",
+   "creator": "EUA3BRvTAWPKEcxhm7tCEppuNoevSBMCfKLaXAiAPNKA",
+   "cluster_size": 15,
+   "members_by_role": {
+    "creator": 1,
+    "funded-live": 14
+   },
+   "watched": true,
+   "creator_balance_ui": 0,
+   "creator_status": "exited",
+   "creator_balance_read_ts": 1794338075.413192,
+   "created_ts": 1792809777.0,
+   "seeded_ts": 1794338077.405633
+  },
+  {
+   "symbol": "PUSSY",
+   "mint": "FZxHLUGiGchY5uvvoeqh1EKiXTrGdN67WUBhUc1fLoat",
+   "creator": "WLHv2UAZm6z4KyaaELi5pjdbJh6RESMva1Rnn8pJVVh",
+   "cluster_size": 1,
+   "members_by_role": {
+    "creator": 1
+   },
+   "watched": true,
+   "creator_balance_ui": 0.0,
+   "creator_status": "exited",
+   "created_ts": 1794169278,
+   "seeded_ts": 1794299208.7058253
+  },
+  {
+   "symbol": "CONDUIT",
+   "mint": "GDv4YUaTKzBNWkzPRLJJcF3PkZ3pfX868SSoQ7ZQpump",
+   "creator": "9bRpBD9mDpv3nEu3RrCA8Nsgpsz4pRY5GXq4pS9DVfnw",
+   "cluster_size": 13,
+   "members_by_role": {
+    "creator": 1,
+    "funded": 9,
+    "funder": 1,
+    "funded-live": 2
+   },
+   "watched": false,
+   "creator_balance_ui": 0.0,
+   "creator_status": "exited",
+   "created_ts": 1792588018.0,
+   "seeded_ts": 1794286647.452392
+  }
+ ]
+}

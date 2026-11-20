@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BONDED · The Bonds. Every bond on the record.</title>
+<link rel="canonical" href="https://launchkey.fun/bonds/">
+<meta name="description" content="Every bond posted through the BONDED door, printed from the door's record and the keeper's confirmations while it runs and after it settles.">
+<style>
+:root{
+  --ink:#0a0a0c; --panel:#101014; --panel2:#131318;
+  --line:rgba(242,242,240,.09); --line2:rgba(242,242,240,.16);
+  --txt:#f2f2f0; --mut:#9a9aa0; --dim:#63636a;
+  --gold:#f0b90b; --gold-ink:#161006; --green:#3fb96f;
+  --r-lg:18px; --r-md:14px; --r-sm:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--txt);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  font-size:15.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,.wordmark,.chip{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif}
+a{color:inherit}
+.mono{font-family:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;word-break:break-all}
+.dim{color:var(--dim);font-weight:500}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px 72px}
+header.site{position:sticky;top:0;z-index:20;background:rgba(10,10,12,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.header-in{max-width:1120px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;gap:18px}
+.wordmark{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:1.6px;font-size:19px;white-space:nowrap;text-decoration:none}
+.wordmark img{height:30px;width:30px;border-radius:8px;flex:none}
+nav.mainnav{margin-left:auto;display:flex;align-items:center;gap:22px}
+nav.mainnav a.nl{color:var(--mut);font-size:14.5px;font-weight:600;text-decoration:none}
+nav.mainnav a.nl:hover{color:var(--txt)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;cursor:pointer;
+  font-weight:700;border-radius:12px;padding:11px 20px;font-size:15px;line-height:1;white-space:nowrap;text-decoration:none}
+.btn-gold{background:var(--gold);color:var(--gold-ink)}
+.btn-gold:hover{background:#ffc81f}
+.page-title{padding:34px 0 4px}
+.page-title h1{font-size:30px;font-weight:700;letter-spacing:-.3px}
+.page-title p{color:var(--mut);font-size:15px;margin-top:4px;max-width:640px}
+.asof{color:var(--dim);font-size:13px;margin-top:10px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px}
+.sec-label{font-size:12px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--dim);margin:46px 0 14px}
+.sec-note{color:var(--mut);font-size:14px;margin:-6px 0 14px;max-width:680px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;letter-spacing:1.2px;
+  padding:4px 10px;border-radius:999px;border:1px solid var(--line2);color:var(--mut);white-space:nowrap}
+.chip .dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.chip-live{color:var(--green);border-color:rgba(63,185,111,.45)}
+.chip-proven{color:var(--gold);border-color:rgba(240,185,11,.55)}
+.chip-probation{color:var(--mut)}
+.chip-config{color:var(--txt)}
+.bond-list{display:grid;grid-template-columns:1fr;gap:16px}
+.bond-card{padding:20px}
+.sb-top{display:flex;gap:14px;align-items:center}
+.coin-tile{width:40px;height:40px;border-radius:10px;border:1px solid var(--line2);background:var(--panel2);
+  display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:700;font-size:15px;flex:none}
+.sb-title{min-width:0}
+.sb-name{font-weight:700;font-size:17px}
+.bc-tick{color:var(--mut);font-size:14px;font-weight:600}
+.sb-rows{margin-top:14px;border-top:1px solid var(--line)}
+.sb-rows .r{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.sb-rows .r .k{color:var(--dim);flex:none}
+.sb-rows .r .v{font-weight:600;text-align:right;min-width:0}
+.sb-rows .r .v a{color:var(--gold);text-decoration:none}
+.sb-rows .r .v a:hover{text-decoration:underline}
+.prog{height:6px;border-radius:999px;background:var(--panel2);border:1px solid var(--line);margin-top:8px;min-width:140px}
+.prog-fill{height:100%;border-radius:999px;background:var(--gold)}
+.cp{white-space:nowrap;font-weight:500;color:var(--dim)}
+.cp-passed{color:var(--txt)}
+.copybtn{background:var(--panel2);color:var(--txt);border:1px solid var(--line2);border-radius:8px;
+  font:inherit;font-size:12px;font-weight:600;padding:2px 8px;cursor:pointer}
+.copybtn:hover{border-color:var(--mut)}
+.empty-card h2{font-size:21px;margin-bottom:8px}
+.empty-card p{color:var(--mut);max-width:560px}
+footer.site{border-top:1px solid var(--line);margin-top:56px;padding-top:22px;
+  display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+footer.site .fl{color:var(--dim);font-size:13.5px}
+footer.site .fl b{color:var(--mut)}
+footer.site .flinks{display:flex;gap:18px;flex-wrap:wrap;row-gap:8px}
+footer.site .flinks a{color:var(--mut);font-size:13.5px;font-weight:600;text-decoration:none}
+footer.site .flinks a:hover{color:var(--gold)}
+@media (max-width:640px){
+  .wrap{padding:0 14px 56px}
+  .header-in{padding:10px 14px;gap:10px;flex-wrap:wrap;height:auto;min-height:60px}
+  nav.mainnav{gap:13px;flex-wrap:wrap}
+  nav.mainnav a.nl{font-size:13px}
+  nav.mainnav a.nl.opt{display:none}
+  .btn{padding:9px 14px;font-size:14px}
+  .page-title h1{font-size:24px}
+  .bond-card{padding:16px}
+  .sb-rows .r{flex-direction:column;gap:2px}
+  .sb-rows .r .v{text-align:left}
+  .prog{min-width:0;width:100%}
+}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-in">
+    <a class="wordmark" href="/">
+      <img src="/logo-mark.png" alt="BONDED home">
+      <span>BONDED</span>
+    </a>
+    <nav class="mainnav">
+      <a class="nl" href="/">Home</a>
+      <a class="nl tellslink" href="/tells">Tells App</a>
+      <a class="nl" href="/board/">The Board</a>
+      <a class="nl" href="/bonds/">Bonds</a>
+      <a class="nl" href="/bond-rules">Rules</a>
+      <a class="nl opt" href="/rules.html">Grading Rules</a>
+      <a class="nl opt" href="/lookup.html">Check a key</a>
+      <a class="nl" href="/launches/">My Launches</a>
+    </nav>
+    <a class="btn btn-gold" href="/door/">Post a Bond</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="page-title">
+    <h1>The Bonds</h1>
+    <p>Every bond posted through the BONDED door, printed from the door's own record and the keeper's confirmations. Live bonds first, settled bonds below, each one here from the moment it is created.</p>
+    <p>BONDED is live.</p>
+    <p class="asof mono">Record as of Nov 20, 2026, 10:46 AM PT. Regenerated from the record, never edited by hand. Times on this page run to that moment, not to yours.</p>
+  </section>
+
+<div class="sec-label">Live bonds</div><section class="bond-list"><article class="card bond-card">
+    <div class="sb-top">
+      <div class="coin-tile">B</div>
+      <div class="sb-title"><span class="sb-name">Bonded</span> <span class="bc-tick">$BONDED</span></div>
+      <span class="chip chip-live" style="margin-left:auto"><span class="dot"></span>Window open</span>
+    </div>
+    <div class="sb-rows"><div class="r"><span class="k">Creator</span><span class="v"><a href="https://solscan.io/account/89J45iZVcTFMGZK78xB6YYmQ2vEFx1xfSGTxUQJeMbcC" target="_blank" rel="noopener">89J4…MbcC</a></span></div><div class="r"><span class="k">Mint</span><span class="v"><span class="mono">BAiZ5e6oYjyn4NBhQNX2FYp5ck9nRY5DTrxv5Db3bond</span> <button type="button" class="copybtn" data-copy="BAiZ5e6oYjyn4NBhQNX2FYp5ck9nRY5DTrxv5Db3bond">Copy</button> <a href="https://solscan.io/token/BAiZ5e6oYjyn4NBhQNX2FYp5ck9nRY5DTrxv5Db3bond" target="_blank" rel="noopener">Solscan</a></span></div><div class="r"><span class="k">Bond posted</span><span class="v">5 SOL</span></div><div class="r"><span class="k">Bond account</span><span class="v"><a href="https://solscan.io/account/5iCwin61MCAnSZuDHk5xoRUZszS9ZueCeRVsjSdLgmj9" target="_blank" rel="noopener">5iCwin61MCAnSZuDHk5xoRUZszS9ZueCeRVsjSdLgmj9</a></span></div><div class="r"><span class="k">Bond vault</span><span class="v"><a href="https://solscan.io/account/HbQ4ppFCc5pENGL9JH8mL36r1ueoFsPVf7y6ANf1LGQL" target="_blank" rel="noopener">HbQ4ppFCc5pENGL9JH8mL36r1ueoFsPVf7y6ANf1LGQL</a></span></div><div class="r"><span class="k">Window</span><span class="v">Nov 11, 2026, 5:51 PM PT to Nov 12, 2026, 5:51 PM PT (24 hour window)</span></div><div class="r"><span class="k">Creation</span><span class="v"><a href="https://solscan.io/tx/2SL9LJQeJnquxZGZ49Hqn6GUb1cC5fjzQXqMka1pzKu8ZwePoxApEokBav1UA1HwBqaAtfkv1rKavRuDH3j4axYj" target="_blank" rel="noopener">Transaction</a></span></div></div>
+  </article></section>
+
+  <footer class="site">
+    <div class="fl"><b>BONDED</b> · Every launch has a record.</div>
+    <div class="flinks">
+      <a href="/board/">The Board</a>
+      <a href="/rules.html">Grading Rules</a>
+      <a href="/door/">The Door</a>
+      <a href="https://x.com/postthebond">@postthebond</a>
+    </div>
+  </footer>
+  <p class="asof mono" style="margin-top:14px">Scoreboard data: /bonds/bonds-data.json · Record as of Nov 20, 2026, 10:46 AM PT</p>
+</div>
+
+<script>
+document.querySelectorAll('.copybtn').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var text = btn.getAttribute('data-copy');
+    if (navigator.clipboard && text) {
+      navigator.clipboard.writeText(text).then(function () {
+        btn.textContent = 'Copied';
+        setTimeout(function () { btn.textContent = 'Copy'; }, 1600);
+      }, function () {});
+    }
+  });
+});
+</script>
+</body>
+</html>

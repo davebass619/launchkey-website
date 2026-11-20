@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BONDED — The Record. Every launch graded and filed.</title>
+<link rel="canonical" href="https://launchkey.fun/board/">
+<meta name="description" content="Launchkey is the launchpad with a memory. Every key is graded. Every launch gets a public record page, and it stays on the public record.">
+<style>
+/* BONDED — design system (P9 production port of the approved P8 prototype).
+   ONE stylesheet for landing + launch + file + lookup. Master copy lives at
+   p1/src/design.css; each shipped page embeds the identical text inline (the
+   pages are single self-contained files — no external CSS or font fetches).
+   Tokens: ink #0a0a0c · off-white #f2f2f0 · gold #f0b90b (primary CTA + key mark
+   + grade accents ONLY) · red #e5484d only in the VET.O dot · green only on
+   the LIVE chip (brand surfaces). Hairline borders, generous spacing. */
+
+:root{
+  --ink:#0a0a0c;
+  --panel:#101014;
+  --panel2:#131318;
+  --line:rgba(242,242,240,.09);
+  --line2:rgba(242,242,240,.16);
+  --txt:#f2f2f0;
+  --mut:#9a9aa0;
+  --dim:#63636a;
+  --gold:#f0b90b;
+  --gold-ink:#161006;
+  --red:#e5484d;
+  --green:#3fb96f;
+  --r-lg:18px;
+  --r-md:14px;
+  --r-sm:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink); color:var(--txt);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  font-size:15.5px; line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.wordmark,.btn,.chip,.step-num{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif}
+a{color:inherit;text-decoration:none}
+img{display:block}
+.mono{font-family:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;word-break:break-all}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px 72px}
+.wrap-narrow{max-width:1060px}
+
+/* ---------- header ---------- */
+header.site{
+  position:sticky;top:0;z-index:20;
+  background:rgba(10,10,12,.86);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.header-in{max-width:1120px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;gap:18px}
+.wordmark{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:1.6px;font-size:19px;white-space:nowrap}
+.wordmark img{height:30px;width:30px;border-radius:8px;flex:none}
+.wordmark .key{color:var(--gold)}
+.wordmark small{font-size:9px;font-weight:600;letter-spacing:2.4px;color:var(--dim);display:block;line-height:1;margin-top:2px}
+.wordmark small b{color:var(--red)}
+nav.mainnav{margin-left:auto;display:flex;align-items:center;gap:22px}
+nav.mainnav a.nl{color:var(--mut);font-size:14.5px;font-weight:600}
+nav.mainnav a.nl:hover{color:var(--txt)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;cursor:pointer;
+  font-weight:700;border-radius:12px;padding:11px 20px;font-size:15px;line-height:1;white-space:nowrap}
+.btn-gold{background:var(--gold);color:var(--gold-ink)}
+.btn-gold:hover{background:#ffc81f}
+.btn-ghost{background:transparent;color:var(--txt);border-color:var(--line2)}
+.btn-ghost:hover{border-color:var(--mut)}
+.btn-quiet{background:var(--panel2);color:var(--txt);border-color:var(--line)}
+.btn-big{width:100%;padding:16px 20px;font-size:16.5px;border-radius:14px}
+.btn-sm{padding:8px 14px;font-size:13.5px;border-radius:10px}
+
+/* ---------- chips ---------- */
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;letter-spacing:1.2px;
+  padding:4px 10px;border-radius:999px;border:1px solid var(--line2);color:var(--mut);white-space:nowrap}
+.chip .dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.chip-live{color:var(--green);border-color:rgba(63,185,111,.45)}
+.chip-proven{color:var(--gold);border-color:rgba(240,185,11,.55)}
+.chip-pillar{background:var(--gold);color:var(--gold-ink);border-color:var(--gold)}
+.chip-probation{color:var(--mut)}
+.chip-config{color:var(--txt)}
+
+/* ---------- cards / sections ---------- */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px}
+.sec-label{font-size:12px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--dim);margin:46px 0 14px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.sec-head a{color:var(--gold);font-size:14px;font-weight:600}
+
+/* ---------- hero (landing) ---------- */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;padding:54px 0 8px}
+.hero h1{font-size:52px;font-weight:700;line-height:1.04;letter-spacing:-.5px}
+.hero h1 .gold{color:var(--gold)}
+.hero .sub{color:var(--mut);font-size:17px;line-height:1.55;max-width:460px;margin:16px 0 26px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.hero-note{color:var(--dim);font-size:13px;margin-top:14px}
+.launch-card{background:var(--panel);border:1px solid var(--line2);border-radius:var(--r-lg);padding:20px}
+.launch-card .lc-top{display:flex;gap:14px;align-items:center}
+.launch-card img.coin{width:64px;height:64px;border-radius:14px;border:1px solid var(--line2)}
+.lc-name{font-size:19px;font-weight:700;line-height:1.15}
+.lc-ticker{color:var(--mut);font-size:14px}
+.lc-rows{margin-top:16px;border-top:1px solid var(--line)}
+.lc-rows .r{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.lc-rows .r .k{color:var(--dim)}
+.lc-rows .r .v{font-weight:600;text-align:right}
+.lc-link{display:inline-block;margin-top:14px;color:var(--gold);font-weight:700;font-size:14.5px}
+
+/* ---------- steps / grades / file rows (landing) ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.benefit-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px}
+.benefit-card .b-big{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-size:19px;font-weight:700;line-height:1.25}
+.benefit-card .b-big .gold{color:var(--gold)}
+.benefit-card p{color:var(--mut);font-size:13.5px;line-height:1.55;margin-top:7px}
+.id-line{text-align:center;color:var(--mut);font-size:14.5px;margin-top:16px}
+.id-line b{color:var(--txt)}
+.step-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px}
+.step-num{width:28px;height:28px;border-radius:50%;border:1px solid rgba(240,185,11,.55);color:var(--gold);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13.5px;margin-bottom:12px}
+.step-card h3{font-size:16px;font-weight:700;margin-bottom:5px}
+.step-card p{color:var(--mut);font-size:14px;line-height:1.55}
+.grades{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grade-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px}
+.grade-card p{color:var(--mut);font-size:14px;line-height:1.55;margin-top:10px}
+.file-rows{border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.file-row{display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--panel);border-bottom:1px solid var(--line)}
+.file-row:last-child{border-bottom:none}
+.file-row:hover{background:var(--panel2)}
+.file-row img.coin{width:40px;height:40px;border-radius:10px;border:1px solid var(--line2)}
+.file-row .coin-tile{width:40px;height:40px;border-radius:10px;border:1px solid var(--line2);background:var(--panel2);
+  display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:700;font-size:13px;flex:none}
+.file-row .fr-main{flex:1;min-width:0}
+.file-row .fr-name{font-weight:700;font-size:15px}
+.file-row .fr-meta{color:var(--dim);font-size:13px}
+.file-row .fr-arrow{color:var(--gold);font-weight:700;font-size:14px;white-space:nowrap}
+.founding-strip{margin-top:46px;border:1px solid rgba(240,185,11,.4);border-radius:var(--r-lg);background:var(--panel);
+  padding:18px 22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.founding-strip .fs-txt{flex:1;min-width:240px;font-size:15px}
+.founding-strip .fs-txt b{color:var(--gold)}
+.founding-strip a{color:var(--gold);font-weight:700;font-size:14.5px;white-space:nowrap}
+
+/* ---------- footer ---------- */
+footer.site{border-top:1px solid var(--line);margin-top:56px;padding-top:22px;
+  display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+footer.site .fl{color:var(--dim);font-size:13.5px}
+footer.site .fl b{color:var(--mut)}
+footer.site .flinks{display:flex;gap:18px;flex-wrap:wrap;row-gap:8px}
+footer.site .flinks a{color:var(--mut);font-size:13.5px;font-weight:600}
+footer.site .flinks a:hover{color:var(--gold)}
+.standing-line{color:var(--dim);font-size:13px}
+
+/* ---------- launch page ---------- */
+.page-title{padding:34px 0 4px}
+.page-title h1{font-size:30px;font-weight:700;letter-spacing:-.3px}
+.page-title p{color:var(--mut);font-size:15px;margin-top:4px}
+.create-grid{display:grid;grid-template-columns:minmax(0,640px) minmax(0,1fr);gap:22px;align-items:start;margin-top:20px}
+.wallet-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--panel2);border:1px solid var(--line);
+  border-radius:var(--r-md);padding:12px 14px;margin-bottom:20px}
+.wallet-bar .wb-addr{font-weight:600}
+.wallet-bar .spacer{flex:1}
+.fld{display:block;margin-bottom:16px}
+.fld .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;font-weight:600;margin-bottom:7px}
+.fld .lab .hint{color:var(--dim);font-weight:500;font-size:12.5px}
+.fld input[type=text],.fld input[type=number],.fld textarea,.fld select{
+  width:100%;background:#0d0d10;border:1px solid var(--line2);border-radius:var(--r-sm);
+  color:var(--txt);font-size:15px;padding:12px 13px;font-family:inherit}
+.fld textarea{resize:vertical;min-height:74px}
+.fld input:focus,.fld textarea:focus{outline:none;border-color:var(--gold)}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:var(--r-sm);overflow:hidden;margin-bottom:8px}
+.seg-btn{appearance:none;background:transparent;border:none;color:var(--mut);font:inherit;font-size:13px;font-weight:600;padding:7px 13px;cursor:pointer}
+.seg-btn + .seg-btn{border-left:1px solid var(--line)}
+.seg-btn.seg-on{background:var(--panel2);color:var(--txt)}
+.readout{color:var(--mut);font-size:13.5px;margin-top:7px}
+.readout b{color:var(--txt)}
+.uploads{display:grid;grid-template-columns:104px 1fr;gap:14px;margin-bottom:16px}
+.tile{border:1.5px dashed var(--line2);border-radius:var(--r-md);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:5px;color:var(--mut);font-size:12px;font-weight:600;text-align:center;padding:10px;min-height:104px;background:#0d0d10}
+.tile.filled{border-style:solid;border-color:var(--line2);padding:0;overflow:hidden}
+.tile.filled img{width:100%;height:100%;object-fit:cover}
+.tile .plus{font-size:22px;color:var(--gold);line-height:1;font-weight:400}
+.tile-banner{min-height:104px;align-items:flex-start;text-align:left;justify-content:center;padding:14px}
+.tile-banner .plus{font-size:18px}
+.media-lab{font-size:13.5px;font-weight:600;margin-bottom:7px}
+.media-lab .hint{color:var(--dim);font-weight:500;font-size:12.5px}
+details.disclosure{border-top:1px solid var(--line);padding-top:14px;margin-top:4px;margin-bottom:16px}
+details.disclosure summary{cursor:pointer;color:var(--mut);font-size:14px;font-weight:600;list-style:none}
+details.disclosure summary::-webkit-details-marker{display:none}
+details.disclosure summary:hover{color:var(--txt)}
+details.disclosure .disc-body{margin-top:12px}
+.lock-row{display:flex;align-items:center;gap:12px;background:var(--panel2);border:1px solid var(--line);
+  border-radius:var(--r-md);padding:13px 14px}
+.lock-row .lr-txt{flex:1}
+.lock-row .lr-txt b{font-size:14.5px}
+.lock-row .lr-txt span{display:block;color:var(--mut);font-size:13px}
+.switch{position:relative;width:46px;height:26px;flex:none}
+.switch input{opacity:0;width:100%;height:100%;position:absolute;cursor:pointer;margin:0}
+.switch .tr{position:absolute;inset:0;background:#2a2a31;border-radius:999px;transition:.15s;pointer-events:none}
+.switch .tr::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#f2f2f0;transition:.15s}
+.switch input:checked + .tr{background:var(--gold)}
+.switch input:checked + .tr::after{transform:translateX(20px);background:var(--gold-ink)}
+.dur-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.dchip{border:1px solid var(--line2);background:transparent;color:var(--mut);border-radius:999px;
+  padding:7px 15px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit}
+.dchip.on{background:var(--gold);color:var(--gold-ink);border-color:var(--gold)}
+.pair-chips{display:flex;gap:8px;flex-wrap:wrap}
+.fee-line{display:flex;justify-content:space-between;gap:12px;align-items:baseline;border-top:1px solid var(--line);
+  padding-top:14px;margin-top:2px;font-size:14px;color:var(--mut)}
+.fee-line b{color:var(--txt)}
+.safety-line{text-align:center;color:var(--dim);font-size:13px;margin-top:12px;line-height:1.55}
+.adv summary{font-size:13px}
+.preview-card{position:sticky;top:82px}
+.preview-card h3{font-size:12px;letter-spacing:2.2px;text-transform:uppercase;color:var(--dim);margin-bottom:14px}
+.pv-head{display:flex;gap:12px;align-items:center;margin-bottom:6px}
+.pv-head img{width:46px;height:46px;border-radius:11px;border:1px solid var(--line2)}
+.pv-name{font-weight:700;font-size:16.5px;line-height:1.15}
+.pv-ticker{color:var(--mut);font-size:13.5px}
+.kv{border-top:1px solid var(--line);margin-top:12px}
+.kv .r{display:flex;justify-content:space-between;gap:14px;padding:8.5px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+/* both sides of a .kv row must be free to shrink and wrap: a coin
+   name can be a single unbroken word ("Alooooo…ong" in a key's coin
+   list) on the label side, and a full mint address sits on the
+   value side of the lookup's coin card — a rigid side pushes the
+   whole row, and the page, wide on phones (found by the P9.2
+   screenshot pass). */
+.kv .r .k{color:var(--dim);min-width:0;overflow-wrap:anywhere}
+.kv .r .v{font-weight:600;text-align:right;min-width:0}
+.pv-foot{color:var(--dim);font-size:12.5px;margin-top:12px}
+
+/* launch: token card preview (the coin as it will appear, drawn from
+   the same form state the launch submits — image, name, ticker,
+   description, pair; a preview only, never a control) */
+.token-card{display:flex;flex-wrap:wrap;gap:14px;background:var(--panel2);border:1px solid var(--line2);
+  border-radius:var(--r-md);padding:14px;margin-bottom:16px}
+/* the picked banner as a strip across the top of the card (finding
+   #6): full-width row above the logo row, shown only while a banner
+   is picked or hosted */
+.tc-banner{flex:1 1 100%;border-radius:var(--r-sm);overflow:hidden;border:1px solid var(--line2);
+  background:#0d0d10;line-height:0}
+.tc-banner img{width:100%;height:64px;object-fit:cover}
+.token-card img.tc-img{width:56px;height:56px;border-radius:12px;border:1px solid var(--line2);
+  object-fit:cover;background:#0d0d10;flex:none}
+.tc-tile{width:56px;height:56px;border-radius:12px;border:1px solid var(--line2);background:#0d0d10;
+  color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:19px;
+  font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;flex:none}
+.tc-main{flex:1;min-width:0}
+.tc-name{font-weight:700;font-size:17px;line-height:1.2;overflow-wrap:anywhere;
+  font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif}
+.tc-ticker{color:var(--mut);font-size:13.5px;margin-top:1px;overflow-wrap:anywhere}
+.tc-ph{color:var(--dim)}
+.tc-desc{color:var(--mut);font-size:13.5px;line-height:1.5;margin-top:7px;overflow-wrap:anywhere;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+/* the pair as a chip UP TOP, next to the name (owner's order,
+   Oct 22 2026) — it used to sit under the description in dim text */
+.tc-pair{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1.2px;color:var(--gold);
+  border:1px solid rgba(240,185,11,.55);border-radius:999px;padding:4px 10px;margin-top:8px;white-space:nowrap}
+/* the same chip on the public file page's header, plus the line
+   under it carrying the real quote held in the pool */
+.chip-pair{color:var(--gold);border-color:rgba(240,185,11,.55)}
+.ph-pool{margin-top:8px;font-size:13.5px;color:var(--off)}
+
+/* ---------- file page ---------- */
+.banner-slot{height:132px;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);margin-top:22px;position:relative;
+  background:radial-gradient(560px 190px at 82% 50%,rgba(240,185,11,.16),rgba(240,185,11,0) 62%),var(--panel)}
+.banner-slot img{position:absolute;right:34px;top:50%;transform:translateY(-50%);height:118px;width:auto;opacity:.5}
+.profile-head{display:flex;gap:16px;align-items:center;margin-top:-34px;padding:0 22px;position:relative}
+.profile-head img.coin{width:76px;height:76px;border-radius:16px;border:2px solid var(--ink);background:var(--ink)}
+.profile-head .ph-txt{padding-top:36px}
+.ph-name{font-size:24px;font-weight:700;line-height:1.1;font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif}
+.ph-sub{color:var(--mut);font-size:14.5px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.fact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);
+  border-radius:var(--r-lg);overflow:hidden;margin-top:24px}
+.fact{background:var(--panel);padding:16px 18px}
+.fact .fk{color:var(--dim);font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:5px}
+.fact .fv{font-size:15px;font-weight:600;line-height:1.45}
+.fact .fv .sub{display:block;color:var(--mut);font-weight:500;font-size:13.5px;margin-top:2px}
+.mono .sub{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+.fact.wide{grid-column:1 / -1}
+.link-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;padding-top:36px}
+  .hero h1{font-size:40px}
+  .create-grid{grid-template-columns:1fr}
+  .preview-card{position:static}
+  .benefits{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .steps,.grades,.benefits{grid-template-columns:1fr}
+  .fact-grid{grid-template-columns:1fr}
+  .hero h1{font-size:36px}
+  .uploads{grid-template-columns:96px 1fr}
+  .profile-head{padding:0 6px}
+  .card{padding:19px}
+  .file-row{flex-wrap:wrap;row-gap:8px}
+  .file-row .fr-main{flex:1 1 calc(100% - 54px)}
+  .file-row .fr-arrow{display:none}
+  .file-row .chip{margin-left:54px}
+}
+
+/* ================= production components (P9) =================
+   The classes the shipped pages' JS emits or the production markup
+   needs, in the same design language. Status tints on the app pages
+   (launch form guards, success/failure boxes) keep their semantic
+   colors — they are form feedback, not brand decoration. */
+
+/* header: ONE line at every width (founder's rule, Oct 21 2026) —
+   nav links never wrap internally; at phone width the header stacks
+   (wordmark + CTA on the first row, a single nav row under it)
+   instead of crowding or hiding links. */
+nav.mainnav a.nl{white-space:nowrap}
+@media (max-width:640px){
+  .header-in{flex-wrap:wrap;height:auto;padding-top:10px;padding-bottom:10px;row-gap:6px}
+  .header-in>.btn{margin-left:auto;padding:9px 14px;font-size:14px}
+  nav.mainnav{order:3;width:100%;margin-left:0;gap:16px}
+  nav.mainnav a.nl{font-size:13.5px}
+}
+
+/* Advanced, demoted (founder's rehearsal ruling, Oct 21 2026): a
+   quiet text-link line, not a section — the BYO-URI checkbox + field,
+   the metadata JSON preview, and the operator program line live
+   inside it, reachable but minor. */
+details.disclosure.quiet-disc{border-top:none;padding-top:0;margin-top:16px}
+details.disclosure.quiet-disc summary{color:var(--gold);font-size:13.5px}
+details.disclosure.quiet-disc summary:hover{color:#ffc81f}
+
+/* generic helpers */
+[hidden]{display:none!important}
+.hint{color:var(--dim);font-size:13px;font-weight:500;line-height:1.5}
+.gold{color:var(--gold)}
+a.txt-link{color:var(--gold);font-weight:600}
+.fact a,.key-box a,.receipt a,.result a,.standing a,.safety-note a{color:var(--gold);font-weight:600}
+/* bare .btn (the copy buttons the JS emits) gets the quiet treatment —
+   the :not() chain keeps it from ever overriding a named variant */
+.btn:not(.btn-gold):not(.btn-ghost):not(.btn-quiet){background:var(--panel2);color:var(--txt);border-color:var(--line)}
+.btn:disabled{background:#26262c;color:#77777f;border-color:transparent;cursor:not-allowed}
+.btn-gold:disabled{background:#26262c;color:#77777f}
+.btn-small{padding:6px 12px;font-size:13px;border-radius:9px}
+.btn-connect{margin:2px 8px 2px 0}
+.grind-status{margin-top:12px;font-size:15px;font-weight:700;color:var(--gold)}
+.lbl{margin:18px 0 6px;font-weight:700;font-size:13.5px}
+.sec-tag{font-size:12px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--dim);margin:28px 0 14px}
+.sec-tag:first-child{margin-top:0}
+section.blk{margin-bottom:6px}
+
+/* status boxes (JS-emitted on launch + file) */
+.ok-box{background:rgba(63,185,111,.09);border:1px solid rgba(63,185,111,.45);border-radius:var(--r-md);padding:12px 14px;margin:10px 0;font-size:14.5px;line-height:1.55}
+.warn-box{background:rgba(229,72,77,.09);border:1px solid rgba(229,72,77,.5);border-radius:var(--r-md);padding:12px 14px;margin:10px 0;font-size:14.5px;line-height:1.55}
+.note-box{background:rgba(240,185,11,.07);border:1px solid rgba(240,185,11,.4);border-radius:var(--r-md);padding:12px 14px;margin:10px 0;font-size:14.5px;line-height:1.55}
+.test-note{background:rgba(240,185,11,.09);border:1px solid rgba(240,185,11,.45);border-radius:var(--r-md);padding:12px 14px;font-size:14.5px;line-height:1.55}
+
+/* launch: wallet + key card */
+.wallet-bar .wb-addr.addr-none{color:var(--dim);font-weight:500}
+.wallet-bar .wb-addr{word-break:normal;overflow-wrap:anywhere;min-width:0}
+#wallet-buttons{display:contents}
+#program-line{margin-top:12px}
+.key-box{background:var(--panel2);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;margin-top:14px;font-size:14px;color:var(--mut);line-height:1.6}
+.key-box .key-grade{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-size:17px;font-weight:700;color:var(--txt);margin-bottom:5px}
+.safety-note{margin-top:10px}
+
+/* launch: form bits the prototype drew statically */
+.tile{position:relative;overflow:hidden;cursor:pointer}
+.tile input[type=file]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.tile:focus-within{border-color:var(--gold)}
+.tile img.tile-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tile .tile-cap{display:flex;flex-direction:column;align-items:center;gap:5px}
+.tile-banner .tile-cap{align-items:flex-start;text-align:left}
+#logo-note,#banner-note{margin-top:8px}
+.fld input[type=text].mono{font-family:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px}
+.checkline{display:flex;gap:10px;align-items:flex-start;margin:12px 0;font-size:14.5px;line-height:1.5}
+.checkline input{margin-top:3px;width:17px;height:17px;accent-color:var(--gold);flex:none}
+#lock-days-row{margin:2px 0 16px 58px}
+#lock-days{width:auto;min-width:150px}
+span.dchip{cursor:default}
+.dchip.dim{opacity:.55}
+.guard-box{border-radius:var(--r-md);padding:12px 14px;margin-top:14px;font-size:14px;line-height:1.6}
+.guard-box div{margin-top:3px}
+.guard-ok{background:rgba(63,185,111,.08);border:1px solid rgba(63,185,111,.4)}
+.guard-warn{background:rgba(240,185,11,.08);border:1px solid rgba(240,185,11,.4)}
+.guard-refuse{background:rgba(229,72,77,.09);border:1px solid rgba(229,72,77,.45)}
+#devbuy-readout{margin:7px 0 6px}
+.buy-hint{margin-bottom:18px}
+.fact .fee-box{border-top:none;margin-top:0;padding-top:0}
+
+/* launch: preview, fees, metadata, result, receipt, log */
+#file-preview>div{padding:7px 0;border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.55}
+#file-preview>div:first-child{padding-top:0}
+#file-preview .rec-not-promise{border-bottom:none;color:var(--dim);font-size:12.5px;padding-top:10px}
+.fee-box{border-top:1px solid var(--line);margin-top:16px;padding-top:14px;font-size:13.5px;color:var(--mut);line-height:1.65}
+.fee-box b{color:var(--txt)}
+.fee-box .fee-total{color:var(--txt);font-weight:700;margin-top:4px}
+.fee-box .hint{margin-top:6px}
+pre.params{background:#0d0d10;border:1px solid var(--line);border-radius:var(--r-sm);padding:12px;overflow-x:auto;font-size:12.5px;line-height:1.5;white-space:pre-wrap;word-break:break-all;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+.result{margin-top:14px;font-size:14.5px;line-height:1.6}
+.result pre{background:#0d0d10;border:1px solid var(--line);border-radius:var(--r-sm);padding:12px;overflow-x:auto;font-size:12.5px;white-space:pre-wrap;word-break:break-all;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+.review-art{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap;margin:10px 0}
+.review-art img.review-logo{width:72px;height:72px;object-fit:cover;border-radius:var(--r-sm);border:1px solid var(--line2)}
+.review-art img.review-banner{max-width:320px;max-height:90px;object-fit:cover;border-radius:var(--r-sm);border:1px solid var(--line2)}
+.receipt{background:#0d0d10;border:1px solid rgba(240,185,11,.45);border-radius:var(--r-md);padding:16px;margin-top:12px}
+.receipt .r-title{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-size:16.5px;font-weight:700;margin-bottom:10px}
+.receipt .r-keyline{font-size:14.5px;margin-bottom:10px}
+.receipt .r-row{margin:9px 0;font-size:14.5px;line-height:1.55}
+.receipt .r-lbl{display:block;color:var(--dim);font-weight:700;font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:2px}
+.receipt .r-mintbox{background:var(--ink);border:1px solid var(--line2);border-radius:var(--r-sm);padding:9px 11px;font-size:13.5px}
+.receipt .r-close{color:var(--dim);font-size:13px;margin-top:12px}
+.receipt .r-key{color:var(--gold);font-weight:700;margin-top:10px}
+#log{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:12px;line-height:1.6;max-height:260px;overflow-y:auto;margin-top:10px}
+#log[hidden]{display:none}
+.log-line{padding:2px 0;border-bottom:1px dashed rgba(242,242,240,.07);word-break:break-all}
+.log-ok{color:var(--green)} .log-err{color:#ff8589} .log-warn{color:var(--gold)}
+#rpc-active{margin-top:10px}
+#test-panel{border-color:rgba(240,185,11,.5)}
+#test-panel .btn{margin:4px 8px 4px 0}
+
+/* file page */
+#file-status-panel{margin-top:22px;background:transparent;border:none;padding:0}
+#file-status-panel .ok-box,#file-status-panel .warn-box,#file-status-panel .note-box{margin:0}
+.banner-slot img.banner-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;transform:none;right:auto;top:0}
+.profile-head .coin-tile{width:76px;height:76px;border-radius:16px;border:2px solid var(--ink);background:var(--panel2);
+  display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:700;font-size:22px;flex:none;
+  font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif}
+.profile-head h2.ph-name{margin:0}
+.fact .fv{word-break:break-word}
+.standing{margin-top:18px;color:var(--txt);font-size:14.5px;font-weight:600}
+.standing span{display:block;color:var(--dim);font-weight:400;font-size:13px;margin-top:3px}
+#program-line.quiet{margin-top:16px;text-align:left}
+
+/* lookup page */
+.lk-form{display:flex;gap:10px;margin-top:22px}
+.lk-form input{flex:1;min-width:0;background:#0d0d10;border:1px solid var(--line2);border-radius:var(--r-sm);color:var(--txt);font-size:15px;padding:13px 14px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+.lk-form input:focus{outline:none;border-color:var(--gold)}
+.sample-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.sample-row .s-lab{color:var(--dim);font-size:13px;font-weight:600}
+#lookup-result{margin-top:22px}
+.key-card .kc-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.key-card .kc-key{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-size:21px;font-weight:700}
+.key-card .kc-wallet{margin-top:8px}
+.birth-line{font-size:15px;line-height:1.6}
+.birth-line .bl-name{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-size:19px;font-weight:700}
+.lk-note{color:var(--mut);font-size:14px;line-height:1.6}
+.lk-note b{color:var(--txt)}
+.snapshot-line{color:var(--dim);font-size:12.5px;margin-top:14px}
+/* coin card (P9.2): two labeled groups — the desk record (snapshot)
+   and the live market (fetched at view time) — never blended */
+.coin-card .grp{margin-top:18px}
+.coin-card .grp-head{font-size:11.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--dim);margin-bottom:2px}
+.coin-card .grp-head .live-dot{color:var(--green)}
+.mint-copy{cursor:pointer;border-bottom:1px dotted var(--line2)}
+.copy-hint{font-size:12px}
+/* the founding doorbell carries the full verbatim sentence (P6b) —
+   unlike the prototype's short link it must be allowed to wrap */
+.founding-strip a.doorbell,.season-panel a.doorbell{white-space:normal;line-height:1.5}
+
+/* ---------- season panel (landing, P9.4, retired Nov 9 2026; quiet
+   rebuild P9.5) ---------- The record is the headline; the season
+   is plain fact lines in the same gold-bordered card language.
+   Nothing on the panel is a promotion — the terms read like a
+   fee schedule, and their full text lives on the rules page.
+   Every number it shows is refreshed from the desk data by the
+   landing's inline script — nothing is typed in by hand. */
+.season-panel{margin-top:46px;border:1px solid rgba(240,185,11,.4);border-radius:var(--r-lg);background:var(--panel);padding:22px 24px}
+.season-panel .sp-label{font-size:12px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.season-panel .sp-head{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-size:20px;font-weight:600;line-height:1.35}
+.season-panel .sp-seats{color:var(--mut);font-size:14px;font-weight:600;margin-top:8px}
+.season-panel .sp-line{color:var(--mut);font-size:14.5px;line-height:1.6;margin-top:7px}
+.season-panel .sp-balance{font-size:15px;font-weight:700;margin-top:10px}
+.season-panel .sp-pot-amount{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-size:clamp(32px,6vw,42px);font-weight:700;color:var(--gold);line-height:1.1;margin-top:14px}.season-panel .sp-pot-amount .sp-pot-sol{font-size:.48em;font-weight:600;color:var(--mut);white-space:nowrap}
+.season-panel .sp-prize{font-size:15px;font-weight:600;margin-top:6px}
+.season-panel .sp-prize b{color:var(--gold)}
+.season-panel .sp-verify{margin-top:10px}
+.season-panel .sp-verify a{color:var(--gold);font-weight:600;overflow-wrap:anywhere}
+.season-panel .sp-cta{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:14px}
+.season-panel a.doorbell{color:var(--gold);font-weight:700;font-size:14.5px}
+.season-panel a.sp-ladder{color:var(--mut);font-weight:600;font-size:14.5px;white-space:nowrap}
+.season-panel a.sp-ladder:hover{color:var(--gold)}
+
+/* ---------- the ladder (P9.4) ----------
+   The public key ranking: one row per key inside the shared
+   .file-rows shell — rank, key + wallet, grade chip, then the
+   record counts in plain words. */
+.lad-row{display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--panel);border-bottom:1px solid var(--line)}
+.lad-row:last-child{border-bottom:none}
+.lad-row:hover{background:var(--panel2)}
+.lad-rank{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-weight:700;font-size:15px;color:var(--dim);width:36px;flex:none}
+.lad-main{flex:1;min-width:0}
+.lad-key{font-weight:700;font-size:15.5px}
+.lad-key a:hover{color:var(--gold)}
+.lad-wallet{color:var(--dim);font-size:13px;margin-top:1px}
+.lad-stats{color:var(--mut);font-size:13.5px;text-align:right;line-height:1.55}
+.lad-stats b{color:var(--txt)}
+.chip-adv{color:var(--txt)}
+@media (max-width:640px){
+  .lad-row{flex-wrap:wrap;row-gap:6px}
+  .lad-main{flex:1 1 calc(100% - 50px)}
+  .lad-stats{flex:1 1 100%;text-align:left;margin-left:50px}
+}
+
+@media (max-width:640px){
+  .lk-form{flex-direction:column}
+  #lock-days-row{margin-left:0}
+  .key-box .key-grade{font-size:16px}
+}
+
+/* ---------- my launches page (fix batch, Oct 22 2026) ----------
+   The wallet's own launches + fee claims. One card per launch in
+   the shared card language; facts in .kv rows like the public
+   file's preview; Claim buttons are the page's one action. */
+.ml-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px}
+.ml-head .spacer{flex:1}
+.ml-card{margin-top:16px}
+.ml-top{display:flex;gap:14px;align-items:center}
+.ml-top img.ml-img{width:52px;height:52px;border-radius:12px;border:1px solid var(--line2);
+  object-fit:cover;background:#0d0d10;flex:none}
+.ml-tile{width:52px;height:52px;border-radius:12px;border:1px solid var(--line2);background:#0d0d10;
+  color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;
+  font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;flex:none}
+.ml-name{font-weight:700;font-size:17px;line-height:1.2;overflow-wrap:anywhere;
+  font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif}
+.ml-ticker{color:var(--mut);font-size:13.5px;margin-top:1px}
+.ml-claim-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;
+  border-top:1px solid var(--line);padding-top:14px}
+.ml-claim-row .ml-claimable{font-size:14.5px}
+.ml-claim-row .ml-claimable b{font-size:16px}
+.ml-status{font-size:14.5px;line-height:1.6;margin-top:12px}
+.ml-pot-note{color:var(--mut);font-size:13.5px;line-height:1.55;margin-top:10px}
+
+/* ---------- search strip + board (homepage v2 insertions) ---------- */
+.search-strip{margin:26px 0 6px}
+.search-box{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line2);border-radius:14px;padding:0 16px;height:54px}
+.search-box:focus-within{border-color:var(--gold)}
+.search-box svg{flex:none;opacity:.55}
+.search-box input{flex:1;background:none;border:none;outline:none;color:var(--txt);font-size:16px;font-family:inherit}
+.search-box input::placeholder{color:var(--dim)}
+.search-stats{margin-top:10px;color:var(--mut);font-size:13.5px}
+.search-stats b{color:var(--txt)}
+.search-results{margin-top:8px;background:var(--panel);border:1px solid var(--line2);border-radius:14px;overflow:hidden;display:none}
+.search-results a{display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--line)}
+.search-results a:last-child{border-bottom:none}
+.search-results a:hover{background:var(--panel2)}
+.sr-name{font-weight:700}
+.sr-tick{color:var(--mut);font-weight:600}
+.sr-ath{margin-left:auto;color:var(--mut);font-size:13px;white-space:nowrap}
+.sr-kind{font-size:11px;font-weight:700;letter-spacing:1.2px;color:var(--gold);border:1px solid var(--line2);border-radius:6px;padding:2px 7px;white-space:nowrap}
+.board-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(252px,1fr));gap:12px;margin-top:14px}
+.bcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px;display:flex;flex-direction:column;gap:7px}
+.bcard:hover{border-color:var(--line2)}
+.bcard .bc-top{display:flex;align-items:center;gap:12px}
+.bcard img.coin,.bc-tile{width:46px;height:46px;border-radius:12px;flex:none}
+.bc-tile{display:flex;align-items:center;justify-content:center;background:var(--panel2);border:1px solid var(--gold);color:var(--gold);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px}
+.bc-name{font-weight:700;font-size:16.5px;line-height:1.2}
+.bc-tick{color:var(--mut);font-weight:600;font-size:13.5px}
+.bc-meta{color:var(--mut);font-size:13.5px}
+.bc-line{font-size:13.5px}
+.bc-foot{margin-top:auto;display:flex;align-items:center;gap:8px;padding-top:6px}
+.bc-file{margin-left:auto;font-weight:700;color:var(--gold);font-size:14px;white-space:nowrap}
+.king{grid-column:1/-1;display:flex;gap:18px;align-items:center;padding:20px}
+.king img.coin{width:72px;height:72px;border-radius:16px}
+.king .bc-name{font-size:21px}
+.king-tag{font-size:11px;font-weight:700;letter-spacing:1.6px;color:var(--gold)}
+@media(max-width:560px){.king{flex-direction:column;align-items:flex-start}}
+/* ---------- trending rail (auto: renders only while a Launchkey coin's live MC >= $10K) ---------- */
+.tp-mc{font-size:15px;font-weight:700;color:var(--gold)}
+.king .bc-tile{width:72px;height:72px;border-radius:16px;font-size:28px}
+</style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://launchkey.fun/board/">
+<meta property="og:title" content="BONDED — Solana launchpad. Every key is graded.">
+<meta property="og:description" content="Launchkey is the launchpad with a memory. Every key is graded. Every launch gets a public record page, and it stays on the public record.">
+<meta property="og:image" content="https://launchkey.fun/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BONDED — Solana launchpad. Every key is graded.">
+<meta name="twitter:description" content="Launchkey is the launchpad with a memory. Every key is graded. Every launch gets a public record page, and it stays on the public record.">
+<meta name="twitter:image" content="https://launchkey.fun/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://launchkey.fun/#org",
+      "name": "Launchkey",
+      "url": "https://launchkey.fun/",
+      "logo": "https://launchkey.fun/logo-mark.png",
+      "description": "Launchkey is the launchpad with a memory. Every key is graded. Every launch gets a public record page, and it stays on the public record.",
+      "foundingDate": "2026-10",
+      "sameAs": [
+        "https://x.com/postthebond"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://launchkey.fun/#website",
+      "name": "Launchkey",
+      "url": "https://launchkey.fun/",
+      "publisher": {
+        "@id": "https://launchkey.fun/#org"
+      }
+    }
+  ]
+}
+</script>
+<style id="bonded-unify">
+/* ===== BONDED UNIFY (Nov 7 2026 site audit): shared theme layer — the
+   homepage (Proxima format) is the reference: near-black ground, steel
+   text, gold accents, Space Grotesk + IBM Plex Mono. Presentation only;
+   no wording on this page was changed. ===== */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;600;700&display=swap');
+body{background:linear-gradient(180deg,#070a10 0%,#050506 55%,#000000 100%)!important;background-color:#050506!important;color:#e8edf5!important;font-family:'Space Grotesk',-apple-system,'Segoe UI',Roboto,sans-serif!important}
+header.site{background:rgba(7,10,16,.88)!important;border-bottom:1px solid #232b38!important}
+header.site .wordmark,header.site .wordmark span{color:#fdfcf9!important;font-family:'Space Grotesk',sans-serif!important}
+header.site .wordmark .key{color:#f0b90b!important}
+header.site .wordmark small{color:#9aa7ba!important}
+header.site nav a,header.site .header-tag{color:#9aa7ba!important;font-family:'IBM Plex Mono',monospace}
+header.site .btn-gold,header.site a.btn[href="/door/"],header.site a.btn[href="/door"]{background:linear-gradient(180deg,#ffffff,#dfe8f4)!important;border-color:#dfe8f4!important;color:#0a0f16!important;border-radius:8px!important;font-family:'IBM Plex Mono',monospace!important}
+.pfoot{margin-top:26px;padding:22px 16px 8px;border-top:1px solid #232b38;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;color:#7d8698;line-height:1.9}
+.pfoot-a{color:#9cc8ff;text-decoration:none}
+.pfoot-a:hover{color:#5ea8ff}
+html,body{overflow-x:hidden}
+table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:640px){
+  .header-in{flex-wrap:wrap!important;height:auto!important;min-height:0!important;padding-top:10px!important;padding-bottom:10px!important;row-gap:8px!important}
+  .header-in>.btn{margin-left:auto;padding:9px 13px!important;font-size:13.5px!important}
+  nav.mainnav{order:3;width:100%;margin-left:0!important;gap:8px 16px!important;flex-wrap:wrap}
+  .header-right{flex-wrap:wrap;row-gap:6px}
+  .header-tag{display:none}
+  .wordmark{font-size:16px!important}
+  img,video,canvas,svg{max-width:100%}
+  input,select,textarea{max-width:100%}
+}
+header.site .wordmark,header.site nav.mainnav,header.site .header-in>.btn,header.site .header-right{display:none!important}
+header.site .wordmark,header.site nav.mainnav,header.site .header-in>.btn,header.site .header-right{display:none!important}
+.ptop-in{flex-wrap:wrap;row-gap:8px}.ptop-in>a{flex:none;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-in"><div class="ptop-in" style="display:flex;align-items:center;gap:12px;max-width:1180px;margin:0 auto;padding:14px 18px 10px"><a href="/" aria-label="BONDED home" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#fdfcf9;font-weight:700;font-size:20px;letter-spacing:.02em;font-family:'Space Grotesk',sans-serif"><img src="/bonded-mark3.png" alt="" width="72" height="72" style="flex:none"></a><span class="ptop-nav" style="margin-left:auto;display:flex;gap:22px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:12.5px;flex-wrap:wrap;justify-content:flex-end"><a href="/" style="color:#9aa7ba;text-decoration:none">Home</a><a class="tellslink" href="/tells" style="color:#ffe98a;font-weight:700;letter-spacing:.08em;text-decoration:none">Tells App</a><a href="/bond-rules" style="color:#9aa7ba;text-decoration:none">Rules</a><a href="/methodology.html" style="color:#9aa7ba;text-decoration:none">Methodology</a><a href="/door/" style="color:#0a0f16;background:linear-gradient(180deg,#ffffff,#dfe8f4);border-radius:8px;padding:9px 16px;font-weight:700;text-decoration:none">Post a Bond</a></span></div>
+    <a class="wordmark" href="/">
+      <img src="/logo-mark.png" alt="Launchkey home">
+      <span>BONDED</span>
+    </a>
+    <nav class="mainnav">
+      <a class="nl" href="/board/">The Board</a>
+      <a class="nl" href="/bonds/">Bonds</a>
+      <a class="nl" href="/rules.html">Grading Rules</a>
+      <a class="nl" href="/lookup.html">Check a key</a>
+      <a class="nl" href="/launches/">My Launches</a>
+    </nav>
+    <a class="btn btn-gold" href="/door/">Post a Bond</a>
+  </div></header>
+
+<div class="wrap">
+  <section class="search-strip">
+    <div class="search-box">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#f2f2f0" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+      <input id="lk-search" type="text" autocomplete="off" spellcheck="false" placeholder="Search coins, tickers, mints, or a wallet">
+    </div>
+    <div class="search-results" id="lk-results"></div>
+    <div class="search-stats"><b id="lk-keys">67,794</b> keys graded · <b id="lk-launches">16</b> launches on record</div>
+  </section>
+
+  <!-- HERO: one line, one action, one proof -->
+  <section class="hero">
+    <div>
+      <h1>Every launch.<br>On the <span class="gold">record.</span></h1>
+      <p class="sub" style="margin:14px 0 0">Every launch graded and filed in public. The bond is one flat standard, the same for every dev. The record prints. It does not set the price.</p>
+      <p class="sub">The record with a memory. Every launch gets a public record page, and it stays on the public record.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-gold" href="/door/">Post a Bond</a>
+        <a class="btn btn-ghost" href="/lookup.html">Check a key before you buy →</a>
+      </div>
+      <p class="hero-note">Everyone launches. The grade is public, never permission.</p>
+    </div>
+
+    <div class="launch-card">
+      <div class="lc-top">
+        <img class="coin" src="/coins/redacted.png" alt="REDACTED coin image">
+        <div>
+          <div class="lc-name">REDACTED</div>
+          <div class="lc-ticker">$REDACTED · Launch #001</div>
+        </div>
+        <span class="chip chip-live" style="margin-left:auto"><span class="dot"></span>LIVE</span>
+      </div>
+      <div class="lc-rows">
+        <div class="r"><span class="k">Key</span><span class="v">Key #001 &nbsp;<span class="chip chip-pillar" id="pc-keychip">PILLAR</span></span></div>
+        <div class="r"><span class="k">Born</span><span class="v">Oct 20, 2026 · 8:15 PM PT</span></div>
+        <div class="r"><span class="k">Dev buy</span><span class="v">1.0 SOL · 3.42% of supply</span></div>
+        <div class="r"><span class="k">Lock</span><span class="v">100% of dev buy · locked 24h at birth</span></div>
+      </div>
+      <a class="lc-link" href="/file.html?mint=AZ73FAwGS3PDef5QAw3N1NDAQhMwy38nqXVDe6VmhWcC">Read Launch #001's file →</a>
+    </div>
+  </section>
+
+  <!-- WHY LAUNCH HERE: the give, in four tiles -->
+  <div class="sec-label">Why the record matters</div>
+  <section class="benefits"></a>
+    <a class="bcard" href="/file.html?mint=8qm8KrqUh9zZAmtSsvH7BpQjxjPqeNCJvWvDxgBzQkey"><img class="coin" src="/coins/keynote.png" alt=""><div style="flex:1;min-width:0"><div class="bc-name">KEYNOTE <span class="bc-tick">$KEYNOTE</span></div><div class="bc-meta">Launch #002 · Oct 21, 2026 · paired SOL</div><div class="bc-line">Dev buy 0.4 SOL · 1.39%</div><div class="bc-line" style="color:var(--mut)">Lock ended Oct 28 · claimed · record closed</div><div class="bc-foot"><span class="chip chip-pillar">KEY #001 · PILLAR</span><span class="bc-file">File →</span></div></div></a>
+    <a class="bcard" href="/file.html?mint=3chcZ4DxfGjDLSqi2J4eBTcKHhf2wzmzttHzcnEjPkey"><div class="bc-tile">U</div><div style="flex:1;min-width:0"><div class="bc-name">USDC Door Test <span class="bc-tick">$USDCT</span></div><div class="bc-meta">Launch #003 · Oct 22, 2026 · paired USDC</div><div class="bc-line">Dev buy 10 USDC</div><div class="bc-line" style="color:var(--mut)">Door test · creator fees claimed</div><div class="bc-foot"><span class="chip chip-pillar">KEY #001 · PILLAR</span><span class="bc-file">File →</span></div></div></a>
+    <a class="bcard" href="/file.html?mint=5m6EcEjxmCbhCfydJeBL18XG1ChV4UFCbD4cFqnFJkey"><div class="bc-tile">W</div><div style="flex:1;min-width:0"><div class="bc-name">WBTC Door Test <span class="bc-tick">$WBTCT</span></div><div class="bc-meta">Launch #004 · Oct 22, 2026 · paired 3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh</div><div class="bc-line">Dev buy 0.00012 WBTC</div><div class="bc-line" style="color:var(--mut)">Door test · WBTC pair</div><div class="bc-foot"><span class="chip chip-pillar">KEY #001 · PILLAR</span><span class="bc-file">File →</span></div></div></a>
+    <a class="bcard" href="/file.html?mint=H4hFyRrKgA1a2PS5G8NjskamQk2g2gPAuUSfwxoWgkey"><div class="bc-tile">W</div><div style="flex:1;min-width:0"><div class="bc-name">WBTC Scaled Test <span class="bc-tick">$WBTCS</span></div><div class="bc-meta">Launch #005 · Oct 22, 2026 · paired 3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh</div><div class="bc-line">Dev buy 0.00012 WBTC</div><div class="bc-line" style="color:var(--mut)">Scaled test · dev exited Oct 22</div><div class="bc-foot"><span class="chip chip-pillar">KEY #001 · PILLAR</span><span class="bc-file">File →</span></div></div></a>
+    <a class="bcard" href="/file.html?mint=D8Xp7ckNjNtWDLQCCVaApxCN1NtVpKxnrBgD3VuDtkey"><div class="bc-tile">A</div><div style="flex:1;min-width:0"><div class="bc-name">Arweave Test <span class="bc-tick">$ARWT</span></div><div class="bc-meta">Launch #006 · Oct 22, 2026 · paired SOL</div><div class="bc-line">Dev buy 0.05 SOL · 0.18%</div><div class="bc-line" style="color:var(--mut)">Machinery test · held</div><div class="bc-foot"><span class="chip chip-pillar">KEY #001 · PILLAR</span><span class="bc-file">File →</span></div></div></a>
+    <a class="bcard" href="/file.html?mint=4jqKibw1YWcNCjEiV8ey87VBeoaytZhHLf8ESdGqCkey"><div class="bc-tile">M</div><div style="flex:1;min-width:0"><div class="bc-name">Mirror Test <span class="bc-tick">$MIRR</span></div><div class="bc-meta">Launch #007 · Oct 23, 2026 · paired SOL</div><div class="bc-line">Dev buy 0.05 SOL</div><div class="bc-line" style="color:var(--mut)">Machinery test · dev sold Oct 23</div><div class="bc-foot"><span class="chip chip-pillar">KEY #001 · PILLAR</span><span class="bc-file">File →</span></div></div></a>
+    <a class="bcard" href="/file.html?mint=2XD5aKasVc1R4mYv4WqUNnC3p1CYbceSFHq4m1sWEkey"><div class="bc-tile">E</div><div style="flex:1;min-width:0"><div class="bc-name">Extensions Test <span class="bc-tick">$EXTS</span></div><div class="bc-meta">Launch #008 · Oct 23, 2026 · paired SOL</div><div class="bc-line">Dev buy 0.05 SOL</div><div class="bc-line" style="color:var(--mut)">Machinery test · held</div><div class="bc-foot"><span class="chip chip-pillar">KEY #001 · PILLAR</span><span class="bc-file">File →</span></div></div></a>
+    <a class="bcard" href="/file.html?mint=GoNSFZsLBNDpML8JtXtCSgReB3FcuRrz774bsHU97key"><div class="bc-tile">I</div><div style="flex:1;min-width:0"><div class="bc-name">Image Test <span class="bc-tick">$IMGS</span></div><div class="bc-meta">Launch #009 · Oct 23, 2026 · paired SOL</div><div class="bc-line">Dev buy 0.05 SOL</div><div class="bc-line" style="color:var(--mut)">Machinery test · held</div><div class="bc-foot"><span class="chip chip-pillar">KEY #001 · PILLAR</span><span class="bc-file">File →</span></div></div></a>
+    <a class="bcard" href="/file.html?mint=GapHxctRyiEAkcWXVeYHEXSzQfqfbCALBGCQ9k9U9key"><div class="bc-tile">U</div><div style="flex:1;min-width:0"><div class="bc-name">URI Test <span class="bc-tick">$URIS</span></div><div class="bc-meta">Launch #010 · Oct 23, 2026 · paired SOL</div><div class="bc-line">Dev buy 0.05 SOL</div><div class="bc-line" style="color:var(--mut)">Machinery test · creator fees claimed Oct 23</div><div class="bc-foot"><span class="chip chip-pillar">KEY #001 · PILLAR</span><span class="bc-file">File →</span></div></div></a>
+    <a class="bcard" href="/file.html?mint=6zMPjkrchGeXoQ79uJX8yy9rG7bQH3K8V3KGNhA5Ekey"><div class="bc-tile">N</div><div style="flex:1;min-width:0"><div class="bc-name">NoBuy Probe <span class="bc-tick">$NBPROBE</span></div><div class="bc-meta">Launch #011 · Oct 24, 2026 · paired SOL</div><div class="bc-line">Dev buy never landed</div><div class="bc-line" style="color:var(--mut)">Two-step test · Phantom warned · 0 held</div><div class="bc-foot"><span class="chip chip-pillar">KEY #001 · PILLAR</span><span class="bc-file">File →</span></div></div></a>
+    <a class="bcard" href="/file.html?mint=DkzzdBXZDUcXkxyGW6rPm2CzytB4micfHBiJQx9hkey"><div class="bc-tile">L</div><div style="flex:1;min-width:0"><div class="bc-name">Lane Test <span class="bc-tick">$LANE</span></div><div class="bc-meta">Launch #012 · Oct 25, 2026 · paired SOL</div><div class="bc-line">Dev buy 0.05 SOL · 0.18%</div><div class="bc-line" style="color:var(--mut)">Solflare lane test · dev exited</div><div class="bc-foot"><span class="chip chip-pillar">KEY #001 · PILLAR</span><span class="bc-file">File →</span></div></div></a>
+    <a class="bcard" href="/file.html?mint=J4ujhVwAuqUepKui698T19zdnyxyY8CrnKuH5VFvSkey"><div class="bc-tile">G</div><div style="flex:1;min-width:0"><div class="bc-name">Golden Key <span class="bc-tick">$GKEY</span></div><div class="bc-meta">Launch #013 · Oct 25, 2026 · paired SOL</div><div class="bc-line">Dev buy 3.1 SOL · 9.94%</div><div class="bc-line" style="color:var(--mut)">100% locked · unlocks Nov 24</div><div class="bc-foot"><span class="chip chip-pillar">KEY #001 · PILLAR</span><span class="bc-file">File →</span></div></div></a>
+    <a class="bcard" href="/file.html?mint=HHGrBY1sQZjW6wrKTBgvJ1Gs8mPPj4Qcxt72D1dfFkey"><div class="bc-tile">P</div><div style="flex:1;min-width:0"><div class="bc-name">Probe <span class="bc-tick">$PROBE</span></div><div class="bc-meta">Launch #014 · Oct 28, 2026 · paired SOL</div><div class="bc-line">Dev buy 0.05 SOL</div><div class="bc-line" style="color:var(--mut)">Jito bundle test · dev sold Oct 28</div><div class="bc-foot"><span class="chip chip-pillar">KEY #001 · PILLAR</span><span class="bc-file">File →</span></div></div></a>
+    <a class="bcard" href="/file.html?mint=5BiadGtJK6ovaEtkGweipe1hanQtMMzGxP9BPkhTUkey"><div class="bc-tile">L</div><div style="flex:1;min-width:0"><div class="bc-name">LAUNCHKEY FUN <span class="bc-tick">$LAUNCHKEY</span></div><div class="bc-meta">Launch #015 · Oct 28, 2026 · paired SOL</div><div class="bc-line">Dev buy 2.96% of supply</div><div class="bc-line" style="color:var(--mut)">Locked at birth · unlocks Oct 29</div><div class="bc-foot"><span class="chip chip-pillar">KEY #001 · PILLAR</span><span class="bc-file">File →</span></div></div></a>
+  </section>
+
+  <footer class="site">
+    <div class="fl"><b>BONDED</b> · Every launch has a record.</div>
+    <div class="flinks">
+      <a href="/rules.html">Grading Rules</a>
+      <a href="/door/">The Door</a>
+      <a href="/example.html">Worked Example</a>
+      <a href="/ladder.html">The Ladder</a>
+      <a href="https://veto-12y.pages.dev">Legacy checker</a>
+      <a href="https://x.com/postthebond">@postthebond</a>
+    </div>
+  </footer>
+<div class="pfoot">BONDED · <a class="pfoot-a" href="/methodology.html">Methodology</a> · <a class="pfoot-a" href="/door/">Post a Bond</a></div>
+
+</div>
+
+<script>
+// Live-bound desk data (P9, extended P9.4): the proof card's key
+// chip, the Latest files list and the season panel all
+// read the same desk snapshots the launch, file and lookup pages
+// read. The static HTML above already prints today's truth — if a
+// snapshot cannot be fetched, it stands as printed.
+//
+// Latest files is rendered from the name index: the rows the
+// snapshot flags Launchkey-born (5th element = 1), newest first,
+// five at most. (Before P9.4 the rows were typed into the page by
+// hand, and a new coin simply did not appear until someone edited
+// the HTML — KEYNOTE was the lesson.) The three house coins keep
+// their house labels and icons; any later Launchkey coin renders
+// from the record alone.
+//
+// SHOWCASE RULE (Oct 24 2026): the strip shows non-test births
+// only. The house test launches (TEST_MINTS below — launch records
+// #003–#011 plus the LKDUST platform dust test) are the platform
+// testing itself, not the venue's proof of life; they stay fully
+// listed on My Launches and on their own file pages. #001
+// REDACTED and #002 KEYNOTE are real launches and always qualify,
+// and any later outside launch qualifies the moment it is flagged.
+// If fewer than five qualify, the strip shows what qualifies.
+//
+// Season seats are KEYS (offer-stack Amendment 8):
+// one seat per key, claimed by the key's first flagged outside
+// launch — a flagged row whose creator is not one of the house
+// wallets below (the founder's Key #001 and the platform's own
+// test launcher — their coins are the house's record, not the
+// class). A key launching again takes no second seat: the
+// counter counts distinct outside creators, not launches.
+//
+// The pot figures used to render from the one pot record;
+// that record is no longer published and the panel no longer
+// carries the pot (retired Oct 30 2026, owner ruling: the
+// Founding Pot is discontinued). The seat count and the
+// Latest files refresh from the snapshots, as before.
+(async () => {
+  const KEY001 = 'GxqBAbcWGo7fNdgHaytDBApJhGGyn5jJbmVgQ214mR4P';
+  const LK_LAUNCHER = '46CwjEsFog6QQ9nb7P8tWmfMA1XVUUdBFYWf5dDRKuXR';
+  const HOUSE = new Set([KEY001, LK_LAUNCHER]);
+  const HOUSE_ICONS = {
+    '8qm8KrqUh9zZAmtSsvH7BpQjxjPqeNCJvWvDxgBzQkey': '/coins/keynote.png',
+    'AZ73FAwGS3PDef5QAw3N1NDAQhMwy38nqXVDe6VmhWcC': '/coins/redacted.png',
+  };
+  const HOUSE_LABELS = {
+    '8qm8KrqUh9zZAmtSsvH7BpQjxjPqeNCJvWvDxgBzQkey': 'Launch #002',
+    'AZ73FAwGS3PDef5QAw3N1NDAQhMwy38nqXVDe6VmhWcC': 'Launch #001',
+    '6DNbxxPQ2tu9caEWRnzBF6jSMMn9rvVnYidw74TYB4f4': 'Platform dust test',
+  };
+  // LKDUST's row carries the config chip, not its launcher key's
+  // chip — the dust test was the platform testing itself.
+  const HOUSE_CONFIG_CHIP = new Set(['6DNbxxPQ2tu9caEWRnzBF6jSMMn9rvVnYidw74TYB4f4']);
+  // House TEST launches, from the launch records (launches/):
+  // #003 USDCT, #004 WBTCT, #005 WBTCS, #006 ARWT, #007 MIRR,
+  // #008 EXTS, #009 IMGS, #010 URIS, #011 NBPROBE, plus the
+  // LKDUST platform dust test. Excluded from the homepage
+  // showcase ONLY (see SHOWCASE RULE above) — never from My
+  // Launches or their file pages.
+  const TEST_MINTS = new Set([
+    '3chcZ4DxfGjDLSqi2J4eBTcKHhf2wzmzttHzcnEjPkey',
+    '5m6EcEjxmCbhCfydJeBL18XG1ChV4UFCbD4cFqnFJkey',
+    'H4hFyRrKgA1a2PS5G8NjskamQk2g2gPAuUSfwxoWgkey',
+    'D8Xp7ckNjNtWDLQCCVaApxCN1NtVpKxnrBgD3VuDtkey',
+    '4jqKibw1YWcNCjEiV8ey87VBeoaytZhHLf8ESdGqCkey',
+    '2XD5aKasVc1R4mYv4WqUNnC3p1CYbceSFHq4m1sWEkey',
+    'GoNSFZsLBNDpML8JtXtCSgReB3FcuRrz774bsHU97key',
+    'GapHxctRyiEAkcWXVeYHEXSzQfqfbCALBGCQ9k9U9key',
+    '6zMPjkrchGeXoQ79uJX8yy9rG7bQH3K8V3KGNhA5Ekey',
+    '6DNbxxPQ2tu9caEWRnzBF6jSMMn9rvVnYidw74TYB4f4',
+  ]);
+  const SEATS_TOTAL = 25;
+
+  const esc = (s) => String(s ?? '')
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const chipCls = (g) => ({ PROVEN: 'chip-proven', PILLAR: 'chip-pillar', PROBATION: 'chip-probation' })[g] ?? 'chip-probation';
+  const rowFlag = (row) => !!row && row.length > 4 && row[4] === 1;
+  // Seats are keys (Amendment 8): the count of DISTINCT creators
+  // with a flagged outside launch — a key's repeat launches add
+  // nothing, and house creators never take a seat.
+  const seatsTakenCount = (rows) => new Set(rows
+    .filter((row) => rowFlag(row) && row[3] && !HOUSE.has(row[3]))
+    .map((row) => row[3])).size;
+  const rowRecord = (row) => {
+    if (!row) return null;
+    for (let i = 4; i < row.length; i++) if (row[i] && typeof row[i] === 'object') return row[i];
+    return null;
+  };
+  const fmtDate = (unix) => new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Los_Angeles', month: 'short', day: 'numeric', year: 'numeric',
+  }).format(new Date(unix * 1000));
+  const getJson = async (url) => {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`${url} HTTP ${res.status}`);
+    return res.json();
+  };
+  // The names snapshot ships as a manifest + shard files (Oct 26 2026):
+  // fetch the manifest, then every shard, merged into one document.
+  const getNames = async () => {
+    const m = await getJson('/data/names.json');
+    if (m?.coins) return m;
+    const parts = await Promise.all((m?.shards ?? []).map((s) => getJson('/data/' + s)));
+    const coins = [];
+    for (const p of parts) coins.push(...(p?.coins ?? []));
+    return { generatedAt: m?.generatedAt, cap: m?.cap, count: m?.count, coins };
+  };
+
+  let keysData = null; let boardFileByMint = {};
+  let namesList = null;
+  try {
+    const [keysJson, namesJson, boardJson] = await Promise.all([getJson('/data/keys.json'), getNames(), getJson('/data/board.json').catch(() => null)]);
+    keysData = keysJson?.keys ?? {}; if (!keysJson?.keys && Array.isArray(keysJson?.shards)) { const kparts = await Promise.all(keysJson.shards.map((s) => getJson('/data/' + s))); for (const kp of kparts) Object.assign(keysData, kp?.keys ?? {}); }
+    namesList = namesJson?.coins ?? []; if (boardJson && Array.isArray(boardJson.entries)) for (const be of boardJson.entries) if (be && be.mint && be.file) boardFileByMint[be.mint] = be.file;
+  } catch { /* the printed page stands */ }
+
+  if (keysData) {
+    // Proof card chip (P9 behavior, unchanged).
+    const entry = keysData[KEY001];
+    if (entry) {
+      const pc = document.querySelector('#pc-keychip');
+      if (pc) { pc.textContent = entry.grade; pc.className = `chip ${chipCls(entry.grade)}`; }
+    }
+  }
+
+  if (keysData && namesList) {
+    // ---- Latest files, from the snapshot ----
+    const born = (row) => rowRecord(row)?.born ?? 0;
+    const flagged = namesList.filter(rowFlag).filter((row) => !TEST_MINTS.has(row[2])).sort((a, b) => born(b) - born(a)).slice(0, 5);
+    const box = document.querySelector('#latest-files');
+    if (box && flagged.length) {
+      box.innerHTML = flagged.map((row) => {
+        const [name, symbol, mint, creator] = row;
+        const rec = rowRecord(row);
+        const icon = HOUSE_ICONS[mint]
+          ? `<img class="coin" src="${HOUSE_ICONS[mint]}" alt="">`
+          : `<div class="coin-tile">${esc(String(symbol || name || '?').trim().slice(0, 2).toUpperCase())}</div>`;
+        const metaParts = [];
+        if (HOUSE_LABELS[mint]) metaParts.push(HOUSE_LABELS[mint]);
+        if (rec?.born) metaParts.push(fmtDate(rec.born));
+        metaParts.push(`paired ${rec?.pair ? esc(rec.pair) : 'SOL'}`);
+        let chip = '';
+        if (HOUSE_CONFIG_CHIP.has(mint)) {
+          chip = '<span class="chip chip-config">FOUNDING</span>';
+        } else {
+          const ke = creator ? keysData[creator] : null;
+          if (ke) chip = `<span class="chip ${chipCls(ke.grade)}">KEY #${String(ke.key).padStart(3, '0')} · ${esc(ke.grade)}</span>`;
+        }
+        return `<a class="file-row" href="${esc(boardFileByMint[mint] ? (/^https?:\/\//.test(boardFileByMint[mint]) ? boardFileByMint[mint] : '/' + boardFileByMint[mint]) : '/file.html?mint=' + mint)}">${icon}` +
+          `<div class="fr-main"><div class="fr-name">${esc(name)} <span style="color:var(--mut);font-weight:500">$${esc(symbol)}</span></div>` +
+          `<div class="fr-meta">${esc(metaParts.join(' · '))}</div></div>${chip}<span class="fr-arrow">${boardFileByMint[mint] && /^https?:\/\//.test(boardFileByMint[mint]) ? 'pump.fun →' : 'File →'}</span></a>`;
+      }).join('');
+    }
+
+    // ---- Season seats: one seat per outside key ----
+    const taken = seatsTakenCount(namesList);
+    const seats = document.querySelector('#sp-seats');
+    if (seats) {
+      seats.textContent = taken === 0
+        ? `0 of ${SEATS_TOTAL} seats taken`
+        : taken >= SEATS_TOTAL
+          ? `${SEATS_TOTAL} of ${SEATS_TOTAL} seats taken`
+          : `${taken} of ${SEATS_TOTAL} seats taken`;
+    }
+  }
+
+  // ---- The pot refresh: RETIRED Oct 30 2026 (owner ruling: the Founding Pot is discontinued). The block that stood here read the pot record and rendered its balance; the record is no longer published and the panel carries no pot. Its lines are held as comments so the documented line count stands. ----
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+  // (retired pot refresh line)
+
+  // Test hook (same convention as the other pages).
+  window.__LK_LANDING__ = {
+    seatsTaken: () => (namesList ? seatsTakenCount(namesList) : null),
+    latestMints: () => Array.from(document.querySelectorAll('#latest-files .file-row')).map((a) => new URL(a.href).searchParams.get('mint')),
+    // potUsd hook retired with the pot (Oct 30 2026).
+  };
+})();
+</script>
+
+<script>
+(function(){
+  var inp = document.getElementById('lk-search'), box = document.getElementById('lk-results');
+  if (!inp) return;
+  var NAMES = null, KEYS = null, loading = false;
+  var B58 = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
+  function fmt(n){ return n >= 1e6 ? '$' + (n/1e6).toFixed(1) + 'M' : n >= 1e3 ? '$' + (n/1e3).toFixed(1) + 'K' : '$' + Math.round(n); }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+  function row(href, kind, name, tick, ath){
+    return '<a href="' + href + '"><span class="sr-kind">' + kind + '</span><span class="sr-name">' + esc(name) + '</span>' +
+      (tick ? '<span class="sr-tick">$' + esc(tick) + '</span>' : '') +
+      (ath ? '<span class="sr-ath">peak ' + fmt(ath) + '</span>' : '') + '</a>';
+  }
+  function metaOf(c){ if (c.length > 5) return c[5] || {}; return (c[4] && typeof c[4] === 'object') ? c[4] : {}; }
+  function render(){
+    var q = inp.value.trim(), ql = q.toLowerCase();
+    if (q.length < 2 || !NAMES){ box.style.display = 'none'; return; }
+    var out = '';
+    if (B58.test(q)){
+      var key = KEYS && KEYS.keys[q];
+      if (key) out += row('lookup.html', 'KEY', 'Key #' + key.key + ' · ' + key.grade, '', 0);
+      var hit = null;
+      for (var i = 0; i < NAMES.coins.length; i++) if (NAMES.coins[i][2] === q){ hit = NAMES.coins[i]; break; }
+      out += hit ? row('/file.html?mint=' + q, (hit.length > 5 && hit[4] === 1) ? 'LAUNCHKEY' : 'COIN', hit[0], hit[1].replace(/^\$/,''), metaOf(hit).ath || 0)
+                 : row('/file.html?mint=' + q, 'MINT', 'Open the file for this mint', '', 0);
+      if (!key && !hit) out += row('lookup.html', 'KEY', 'Check this wallet in the key lookup', '', 0);
+    } else {
+      var hits = [];
+      for (var j = 0; j < NAMES.coins.length; j++){
+        var c = NAMES.coins[j], t = c[1].replace(/^\$/,'');
+        if (t.toLowerCase().indexOf(ql) === 0 || c[0].toLowerCase().indexOf(ql) >= 0)
+          hits.push([c, metaOf(c).ath || 0]);
+      }
+      hits.sort(function(a,b){ return b[1] - a[1]; });
+      out = hits.slice(0, 8).map(function(h){
+        return row('/file.html?mint=' + h[0][2], (h[0].length > 5 && h[0][4] === 1) ? 'LAUNCHKEY' : 'COIN', h[0][0], h[0][1].replace(/^\$/,''), h[1]);
+      }).join('') || '<a href="/lookup.html"><span class="sr-kind">KEY</span><span class="sr-name">No coin match. Try the key lookup</span></a>';
+    }
+    box.innerHTML = out; box.style.display = 'block';
+  }
+  function loadNames(){
+    fetch('/data/names.json').then(function(r){ return r.json(); }).then(function(m){
+      if (m.coins) { NAMES = m; render(); return; }
+      Promise.all(m.shards.map(function(s){ return fetch('/data/' + s).then(function(r){ return r.json(); }); })).then(function(parts){
+        var coins = []; for (var i = 0; i < parts.length; i++) coins = coins.concat(parts[i].coins || []);
+        NAMES = { generatedAt: m.generatedAt, cap: m.cap, count: m.count, coins: coins }; render();
+      }).catch(function(){});
+    }).catch(function(){});
+  }
+  function load(){
+    if (NAMES || loading) return; loading = true;
+    loadNames();
+    fetch('/data/keys.json').then(function(r){ return r.json(); }).then(function(m){
+      if (m.keys) { KEYS = m; render(); return; }
+      Promise.all(m.shards.map(function(s){ return fetch('/data/' + s).then(function(r){ return r.json(); }); })).then(function(parts){
+        var keys = {}; for (var i = 0; i < parts.length; i++) for (var w in parts[i].keys) keys[w] = parts[i].keys[w];
+        KEYS = { generatedAt: m.generatedAt, methodology: m.methodology, count: m.count, keys: keys }; render();
+      }).catch(function(){});
+    }).catch(function(){});
+  }
+  inp.addEventListener('focus', load);
+  inp.addEventListener('input', function(){ load(); render(); });
+  inp.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ var a = box.querySelector('a'); if (a) location.href = a.href; } });
+  document.addEventListener('click', function(e){ if (!box.contains(e.target) && e.target !== inp) box.style.display = 'none'; });
+  fetch('/data/board.json').then(function(r){ return r.json(); }).then(function(b){
+    var k = document.getElementById('lk-keys'), l = document.getElementById('lk-launches');
+    if (k) k.textContent = b.keysGraded.toLocaleString('en-US');
+    if (l) l.textContent = b.launches;
+  }).catch(function(){});
+})();
+</script>
+
+<script>
+/* TRENDING rail: renders only while a Launchkey-born coin's LIVE market
+   cap (board.json "mc", the snapshot cycle's own pool read) is at or above
+   $10K. The render is recomputed from board.json on every load, so a coin
+   whose cap falls back below the line disappears on the next refresh.
+   Below the line this script leaves the page exactly as it is: no
+   section, no placeholder. */
+(function(){
+  var host = document.getElementById('lk-toppeak');
+  if (!host) return;
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+  function usd(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+  function card(e, rank){
+    var icon = e.icon
+      ? '<img class="coin" src="' + esc('/' + e.icon) + '" alt="">' : e.imgUrl ? '<img class="coin" src="' + esc(e.imgUrl) + '" alt="">'
+      : '<div class="bc-tile">' + esc(String(e.name || '?').trim().charAt(0).toUpperCase()) + '</div>';
+    var tag = rank === 1 ? '<div class="king-tag">TRENDING #1</div>' : '';
+    return '<a class="bcard' + (rank === 1 ? ' king' : '') + '" href="' + esc(/^https?:\/\//.test(e.file) ? e.file : '/' + e.file) + '">' + icon +
+      '<div style="flex:1;min-width:0">' + tag +
+      '<div class="bc-name">' + esc(e.name) + ' <span class="bc-tick">$' + esc(e.ticker) + '</span></div>' +
+      '<div class="bc-meta">' + (e.live ? 'Live · born ' + esc(e.born) + ' · paired ' + esc(e.pair) : 'Launch #' + String(e.num).padStart(3, '0') + ' · ' + esc(e.born) + ' · paired ' + esc(e.pair)) + '</div>' +
+      '<div class="tp-mc">MC ' + usd(e.mc) + '</div>' +
+      '<div class="bc-foot"><span class="chip chip-pillar">KEY #' + String(e.keyNum).padStart(3, '0') + ' · ' + esc(e.grade) + '</span><span class="bc-file">' + (/^https?:\/\//.test(e.file) ? 'pump.fun →' : 'File →') + '</span></div>' +
+      '</div></a>';
+  }
+  fetch('/data/board.json').then(function(r){ return r.json(); }).then(function(b){
+    var hits = (b.entries || []).filter(function(e){
+      return typeof e.mc === 'number' && isFinite(e.mc) && e.mc >= 10000;
+    }).sort(function(a, c){ return c.mc - a.mc; }).slice(0, 3);
+    if (!hits.length) return;
+    host.innerHTML =
+      '<div class="sec-head" style="margin-top:34px"><div class="sec-label" style="margin-bottom:0">TRENDING ON LAUNCHKEY</div></div>' +
+      '<p style="color:var(--mut);margin-top:8px">Coins born on Launchkey whose live market cap is at or above $10K right now. The board refreshes every 15 minutes; a coin that falls back below the line leaves the rail.</p>' +
+      '<section class="board-grid">' + hits.map(function(e, i){ return card(e, i + 1); }).join('') + '</section>';
+  }).catch(function(){});
+})();
+</script>
+
+<script>
+/* THE BOARD (homepage ledger): renders every Launchkey-born coin's
+   card from data/board.json on load — the same snapshot the counters
+   and the trending rail read. Before this, the cards were typed into
+   the HTML by hand and froze at Launch #011 while the desk's record
+   moved on to #015. The static cards above are today's printed
+   truth; if the snapshot cannot be fetched, they stand as printed.
+   Card markup mirrors the trending rail's card, plus the dev-buy
+   and status lines the board has always carried. */
+(function(){
+  var host = document.getElementById('lk-board');
+  if (!host) return;
+  function esc(s){ return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function card(e){
+    var icon = e.icon
+      ? '<img class="coin" src="' + esc('/' + e.icon) + '" alt="">' : e.imgUrl ? '<img class="coin" src="' + esc(e.imgUrl) + '" alt="">'
+      : '<div class="bc-tile">' + esc(String(e.name || '?').trim().charAt(0).toUpperCase()) + '</div>';
+    var king = e.num === 1;
+    var tag = king ? '<div class="king-tag">LAUNCH #001 · THE FIRST</div>' : '';
+    return '<a class="bcard' + (king ? ' king' : '') + '" href="' + esc(/^https?:\/\//.test(e.file) ? e.file : '/' + e.file) + '">' + icon +
+      '<div style="flex:1;min-width:0">' + tag +
+      '<div class="bc-name">' + esc(e.name) + ' <span class="bc-tick">$' + esc(e.ticker) + '</span></div>' +
+      '<div class="bc-meta">' + (e.live ? 'Live · born ' + esc(e.born) + ' · paired ' + esc(e.pair) : 'Launch #' + String(e.num).padStart(3, '0') + ' · ' + esc(e.born) + ' · paired ' + esc(e.pair)) + '</div>' +
+      '<div class="bc-line">' + esc(e.devbuy) + '</div>' +
+      '<div class="bc-line" style="color:var(--mut)">' + esc(e.status) + '</div>' +
+      '<div class="bc-foot">' + (e.keyNum != null ? '<span class="chip chip-' + esc(String(e.grade || '').toLowerCase()) + '">KEY #' + String(e.keyNum).padStart(3, '0') + ' · ' + esc(e.grade) + '</span>' : '<span class="chip">NEW KEY</span>') + '<span class="bc-file">' + (/^https?:\/\//.test(e.file) ? 'pump.fun →' : 'File →') + '</span></div>' +
+      '</div></a>';
+  }
+  fetch('/data/board.json').then(function(r){ return r.json(); }).then(function(b){
+    var entries = (b && b.entries) || []; if (!entries.length) return; var seen = {}; for (var i = 0; i < entries.length; i++) seen[entries[i].mint] = true; function gj2(u){ return fetch(u).then(function(r){ return r.json(); }); } function lk2(){ return gj2('/data/keys.json').then(function(m){ if (!m) return {}; if (m.keys) return m.keys; if (Array.isArray(m.shards)) return Promise.all(m.shards.map(function(s){ return gj2('/data/' + s).catch(function(){ return null; }); })).then(function(ps){ var ks = {}; for (var i = 0; i < ps.length; i++) if (ps[i] && ps[i].keys) for (var w in ps[i].keys) ks[w] = ps[i].keys[w]; return ks; }); return {}; }).catch(function(){ return {}; }); } function le2(x, kw){ var k = kw[x.creator] || null; var img = null; if (typeof x.image === 'string' && x.image) img = x.image.indexOf('ipfs://') === 0 ? 'https://gateway.pinata.cloud/ipfs/' + x.image.slice(7) : x.image; var born = x.bornAt ? new Date(x.bornAt * 1000).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/Los_Angeles' }) : ''; return { live: true, num: null, name: x.name, ticker: x.symbol, mint: x.mint, born: born, pair: x.pairMint ? (x.pair || (x.pairMint.slice(0, 4) + '…' + x.pairMint.slice(-4))) : 'SOL', devbuy: typeof x.devPct === 'number' ? 'Dev buy ' + x.devPct.toFixed(2) + '% of supply' : '', status: 'Born through the pump door', icon: null, imgUrl: img, keyNum: k ? k.key : null, grade: k ? k.grade : null, file: 'https://pump.fun/coin/' + x.mint }; }
+    Promise.all([gj2('/api/births').catch(function(){ return null; }), lk2()]).then(function(res){ var extra = ((res[0] && res[0].births) || []).filter(function(x){ return x && x.mint && !seen[x.mint]; }).sort(function(a, c){ return (c.bornAt || 0) - (a.bornAt || 0); }).map(function(x){ return le2(x, res[1]); }); if (extra.length) host.innerHTML = extra.concat(entries.slice().reverse()).map(card).join(''); }).catch(function(){});
+    host.innerHTML = entries.slice().reverse().map(card).join('');
+  }).catch(function(){});
+})();
+</script>
+</body>
+</html>

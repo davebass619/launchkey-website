@@ -1,0 +1,37 @@
+# Launchkey — Pages redirects.
+# Oct 29 2026 (launches unification, owner ruling): the legacy
+# fee-claim tool lived at /launches.html (and at /launches, where
+# Pages served the file extensionlessly). The tool is renamed
+# claim.html; its old .html URL lands on /claim permanently.
+# /launches itself is NOT redirected: it resolves to the
+# key-record page at /launches/, which is where every "My
+# Launches" / "All launches" navigation link now points.
+/launches.html /claim 301
+
+# Nov 9 2026: the AgentKey constitution page is pulled at the
+# owner’s order. BONDED’s operative documents are its adopted
+# terms and counsel’s approved status copy. The page redirects
+# home permanently so no held link 404s.
+/constitution / 301
+/constitution/ / 301
+/constitution.html / 301
+
+# Nov 9 2026: the AgentKey agent pages are pulled at the
+# owner’s order, same treatment as the constitution. Sources
+# are archived locally; the addresses redirect home so no held
+# link 404s.
+/agents / 301
+/agents/ / 301
+/agents/the-pillar / 301
+/agents/the-hunter / 301
+/agents/the-pillar.html / 301
+/agents/the-hunter.html / 301
+
+# Nov 9 2026, revamp phase 3: the old guide documented the
+# retired Raydium founding door, and the legacy launch tool
+# built on it. Both are pulled; the pump door is the only
+# launch surface. Sources archived in the pre-phase-3 tarball.
+/guide.html /door/ 301
+/guide /door/ 301
+/launch.html /door/ 301
+/launch /door/ 301

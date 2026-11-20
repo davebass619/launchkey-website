@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "generatedAt": "2026-11-20T18:46:17.932Z",
+  "recordAsOf": "Nov 20, 2026, 10:46 AM PT",
+  "counts": {
+    "live": 1,
+    "prelaunch": 0,
+    "settled": 0,
+    "total": 1
+  },
+  "live": [
+    {
+      "bondId": "prestaged-house-bond",
+      "status": "Window open",
+      "statusAt": null,
+      "coinName": "Bonded",
+      "coinTicker": "BONDED",
+      "mint": "BAiZ5e6oYjyn4NBhQNX2FYp5ck9nRY5DTrxv5Db3bond",
+      "creator": "89J45iZVcTFMGZK78xB6YYmQ2vEFx1xfSGTxUQJeMbcC",
+      "creatorShort": "89J4…MbcC",
+      "bondPostedSol": 5,
+      "composition": null,
+      "bondAccount": "5iCwin61MCAnSZuDHk5xoRUZszS9ZueCeRVsjSdLgmj9",
+      "bondVault": "HbQ4ppFCc5pENGL9JH8mL36r1ueoFsPVf7y6ANf1LGQL",
+      "windowStart": null,
+      "windowEnd": null,
+      "windowLengthHours": null,
+      "windowNote": "Nov 11, 2026, 5:51 PM PT to Nov 12, 2026, 5:51 PM PT (24 hour window)",
+      "elapsedSecs": null,
+      "remainingSecs": null,
+      "windowProgress": null,
+      "checkpoints": [],
+      "feesReleasedToDevSol": null,
+      "positionRemainingPercent": null,
+      "launchTx": "2SL9LJQeJnquxZGZ49Hqn6GUb1cC5fjzQXqMka1pzKu8ZwePoxApEokBav1UA1HwBqaAtfkv1rKavRuDH3j4axYj",
+      "settlementStateAfter": null
+    }
+  ],
+  "prelaunch": [],
+  "settled": []
+}

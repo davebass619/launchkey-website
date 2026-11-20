@@ -1,0 +1,10 @@
+{
+  "name": "KEYNOTE",
+  "symbol": "KEYNOTE",
+  "description": "Launch #002 on Launchkey. The first one said nothing. This one's the keynote. Every key is graded.",
+  "image": "https://launchkey.fun/coins/keynote.png",
+  "external_url": "https://launchkey.fun",
+  "extensions": {
+    "website": "https://launchkey.fun"
+  }
+}

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BONDED — The rules: how a key gets its grade</title>
+<link rel="canonical" href="https://launchkey.fun/rules">
+<meta name="description" content="How a key gets its grade: how grades are made, what they mean, and what they never mean. This is a record, not a promise.">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:#0a0a0c; color:#f2f2f0; font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; }
+  a { color:inherit; text-decoration:none; }
+  .wrap { max-width:1180px; margin:0 auto; padding:0 18px 60px; }
+
+  /* header */
+  header { display:flex; align-items:center; justify-content:space-between; padding:18px 0 8px; }
+  .logo { font-size:27px; font-weight:900; letter-spacing:1.5px; }
+  .logo .key { color:#f0b90b; }
+  .logo small { display:block; font-size:10.5px; font-weight:600; letter-spacing:2.5px; color:#8b8b90; margin-top:1px; }
+  .logo small b { color:#e5484d; }
+  .btn { display:inline-block; border:none; cursor:pointer; font-weight:700; border-radius:12px; padding:12px 20px; font-size:15px; }
+  .btn-board { background:#1c1c21; color:#f0b90b; border:1px solid #f0b90b; }
+
+  /* standard site header (ported from the app pages, Oct 24 2026) */
+  header.site { position:sticky; top:0; z-index:20; padding:0; justify-content:initial;
+    background:rgba(10,10,12,.86); backdrop-filter:blur(10px); border-bottom:1px solid #232329; }
+  .header-in { max-width:1180px; margin:0 auto; padding:0 18px; min-height:64px;
+    display:flex; align-items:center; gap:18px; }
+  .wordmark { display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:1.6px;
+    font-size:19px; white-space:nowrap; font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif; }
+  .wordmark img { height:30px; width:30px; border-radius:8px; flex:none; }
+  .wordmark .key { color:#f0b90b; }
+  .wordmark small { display:block; font-size:9px; font-weight:600; letter-spacing:2.4px;
+    color:#8b8b90; line-height:1; margin-top:2px; }
+  .wordmark small b { color:#e5484d; }
+  nav.mainnav { margin-left:auto; display:flex; align-items:center; gap:22px; }
+  nav.mainnav a.nl { color:#9a9aa0; font-size:14.5px; font-weight:600; white-space:nowrap; }
+  nav.mainnav a.nl:hover { color:#f2f2f0; }
+  .btn-gold { background:#f0b90b; color:#161006; border:1px solid #f0b90b;
+    font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif; }
+  .btn-gold:hover { background:#ffc81f; }
+  @media (max-width:640px){
+    .header-in{ flex-wrap:wrap; height:auto; padding-top:10px; padding-bottom:10px; row-gap:6px; }
+    .header-in>.btn{ margin-left:auto; padding:9px 14px; font-size:14px; }
+    nav.mainnav{ order:3; width:100%; margin-left:0; gap:16px; }
+    nav.mainnav a.nl{ font-size:13.5px; }
+  }
+
+
+  /* title */
+  .tagline { text-align:center; margin:44px 0 6px; font-size:38px; font-weight:900; line-height:1.2; }
+  .tagline .gold { color:#f0b90b; }
+  .sub { text-align:center; color:#9a9aa0; font-size:16px; line-height:1.55; max-width:640px; margin:0 auto 10px; }
+
+  /* sections */
+  .sec-title { font-size:13px; letter-spacing:2px; color:#8b8b90; text-transform:uppercase; margin:40px 0 16px; }
+  .card { background:#131318; border:1px solid #232329; border-radius:18px; padding:22px; margin-bottom:22px; }
+  .body-txt { color:#c9c9ce; font-size:15.5px; line-height:1.65; }
+  .body-txt b { color:#f2f2f0; }
+  .body-txt .gold { color:#f0b90b; font-weight:800; }
+  .body-txt + .body-txt { margin-top:12px; }
+
+  /* read list */
+  .item { display:flex; gap:13px; padding:11px 0; border-bottom:1px solid #1f1f25; font-size:15px; line-height:1.55; color:#c9c9ce; }
+  .item:last-child { border-bottom:none; }
+  .item .dot { flex:none; color:#f0b90b; font-weight:900; margin-top:1px; }
+  .item b { color:#f2f2f0; }
+
+  /* endings */
+  .end { padding:13px 0; border-bottom:1px solid #1f1f25; }
+  .end:last-child { border-bottom:none; }
+  .end .ename { font-weight:900; letter-spacing:1px; font-size:14.5px; }
+  .end .ename.good { color:#3fb96f; }
+  .end .ename.flat { color:#9a9aa0; }
+  .end .ename.bad { color:#ff6b6f; }
+  .end .ename.mid { color:#f0b90b; }
+  .end .ewhy { color:#9a9aa0; font-size:14px; line-height:1.6; margin-top:3px; }
+
+  /* tiers */
+  .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .grid3 .card { margin-bottom:0; }
+  .std-name { font-size:18px; font-weight:800; margin-bottom:9px; }
+  .std-name .gold { color:#f0b90b; }
+  .std-body { color:#9a9aa0; font-size:14.5px; line-height:1.6; }
+  .priv { margin-top:13px; border-top:1px solid #1f1f25; padding-top:11px; }
+  .priv div { color:#c9c9ce; font-size:13.5px; line-height:1.5; padding:3px 0; }
+  .priv div b { color:#f0b90b; font-weight:800; }
+  @media (max-width:820px){ .grid3{ grid-template-columns:1fr; } .tagline{ font-size:31px; } }
+
+  /* footer */
+  footer { text-align:center; margin-top:38px; }
+  footer .fline { color:#9a9aa0; font-size:14px; line-height:1.6; }
+  footer .fline b { color:#f2f2f0; }
+  footer .flinks { margin-top:11px; font-size:13.5px; }
+  footer .flinks a { color:#f0b90b; font-weight:700; }
+  footer .flinks span { color:#55555c; margin:0 8px; }
+  .demo { text-align:center; color:#55555c; font-size:12px; margin-top:26px; letter-spacing:1px; }
+</style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://launchkey.fun/rules">
+<meta property="og:title" content="BONDED — The rules: how a key gets its grade">
+<meta property="og:description" content="How a key gets its grade: how grades are made, what they mean, and what they never mean. This is a record, not a promise.">
+<meta property="og:image" content="https://launchkey.fun/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BONDED — The rules: how a key gets its grade">
+<meta name="twitter:description" content="How a key gets its grade: how grades are made, what they mean, and what they never mean. This is a record, not a promise.">
+<meta name="twitter:image" content="https://launchkey.fun/og-image.png">
+<style id="bonded-unify">
+/* ===== BONDED UNIFY (Nov 7 2026 site audit): shared theme layer — the
+   homepage (Proxima format) is the reference: near-black ground, steel
+   text, gold accents, Space Grotesk + IBM Plex Mono. Presentation only;
+   no wording on this page was changed. ===== */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;600;700&display=swap');
+body{background:linear-gradient(180deg,#070a10 0%,#050506 55%,#000000 100%)!important;background-color:#050506!important;color:#e8edf5!important;font-family:'Space Grotesk',-apple-system,'Segoe UI',Roboto,sans-serif!important}
+header.site{background:rgba(7,10,16,.88)!important;border-bottom:1px solid #232b38!important}
+header.site .wordmark,header.site .wordmark span{color:#fdfcf9!important;font-family:'Space Grotesk',sans-serif!important}
+header.site .wordmark .key{color:#f0b90b!important}
+header.site .wordmark small{color:#9aa7ba!important}
+header.site nav a,header.site .header-tag{color:#9aa7ba!important;font-family:'IBM Plex Mono',monospace}
+header.site .btn-gold,header.site a.btn[href="/door/"],header.site a.btn[href="/door"]{background:linear-gradient(180deg,#ffffff,#dfe8f4)!important;border-color:#dfe8f4!important;color:#0a0f16!important;border-radius:8px!important;font-family:'IBM Plex Mono',monospace!important}
+.pfoot{margin-top:26px;padding:22px 16px 8px;border-top:1px solid #232b38;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;color:#7d8698;line-height:1.9}
+.pfoot-a{color:#9cc8ff;text-decoration:none}
+.pfoot-a:hover{color:#5ea8ff}
+html,body{overflow-x:hidden}
+table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:640px){
+  .header-in{flex-wrap:wrap!important;height:auto!important;min-height:0!important;padding-top:10px!important;padding-bottom:10px!important;row-gap:8px!important}
+  .header-in>.btn{margin-left:auto;padding:9px 13px!important;font-size:13.5px!important}
+  nav.mainnav{order:3;width:100%;margin-left:0!important;gap:8px 16px!important;flex-wrap:wrap}
+  .header-right{flex-wrap:wrap;row-gap:6px}
+  .header-tag{display:none}
+  .wordmark{font-size:16px!important}
+  img,video,canvas,svg{max-width:100%}
+  input,select,textarea{max-width:100%}
+}
+header.site .wordmark,header.site nav.mainnav,header.site .header-in>.btn,header.site .header-right{display:none!important}
+header.site .wordmark,header.site nav.mainnav,header.site .header-in>.btn,header.site .header-right{display:none!important}
+.ptop-in{flex-wrap:wrap;row-gap:8px}.ptop-in>a{flex:none;white-space:nowrap}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="header-in"><div class="ptop-in" style="display:flex;align-items:center;gap:12px;max-width:1180px;margin:0 auto;padding:14px 18px 10px"><a href="/" aria-label="BONDED home" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#fdfcf9;font-weight:700;font-size:20px;letter-spacing:.02em;font-family:'Space Grotesk',sans-serif"><img src="/bonded-mark3.png" alt="" width="72" height="72" style="flex:none"></a><span class="ptop-nav" style="margin-left:auto;display:flex;gap:22px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:12.5px;flex-wrap:wrap;justify-content:flex-end"><a href="/" style="color:#9aa7ba;text-decoration:none">Home</a><a class="tellslink" href="/tells" style="color:#ffe98a;font-weight:700;letter-spacing:.08em;text-decoration:none">Tells App</a><a href="/bond-rules" style="color:#9aa7ba;text-decoration:none">Rules</a><a href="/methodology.html" style="color:#9aa7ba;text-decoration:none">Methodology</a><a href="/door/" style="color:#0a0f16;background:linear-gradient(180deg,#ffffff,#dfe8f4);border-radius:8px;padding:9px 16px;font-weight:700;text-decoration:none">Post a Bond</a></span></div>
+    <a class="wordmark" href="index.html"><img src="logo-mark.png" alt="Launchkey home"><span>BONDED</span></a>
+    <nav class="mainnav">
+      <a class="nl" href="/board/">The Board</a>
+      <a class="nl" href="/bonds/">Bonds</a>
+      <a class="nl" href="lookup.html">Check a key</a>
+      <a class="nl" href="/launches/">My Launches</a>
+    </nav>
+    <a class="btn btn-gold" href="/door/">Post a Bond</a>
+  </div></header>
+
+<div class="wrap">
+
+  <!-- TITLE -->
+  <div class="tagline">How a key gets <span class="gold">its grade.</span></div>
+  <div class="sub">How grades are made, what they mean, and what they never mean. Methodology v2.</div>
+  <div class="sub">For the bond itself, read <a href="/bond-rules.html" style="color:#f0b90b;font-weight:700">the bond rules in plain language</a>.</div>
+
+  <!-- 1. THE PRINCIPLE -->
+  <div class="sec-title">The Principle</div>
+  <div class="card">
+    <div class="body-txt"><b>Everyone launches. Every key is graded.</b></div>
+    <div class="body-txt">We grade <span class="gold">hands, not luck</span> — what the dev <b>did</b>, not what the market did.</div>
+    <div class="body-txt"><b>This is a record, not a promise.</b> Grades summarize observed wallet activity under a published method. They do not establish identity, intent, or whether holders were harmed. A higher grade means the observed record meets that tier’s criteria, not that the record is complete or the next launch is safe.</div>
+  </div>
+
+  <!-- 2. WHAT WE MEASURE -->
+  <div class="sec-title">What We Measure</div>
+  <div class="card">
+    <div class="item"><div class="dot">●</div><div><b>Launch-wallet activity</b> — the launches, buys, sells, liquidity actions, and endings associated with the launch wallet.</div></div>
+    <div class="item"><div class="dot">●</div><div><b>Attributed wallets</b> — additional wallets attributed to the launch wallet under the published methodology. Observed transactions and inferred wallet relationships are displayed separately.</div></div>
+    <div class="item"><div class="dot">●</div><div><b>Evidence on every finding</b> — each finding identifies its source transactions, observation period, methodology version, and any wallet-attribution assumptions.</div></div>
+    <div class="item"><div class="dot">●</div><div><b>Coverage has limits</b> — activity outside the supported protocols, observation period, or identified wallets may not appear in the record. An absence of detected events is not evidence that no event occurred.</div></div>
+    <div class="item"><div class="dot">●</div><div><b>Conduct on this platform</b> — every launch here adds to the same file while the service operates. Corrections annotate the record; they never overwrite it.</div></div>
+    <div class="item"><div class="dot">●</div><div><b>Measurements print continuously; labels are mechanical</b> — wherever the desk measured one, a number prints as a number: holdings over time, disposal share, cluster share, counts. A label — an ending, an adverse exit finding, a grade — fires only when a published definition is met. A measurement below a label's threshold is still printed; it simply carries no label.</div></div>
+    <div class="item"><div class="dot">●</div><div><b>Social links, labeled two ways</b> — a coin's file labels every social link one of two ways: <b>linked by launcher</b>, where the claimed account publicly references the coin or its file, so the link is proven from both sides; or <b>claimed, unlinked</b>, where the link appears in the coin's metadata only. An unlinked claim prints as a claim, never as the project's account.</div></div>
+  </div>
+
+  <!-- 3. HOW A COIN CAN END -->
+  <div class="sec-title">How a Coin Can End</div>
+  <div class="card">
+    <div class="end"><span class="ename good">GRADUATED</span><div class="ewhy">Completing the bonding curve and continuing to trade are separate observations. Neither establishes that holders profited or that the developer acted properly. Any effect on the grade follows the published scoring rules.</div></div>
+    <div class="end"><span class="ename flat">QUIET DEATH</span><div class="ewhy">The coin faded without a measured exit event. This barely touches the grade — a flop is not a crime.</div></div>
+    <div class="end"><span class="ename mid">POST-LAUNCH EXIT EVENT</span><div class="ewhy">A measured fact: net token disposals by the launch wallet and its attributed wallets reached <b>at least 50% of attributed holdings during the first 60 minutes after launch</b>. The event record shows the holdings baseline, included wallets, attribution basis, calculation, and source transactions. Transfers are not treated as sales solely because tokens moved between wallets. <b>An exit event is a fact on the record, and by itself it carries no grade consequence</b> — selling early is common, and on its own it is not a finding against anyone. It does not establish intent, common control of every attributed wallet, or harm to holders.</div></div>
+    <div class="end"><span class="ename mid">SLOW EXIT — PROPOSED</span><div class="ewhy">Also a fact: a measured disposal of at least 50% of attributed holdings that completes after the first 60 minutes and within 7 days of launch (the completion window is stated in the methodology annex). A slow exit prints like any other exit. Like a fast one, it moves a grade only through an adverse exit finding.</div></div>
+    <div class="end"><span class="ename bad">ADVERSE EXIT FINDING</span><div class="ewhy">The only exit that moves a grade. An exit becomes an adverse exit finding only when at least one published aggravator is also measured: <b>deception</b> — the disposal contradicts a lock or hold position printed at launch; <b>extraction + abandonment</b> — cumulative disposal of at least 90% within 7 days, no later launch-wallet market activity on the coin, and a quiet-death or abandoned-with-holders ending; or <b>hidden position</b> — the position printed at birth materially understated the attributed cluster's true position, and the hidden share was disposed of. An aggravator the desk data cannot check is printed as unchecked — never presumed.</div></div>
+    <div class="end"><span class="ename flat">ABANDONED — WITH HOLDERS</span><div class="ewhy">An ending class: the coin reached a real peak — all-time high at or above $20,000 — and its last read sits below the lower of 10% of that peak or $5,000. The class names the market state. It says nothing about why, and on its own it is not an exit finding.</div></div>
+    <div class="end"><span class="ename bad">OBSERVED LIQUIDITY WITHDRAWAL</span><div class="ewhy">A separate finding: liquidity was measurably removed from a pool by an attributed wallet during the stated observation period. The finding carries its own evidence and definition; it is not folded into the exit-event calculation.</div></div>
+    <div class="end"><span class="ename bad">CORRELATED EXIT PATTERN</span><div class="ewhy">A separate finding: disposals by multiple attributed wallets met the methodology’s published correlation test. Correlation and timing alone do not establish common control.</div></div>
+    <div class="end"><span class="ename mid">OBSERVED INACTIVITY — PROPOSED</span><div class="ewhy">A defined period with no observed activity from the launch wallet or its attributed wallets while those wallets still hold tokens from the launch. Inactivity alone does not establish abandonment, disappearance, or a broken obligation.</div></div>
+  </div>
+  <div class="card">
+    <div class="body-txt"><b>How a record becomes adverse.</b> There are three measured paths, and no others in the published rule. Any one of them prints the key as <b>PROBATION · ADVERSE RECORD</b>.</div>
+    <div class="body-txt"><b>1. An adverse exit finding.</b> A measured exit event that also carries at least one published aggravator above — deception, extraction + abandonment, or hidden position.</div>
+    <div class="body-txt"><b>2. The peak-collapse pattern.</b> Three or more of the key’s launches meet the peak-collapse test: an all-time high at or above $20,000, and a last read below the lower of 10% of that peak or $5,000.</div>
+    <div class="body-txt"><b>3. The launch-farm pattern.</b> The key has 100 or more launches, its graduation rate is under 2%, and it made five or more launches in the last 24 hours.</div>
+    <div class="body-txt">The second and third paths are <b>key-level grade triggers</b>. They are not coin endings and they are not exit findings; they read the key’s whole record. <b>How findings affect grades.</b> A finding affects a grade only under the published scoring rules. Where the evidence is insufficient to apply a rule, the result is marked <b>UNDETERMINED</b>.</div>
+  </div>
+
+  <!-- 4. THE TIERS -->
+  <div class="sec-title">The Tiers — And What They Unlock</div>
+  <div class="grid3">
+    <div class="card">
+      <div class="std-name">PROBATION</div>
+      <div class="std-body">Where every new or unknown key starts.</div>
+      <div class="std-body" style="margin-top:11px">Probation means insufficient history. It is not a finding of misconduct.</div>
+      <div class="std-body" style="margin-top:11px">A key with measured adverse findings sits here too — printed as <b>PROBATION · ADVERSE RECORD</b>, a different label from plain Probation.</div>
+    </div>
+    <div class="card">
+      <div class="std-name"><span class="gold">PROVEN</span></div>
+      <div class="std-body">No adverse record, and proof on it: one real graduation — a launch that completed its curve without collapsing from its peak — or, across two or more launches, at least one completed curve or one launch still trading.</div>
+    </div>
+    <div class="card">
+      <div class="std-name">PILLAR</div>
+      <div class="std-body">The deepest record on the pad: three or more launches, at least one graduation, at least one launch that reached a $100K all-time high, and no adverse record — over a record at least 30 days old.</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:22px">
+    <div class="body-txt"><b>Placement:</b> every launch lists the same way, newest first. Grades do not buy position.</div>
+    <div class="body-txt"><b>Pairing:</b> the full catalog is open to every key from its first launch.</div>
+    <div class="body-txt"><b>Under the published scoring rules, one genuine success outweighs many quiet flops.</b> Ten coins that faded cost a key almost nothing. One coin that landed can carry it.</div>
+    <div class="body-txt"><b>And an adverse record drops a key on the spot</b> — whether it comes from an adverse exit finding or one of the two key-level patterns in §3, whatever tier it was sitting in. A plain exit event drops nothing; it prints on the record either way. Grades climb slowly. They fall fast.</div>
+  </div>
+
+  <!-- 5. FEES -->
+  <div class="sec-title">Fees</div>
+  <div class="card">
+    <div class="body-txt" style="margin-bottom:14px"><b>Retired November 9, 2026.</b> This schedule was the fee schedule of the retired Raydium launch service. Nothing launches there now. The pump door charges no platform fee, and trades run on pump.fun at pump.fun's own rates. The schedule below stays in these rules as the record of the terms exactly as they were printed while that service ran.</div>
+    <div class="item"><div class="dot">●</div><div><b>Founding keys: 0.5% platform fee — for the life of the service.</b> Launch during the founding window and the 0.5% rate holds while the service runs. The full Founding Key Terms are below.</div></div>
+    <div class="item"><div class="dot">●</div><div><b>Creator fee: 0.5% — the LaunchLab protocol maximum.</b></div></div>
+    <div class="item"><div class="dot">●</div><div><b>Standard: 1% platform fee</b> — for keys without founding status.</div></div>
+    <div class="body-txt" style="margin-top:14px"><b>What these rates cover.</b> These rates cover the Launchkey platform fee and the creator fee only. Protocol, pool, network, and third-party charges are separate and are shown before you sign.</div>
+    <div class="body-txt"><b>Who counts as a founding key.</b> A founding key is a wallet that completes a launch through Launchkey during the founding window. The protected rate then applies to that key's launches through the covered service, including launches after the window closes. An expression of interest or a wallet connection alone does not qualify.</div>
+    <div class="body-txt"><b>Fee changes.</b> Fee changes are published here with their scope, reason, and effective date before they take effect — except where a legal restriction or urgent security response prevents advance notice, in which case notice is published as soon as legally and operationally possible.</div>
+  </div>
+  <div class="card">
+    <div class="body-txt"><b>Founding Key Terms</b> — what the 0.5% actually covers, in plain words:</div>
+    <div class="item"><div class="dot">●</div><div>The 0.5% rate covers <b>qualifying launches through the Launchkey launch service</b> — including substantially equivalent successor contracts or interfaces.</div></div>
+    <div class="item"><div class="dot">●</div><div>It <b>survives rebranding, migration, and acquisition</b> while the service operates.</div></div>
+    <div class="item"><div class="dot">●</div><div>It does <b>not</b> cover separate products, or third-party and protocol charges.</div></div>
+    <div class="item"><div class="dot">●</div><div>The rate can change <b>only</b> where required by law, a binding government order, or a documented security or protocol emergency — and the reason, scope, and date are published before it takes effect. An emergency exception lasts only while the documented need continues.</div></div>
+    <div class="item"><div class="dot">●</div><div>Changes are <b>never retroactive</b>. Launchkey will not use a substitute charge to circumvent the protected rate.</div></div>
+    <div class="item"><div class="dot">●</div><div>The founding window closes at the <b>later of 90 days after public launch opens, or the 250th completed launch</b>.</div></div>
+  </div>
+
+  <!-- 6. FOUNDING SEASON -->
+  <div class="sec-title">Founding Season</div>
+  <div class="card">
+    <div class="body-txt"><b>Retired November 9, 2026.</b> The founding season is closed. No outside key completed a launch in the window, and no founding seats were taken. The text below stays in these rules as the record of the offer exactly as it was printed while it ran.</div>
+    <div class="body-txt" style="margin-top:14px">The founding season covers the <b>first 25 keys</b> to complete an outside launch: launches by keys other than the platform's own. A key that completes a launch in the window is a founding key, and its platform fee is <b>0.5% for the life of the service</b> under the Founding Key Terms above. Seats are keys: a key takes exactly one seat, claimed when its first launch in the window completes; later launches by the same key take no further seats. The season counts keys, not people; one operator can hold more than one key.</div>
+    <div class="body-txt" style="margin-top:14px">Disputes about the season's record follow <b>Corrections and Review</b> below: the same machinery as every other finding on the record.</div>
+  </div>
+
+  <!-- 7. FUNDING LINKS -->
+  <div class="sec-title">Funding Links</div>
+  <div class="card">
+    <div class="body-txt">A funding link shows a transaction path between wallets. It does not, by itself, establish shared ownership, control, intent, or responsibility for another wallet’s activity.</div>
+    <div class="body-txt">Where a funding path is reliably attributed under the published methodology and the source wallet has measured exit events, the new key can start at the bottom tier. Where provenance affects the starting tier, the record identifies the relevant transfers, the rule applied, and the uncertainty involved. The restriction is a provenance-based starting position, not inherited misconduct.</div>
+    <div class="body-txt">Funding paths that cannot be reliably attributed — including paths through shared services or exchanges — are marked <b>UNRESOLVED</b>. An unresolved path is not an adverse finding.</div>
+    <div class="body-txt">A wallet’s own observed activity is assessed separately from its funding links.</div>
+    <div class="body-txt">We call that starting position an <b>inherited shadow</b>. It is a starting position, not a finding about the new key.</div>
+  </div>
+
+  <!-- 8. CORRECTIONS AND REVIEW -->
+  <div class="sec-title">Corrections and Review</div>
+  <div class="card">
+    <div class="body-txt">A record can be disputed for its transaction classification, wallet attribution, calculation, or rule application. Message us on X at <a href="https://x.com/postthebond" style="color:#f0b90b;font-weight:700">@postthebond</a> and provide supporting evidence where available.</div>
+    <div class="body-txt">A dispute does not automatically remove a finding. Where review identifies a material uncertainty, that uncertainty is shown beside the finding while it is under review.</div>
+    <div class="body-txt">If the evidence no longer supports a finding, the finding is <b>WITHDRAWN</b>, clearly marked as withdrawn, and no longer counted in the current grade. Any affected grade is recalculated.</div>
+    <div class="body-txt">Material corrections are appended to the record — never overwritten — and show what changed, why it changed, and when.</div>
+    <div class="body-txt">Records show their observation period, last update, and methodology version. Public availability depends on the service continuing to operate; we do not promise permanent hosting.</div>
+    <div class="body-txt"><b>Our own calls are graded on The Board by the same ruler.</b> Manual overrides, if ever made, are published on the record with their reason and effect. Placement is never sold without disclosure.</div>
+    <div class="body-txt">That includes the founder's key. Same rules, same endings, same drops. No exceptions at the top.</div>
+  </div>
+
+  <footer>
+    <div class="fline"><b>BONDED</b> — Grading Rules v2 · These rules can change; every change is published with its date and reason.</div>
+    <div class="fline">Methodology v2 — Oct 21, 2026 — supersedes v1: exit events are facts and move nothing alone; only an aggravated exit is an adverse finding; confirmed disposals on graduated coins now reach the record through the aggravator test.</div>
+    <div class="flinks"><a href="index.html">← Back to BONDED</a><span>·</span><a href="methodology.html">Methodology Annex</a><span>·</span><a href="/launches/">My Launches</a><span>·</span><a href="https://x.com/postthebond">@postthebond</a></div>
+  </footer>
+<div class="pfoot">BONDED · <a class="pfoot-a" href="/methodology.html">Methodology</a> · <a class="pfoot-a" href="/door/">Post a Bond</a></div>
+
+  <div class="demo">BONDED — GRADING RULES v2</div>
+</div>
+</body>
+</html>

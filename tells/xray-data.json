@@ -1,0 +1,1126 @@
+{
+ "generated_ts": 1794780106.640585,
+ "coins": [
+  {
+   "symbol": "PUSSY",
+   "name": "Pussycoin",
+   "mint": "FZxHLUGiGchY5uvvoeqh1EKiXTrGdN67WUBhUc1fLoat",
+   "tier": "GRADED PILOT COIN",
+   "status": "live",
+   "generated_ts": 1794779988.3199806,
+   "creator_wallet": "WLHv2UAZm6z4KyaaELi5pjdbJh6RESMva1Rnn8pJVVh",
+   "snapshot_ts": 1794779915.8450565,
+   "snapshot_kind": "snapshot",
+   "concentration": {
+    "top10_merged_pct": 17.51178169344952,
+    "top10_raw_pct": 39.64628373021407,
+    "basis": "watcher snapshot; wallets that share one funder merged by the watcher's live funder map"
+   },
+   "top_holders": [
+    {
+     "pct": 23.188640971220515,
+     "wallets": [
+      "GpMZ...xFbL"
+     ],
+     "owners": [
+      "GpMZbSM2GgvTKHJirzeGfMFoaZ8UR2X7F4v8vHTvxFbL"
+     ]
+    },
+    {
+     "pct": 3.428541116664251,
+     "wallets": [
+      "6zMV...wNti"
+     ],
+     "owners": [
+      "6zMVSeukMUMKu5tDsECh4QMqrCRZqTbTvuawztFfwNti"
+     ]
+    },
+    {
+     "pct": 2.307299562313286,
+     "wallets": [
+      "HTeC...bG4R"
+     ],
+     "owners": [
+      "HTeCsRM6UQ5RoDgh7ZpqWsnHf83rSAs5xZs42yk7bG4R"
+     ]
+    },
+    {
+     "pct": 2.186642004530753,
+     "wallets": [
+      "HA6E...4XWh"
+     ],
+     "owners": [
+      "HA6EmepZwtryoDtrav7hePTUarYCecHsLGjcCBRd4XWh"
+     ]
+    },
+    {
+     "pct": 2.1360730435900743,
+     "wallets": [
+      "DdM1...Tf7d"
+     ],
+     "owners": [
+      "DdM1tyCdoEyoxYYmGMjdf5rRPcpmj3UzZTpE7ScuTf7d"
+     ]
+    }
+   ],
+   "market_cap_usd": 153520.0,
+   "price_usd": 0.0001535,
+   "supply_ui": 981173111.397406,
+   "creator": {
+    "wallet": "WLHv2UAZm6z4KyaaELi5pjdbJh6RESMva1Rnn8pJVVh",
+    "short": "WLHv...JVVh",
+    "status": "exited",
+    "status_text": "The creator holds nothing at the last read.",
+    "balance_pct": 0.0
+   },
+   "cluster": {
+    "size": 1,
+    "holding": 0,
+    "members": [
+     {
+      "short": "WLHv...JVVh",
+      "role": "creator",
+      "pct": 0.0
+     }
+    ]
+   },
+   "created_ts": 1794169278,
+   "seeded_ts": 1794299208.7058253,
+   "pressure": {
+    "pct": 0.0,
+    "short": "None in 24h",
+    "display": "pressure: no cluster movement recorded in 24h",
+    "events_24h": 0,
+    "basis": "zero countable E2 events in the trailing 24h, and every proven cluster member's latest balance read is zero or dust, so the cluster holds nothing it could have moved"
+   },
+   "story": "No wallet is tied to the creator by funding evidence. The creator holds nothing."
+  },
+  {
+   "symbol": "FLOAT",
+   "name": "FLOAT",
+   "mint": "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr",
+   "tier": "SHOWCASE WATCH",
+   "status": "live",
+   "generated_ts": 1794779990.6903775,
+   "creator_wallet": "WLHv2UAZm6z4KyaaELi5pjdbJh6RESMva1Rnn8pJVVh",
+   "snapshot_ts": 1794779943.6395264,
+   "snapshot_kind": "snapshot",
+   "concentration": {
+    "top10_merged_pct": 26.858653159384943,
+    "top10_raw_pct": 31.307062978677553,
+    "basis": "watcher snapshot; wallets that share one funder merged by the watcher's live funder map"
+   },
+   "top_holders": [
+    {
+     "pct": 6.085279053148826,
+     "wallets": [
+      "GpMZ...xFbL"
+     ],
+     "owners": [
+      "GpMZbSM2GgvTKHJirzeGfMFoaZ8UR2X7F4v8vHTvxFbL"
+     ]
+    },
+    {
+     "pct": 5.745594248501073,
+     "wallets": [
+      "EEAB...T52G"
+     ],
+     "owners": [
+      "EEABWyb6xFFDq6Vc7ZprJynTnv1RzCKVk19uoPnHT52G"
+     ]
+    },
+    {
+     "pct": 4.090291590272847,
+     "wallets": [
+      "6zMV...wNti"
+     ],
+     "owners": [
+      "6zMVSeukMUMKu5tDsECh4QMqrCRZqTbTvuawztFfwNti"
+     ]
+    },
+    {
+     "pct": 2.988743473406957,
+     "wallets": [
+      "BHRE...2AtX"
+     ],
+     "owners": [
+      "BHREKFkPQgAtDs8Vb1UfLkUpjG6ScidTjHaCWFuG2AtX"
+     ]
+    },
+    {
+     "pct": 2.851789974889991,
+     "wallets": [
+      "zV18...dcgi"
+     ],
+     "owners": [
+      "zV18RQeme9fDZUbCGf7skSWNz6Vphs5j3PQUHjHdcgi"
+     ]
+    }
+   ],
+   "market_cap_usd": 2841620.0,
+   "price_usd": 0.002844,
+   "supply_ui": 868381612.431515,
+   "creator": {
+    "wallet": "WLHv2UAZm6z4KyaaELi5pjdbJh6RESMva1Rnn8pJVVh",
+    "short": "WLHv...JVVh",
+    "status": "holds",
+    "status_text": "Creator still holds 0.12% of supply.",
+    "balance_pct": 0.11554331779959583
+   },
+   "cluster": {
+    "size": 1,
+    "holding": 1,
+    "members": [
+     {
+      "short": "WLHv...JVVh",
+      "role": "creator",
+      "pct": 0.11554331779959583
+     }
+    ]
+   },
+   "created_ts": 1793224397.0,
+   "seeded_ts": 1794359720.6337905,
+   "pressure": {
+    "pct": null,
+    "display": null,
+    "short": null,
+    "events_24h": 0,
+    "basis": "zero countable E2 events in the trailing 24h, but 1 cluster member(s) still hold and 0 balance(s) are unread; the record cannot support a 24h movement figure yet"
+   },
+   "story": "No wallet is tied to the creator by funding evidence. The creator still holds 0.11% of supply."
+  },
+  {
+   "symbol": "Dacity",
+   "name": "Dacity",
+   "mint": "nxPqZ4F7ux8Vph5NFu25rEP6Kx9Gr1U6Fmj36Rjpump",
+   "tier": "SHOWCASE WATCH",
+   "status": "live",
+   "generated_ts": 1794779992.727736,
+   "creator_wallet": "EUA3BRvTAWPKEcxhm7tCEppuNoevSBMCfKLaXAiAPNKA",
+   "snapshot_ts": 1794779500.552788,
+   "snapshot_kind": "snapshot",
+   "concentration": {
+    "top10_merged_pct": 20.96139292304185,
+    "top10_raw_pct": 26.914574487498697,
+    "basis": "watcher snapshot; wallets that share one funder merged by the watcher's live funder map"
+   },
+   "top_holders": [
+    {
+     "pct": 6.98492018029456,
+     "wallets": [
+      "G2Uu...6y4b"
+     ],
+     "owners": [
+      "G2UuRbmVDzDFP4qyoBJrSKBXSi7d6V4bPP9tHPs36y4b"
+     ]
+    },
+    {
+     "pct": 5.2436228131908695,
+     "wallets": [
+      "DoLq...hypg"
+     ],
+     "owners": [
+      "DoLqxdyFYQjJySZuN9xot5vAwqbzt7JDYU5wrWu3hypg"
+     ]
+    },
+    {
+     "pct": 2.4764133432786415,
+     "wallets": [
+      "9CNy...vND2"
+     ],
+     "owners": [
+      "9CNyLECt2j8tnDhqxtjYk5HUhZ2b8Nwnyb7sfYN7vND2"
+     ]
+    },
+    {
+     "pct": 2.388299646408153,
+     "wallets": [
+      "HWYp...NWKR"
+     ],
+     "owners": [
+      "HWYpE693cw8AWxHSynrHhUsKDbfzubAFYWpTcMZdNWKR"
+     ]
+    },
+    {
+     "pct": 2.2264777448655924,
+     "wallets": [
+      "AGdt...ii9v"
+     ],
+     "owners": [
+      "AGdtsMmphhymH5wYW3dWKSkAxpLYRrNDCTFAfuq8ii9v"
+     ]
+    }
+   ],
+   "market_cap_usd": 484103.1661601492,
+   "price_usd": 0.000493123242307614,
+   "supply_ui": 981708272.144597,
+   "creator": {
+    "wallet": "EUA3BRvTAWPKEcxhm7tCEppuNoevSBMCfKLaXAiAPNKA",
+    "short": "EUA3...PNKA",
+    "status": "exited",
+    "status_text": "The creator holds nothing at the last read.",
+    "balance_pct": 0.0
+   },
+   "cluster": {
+    "size": 15,
+    "holding": 0,
+    "members": [
+     {
+      "short": "EUA3...PNKA",
+      "role": "creator",
+      "pct": 0.0
+     },
+     {
+      "short": "nozV...FULm",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "7GiJ...8BWm",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "4utj...vk9D",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "gang...91RV",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "nozi...iaG5",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "jZnL...gNN7",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "nozV...QUff",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "devA...iAcM",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "jiJh...91L7",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "nozc...FZMJ",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "4CHq...yWsi",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "DPPu...AewH",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "J4o3...J8HB",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "nozY...kmzU",
+      "role": "funded-live",
+      "pct": 0.0
+     }
+    ]
+   },
+   "created_ts": 1792809777.0,
+   "seeded_ts": 1794338077.405633,
+   "pressure": {
+    "pct": null,
+    "display": null,
+    "short": null,
+    "events_24h": 0,
+    "basis": "zero countable E2 events in the trailing 24h, but 0 cluster member(s) still hold and 14 balance(s) are unread; the record cannot support a 24h movement figure yet"
+   },
+   "story": "No wallet is tied to the creator by funding evidence. The creator holds nothing."
+  },
+  {
+   "symbol": "X",
+   "name": "apeonx",
+   "mint": "9VZerdNL1x6EjetDqRnh5bYcdmk1y8sLAGs1ybzGpump",
+   "tier": "SHOWCASE WATCH",
+   "status": "live",
+   "generated_ts": 1794780021.0187826,
+   "creator_wallet": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "snapshot_ts": 1794779565.3991299,
+   "snapshot_kind": "snapshot",
+   "concentration": {
+    "top10_merged_pct": 25.267655916957665,
+    "top10_raw_pct": 59.27204781034324,
+    "basis": "watcher snapshot; wallets that share one funder merged by the watcher's live funder map"
+   },
+   "top_holders": [
+    {
+     "pct": 35.578258488227746,
+     "wallets": [
+      "6Mdm...rDzQ"
+     ],
+     "owners": [
+      "6MdmwvCsrMAbTqJC7GBBu5FBUFLbC6dJXGxm5VtnrDzQ"
+     ]
+    },
+    {
+     "pct": 4.924241151169881,
+     "wallets": [
+      "BM9C...jvMN"
+     ],
+     "owners": [
+      "BM9CcyErJcu2mjrFvUsRRrD3snGeHDDVirJLvL6EjvMN"
+     ]
+    },
+    {
+     "pct": 3.0702689724697954,
+     "wallets": [
+      "4Dyo...u7tF"
+     ],
+     "owners": [
+      "4Dyo8cQHeQfBgDjGkxRxMbCX1Lf9kPV1pUHuGfw4u7tF"
+     ]
+    },
+    {
+     "pct": 2.7340615002040187,
+     "wallets": [
+      "Hhhm...g22N"
+     ],
+     "owners": [
+      "HhhmeEYtAwToAY54pvTZxMWg4mygCChcksduEjABg22N"
+     ]
+    },
+    {
+     "pct": 2.493348598538861,
+     "wallets": [
+      "97fB...yrQm"
+     ],
+     "owners": [
+      "97fBAwZLRzcSFoxU3aTu11tnZXCGF8g6X9WDJHdpyrQm"
+     ]
+    }
+   ],
+   "market_cap_usd": 16281.0,
+   "price_usd": 1.673e-05,
+   "supply_ui": 972917574.253142,
+   "creator": {
+    "wallet": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+    "short": "TSLv...eokM",
+    "status": "exited",
+    "status_text": "The creator holds nothing at the last read.",
+    "balance_pct": 0.0
+   },
+   "cluster": {
+    "size": 1,
+    "holding": 0,
+    "members": [
+     {
+      "short": "TSLv...eokM",
+      "role": "creator",
+      "pct": 0.0
+     }
+    ]
+   },
+   "created_ts": 1794299900,
+   "seeded_ts": 1794343620.7633734,
+   "pressure": {
+    "pct": 0.0,
+    "short": "None in 24h",
+    "display": "pressure: no cluster movement recorded in 24h",
+    "events_24h": 0,
+    "basis": "zero countable E2 events in the trailing 24h, and every proven cluster member's latest balance read is zero or dust, so the cluster holds nothing it could have moved"
+   },
+   "story": "No wallet is tied to the creator by funding evidence. The creator holds nothing."
+  },
+  {
+   "symbol": "GTA",
+   "name": "GTA memes",
+   "mint": "EJv8TgQfN6gtYN8Z6KGyBeNPbVYmogmudfxiRA2Fpump",
+   "tier": "SHOWCASE WATCH",
+   "status": "live",
+   "generated_ts": 1794780022.7663965,
+   "creator_wallet": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "snapshot_ts": 1794779598.260791,
+   "snapshot_kind": "snapshot",
+   "concentration": {
+    "top10_merged_pct": 20.263624404672072,
+    "top10_raw_pct": 24.509594370372387,
+    "basis": "watcher snapshot; wallets that share one funder merged by the watcher's live funder map"
+   },
+   "top_holders": [
+    {
+     "pct": 5.773356677923138,
+     "wallets": [
+      "5iSV...tLii"
+     ],
+     "owners": [
+      "5iSVs31h7HMdGGmyUvzmHDsYwV7cydD6CZJTbqzCtLii"
+     ]
+    },
+    {
+     "pct": 3.153207188623256,
+     "wallets": [
+      "7CP4...iu9z"
+     ],
+     "owners": [
+      "7CP4LUprNGFBPge9xPJQGQJf3b5GKLMj95KYmFLNiu9z"
+     ]
+    },
+    {
+     "pct": 2.35987435674744,
+     "wallets": [
+      "CcmC...uNMs"
+     ],
+     "owners": [
+      "CcmCV1vgNECCyRF2trH3Ly4W8bUF4tQjufcZzDMxuNMs"
+     ]
+    },
+    {
+     "pct": 2.2303781839555437,
+     "wallets": [
+      "GRPn...7H2o"
+     ],
+     "owners": [
+      "GRPn81aRUT6xHvn6Xbi9u3iHavJ1x5gNZ9VspLcN7H2o"
+     ]
+    },
+    {
+     "pct": 2.1591674306584756,
+     "wallets": [
+      "9ujR...KYhR"
+     ],
+     "owners": [
+      "9ujRacUcLsyEtv8BiHDNLCDNLtsmPjB5ZTdhu4CzKYhR"
+     ]
+    }
+   ],
+   "market_cap_usd": 809899.0,
+   "price_usd": 0.0008357,
+   "supply_ui": 969019249.478177,
+   "creator": {
+    "wallet": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+    "short": "TSLv...eokM",
+    "status": "exited",
+    "status_text": "The creator holds nothing at the last read.",
+    "balance_pct": 0.0
+   },
+   "cluster": {
+    "size": 1,
+    "holding": 0,
+    "members": [
+     {
+      "short": "TSLv...eokM",
+      "role": "creator",
+      "pct": 0.0
+     }
+    ]
+   },
+   "created_ts": 1794234821,
+   "seeded_ts": 1794392057.2270513,
+   "pressure": {
+    "pct": 0.0,
+    "short": "None in 24h",
+    "display": "pressure: no cluster movement recorded in 24h",
+    "events_24h": 0,
+    "basis": "zero countable E2 events in the trailing 24h, and every proven cluster member's latest balance read is zero or dust, so the cluster holds nothing it could have moved"
+   },
+   "story": "No wallet is tied to the creator by funding evidence. The creator holds nothing."
+  },
+  {
+   "symbol": "mihao",
+   "name": "ni hao cat",
+   "mint": "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump",
+   "tier": "SHOWCASE WATCH",
+   "status": "live",
+   "generated_ts": 1794780024.329025,
+   "creator_wallet": "9tH2zRYdS3X7PEcsPno3GST1EHe8GX8CSNih1pKpamAp",
+   "snapshot_ts": 1794779956.7872322,
+   "snapshot_kind": "snapshot",
+   "concentration": {
+    "top10_merged_pct": 21.578426105998663,
+    "top10_raw_pct": 21.952570172942,
+    "basis": "watcher snapshot; wallets that share one funder merged by the watcher's live funder map"
+   },
+   "top_holders": [
+    {
+     "pct": 5.7396192259425005,
+     "wallets": [
+      "CLoF...6NWU"
+     ],
+     "owners": [
+      "CLoF2bGdy6aMMHQJh9XRiPGsCLraa7vDGvTpzDaY6NWU"
+     ]
+    },
+    {
+     "pct": 3.1972573602812417,
+     "wallets": [
+      "9tH2...amAp"
+     ],
+     "owners": [
+      "9tH2zRYdS3X7PEcsPno3GST1EHe8GX8CSNih1pKpamAp"
+     ]
+    },
+    {
+     "pct": 2.778960557657691,
+     "wallets": [
+      "2EJP...Dpht"
+     ],
+     "owners": [
+      "2EJPiGHWCddwUnoWoRHD3dfycjQwDV9iQceshn2HDpht"
+     ]
+    },
+    {
+     "pct": 2.0831841473098374,
+     "wallets": [
+      "AvGi...GdMP"
+     ],
+     "owners": [
+      "AvGiSdrkwtGYhrrFXZPtdhNhV4pASUR67TmRjfaKGdMP"
+     ]
+    },
+    {
+     "pct": 1.7397592286634098,
+     "wallets": [
+      "Be24...nRR6"
+     ],
+     "owners": [
+      "Be24Gbf5KisDk1LcWWZsBn8dvB816By7YzYF5zWZnRR6"
+     ]
+    }
+   ],
+   "market_cap_usd": 15120774.0,
+   "price_usd": 0.01607,
+   "supply_ui": 940828962.240656,
+   "creator": {
+    "wallet": "9tH2zRYdS3X7PEcsPno3GST1EHe8GX8CSNih1pKpamAp",
+    "short": "9tH2...amAp",
+    "status": "moved",
+    "status_text": "Creator held 8.93% of supply when the watch was seeded. Holds 3.20% now.",
+    "balance_pct": 3.1972573602812417
+   },
+   "cluster": {
+    "size": 9,
+    "holding": 1,
+    "members": [
+     {
+      "short": "9tH2...amAp",
+      "role": "creator",
+      "pct": 3.1972573602812417
+     },
+     {
+      "short": "KfHb...zMFQ",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "7KHJ...XV3S",
+      "role": "funded-live",
+      "pct": 6.265996516476339e-07
+     },
+     {
+      "short": "55aN...LpBu",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "C6J4...jYV8",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "CXU3...xkx2",
+      "role": "funded-live",
+      "pct": 0.00028547980693572396
+     },
+     {
+      "short": "E71r...koZF",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "nwCE...TqH1",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "2ssA...Ytoq",
+      "role": "funded-live",
+      "pct": 0.0
+     }
+    ]
+   },
+   "created_ts": 1792934860.0,
+   "seeded_ts": 1794356688.9958987,
+   "pressure": {
+    "pct": null,
+    "display": null,
+    "short": null,
+    "events_24h": 0,
+    "basis": "zero countable E2 events in the trailing 24h, but 1 cluster member(s) still hold and 8 balance(s) are unread; the record cannot support a 24h movement figure yet"
+   },
+   "story": "No wallet is tied to the creator by funding evidence. The creator still holds 8.93% of supply."
+  },
+  {
+   "symbol": "HOLD",
+   "name": "Hold",
+   "mint": "4iJ7xEQrUvVUQH9KVStvw3FaY2PZDd7RtR4L9zx2pump",
+   "tier": "SHOWCASE WATCH",
+   "status": "live",
+   "generated_ts": 1794780041.3288355,
+   "creator_wallet": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "snapshot_ts": 1794779650.0080738,
+   "snapshot_kind": "snapshot",
+   "concentration": {
+    "top10_merged_pct": 20.58109558591513,
+    "top10_raw_pct": 55.35535044524728,
+    "basis": "watcher snapshot; wallets that share one funder merged by the watcher's live funder map"
+   },
+   "top_holders": [
+    {
+     "pct": 35.92672966471301,
+     "wallets": [
+      "GUsi...Ujbb"
+     ],
+     "owners": [
+      "GUsid5mPW6KiExjQDDggoTHrFv4ecGqqAgYwiHa4Ujbb"
+     ]
+    },
+    {
+     "pct": 4.312564463735327,
+     "wallets": [
+      "DuAR...c6s6"
+     ],
+     "owners": [
+      "DuARUpsEzdVbVpSnbGipLJvWxaXUCPLDJDjNov6Rc6s6"
+     ]
+    },
+    {
+     "pct": 3.6186252452267156,
+     "wallets": [
+      "JCU9...qUJN"
+     ],
+     "owners": [
+      "JCU9ZAeZgCqfZyCxrPaZwqGHw7JHCyiAH1R4jF4tqUJN"
+     ]
+    },
+    {
+     "pct": 3.211662598791352,
+     "wallets": [
+      "DBbu...hrmt"
+     ],
+     "owners": [
+      "DBbuneUWWEksDWUmkTyo9gGohdzoLq7ewnVG4TNThrmt"
+     ]
+    },
+    {
+     "pct": 1.6752814482195448,
+     "wallets": [
+      "5gn6...e7oC"
+     ],
+     "owners": [
+      "5gn6aD3yswsydntE5VLdMV4NyXpWcdaAnZN5uBgQe7oC"
+     ]
+    }
+   ],
+   "market_cap_usd": 16308.0,
+   "price_usd": 1.734e-05,
+   "supply_ui": 940386350.029015,
+   "creator": {
+    "wallet": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+    "short": "TSLv...eokM",
+    "status": "exited",
+    "status_text": "The creator holds nothing at the last read.",
+    "balance_pct": 0.0
+   },
+   "cluster": {
+    "size": 1,
+    "holding": 0,
+    "members": [
+     {
+      "short": "TSLv...eokM",
+      "role": "creator",
+      "pct": 0.0
+     }
+    ]
+   },
+   "created_ts": 1794344274,
+   "seeded_ts": 1794364540.9286969,
+   "pressure": {
+    "pct": 0.0,
+    "short": "None in 24h",
+    "display": "pressure: no cluster movement recorded in 24h",
+    "events_24h": 0,
+    "basis": "zero countable E2 events in the trailing 24h, and every proven cluster member's latest balance read is zero or dust, so the cluster holds nothing it could have moved"
+   },
+   "story": "No wallet is tied to the creator by funding evidence. The creator holds nothing."
+  },
+  {
+   "symbol": "AgenC",
+   "name": "AgenC",
+   "mint": "5yC9BM8KUsJTPbWPLfA2N8qH1s9V8DQ3Vcw1G6Jdpump",
+   "tier": "SHOWCASE WATCH",
+   "status": "live",
+   "generated_ts": 1794780043.0908182,
+   "creator_wallet": "8ZN71XTdVo8yRovnGLmNgW3Tgniw6A4J3JGLvPD686FP",
+   "snapshot_ts": 1794779680.0839324,
+   "snapshot_kind": "snapshot",
+   "concentration": {
+    "top10_merged_pct": 55.11403548430542,
+    "top10_raw_pct": 60.666703713467676,
+    "basis": "watcher snapshot; wallets that share one funder merged by the watcher's live funder map"
+   },
+   "top_holders": [
+    {
+     "pct": 30.002100484149583,
+     "wallets": [
+      "9SY5...k6ra"
+     ],
+     "owners": [
+      "9SY5i5pMdzu4vK5vouUrYcyERfK1bpY5y3bs9HUDk6ra"
+     ]
+    },
+    {
+     "pct": 10.329839437783583,
+     "wallets": [
+      "FtVq...WnBx"
+     ],
+     "owners": [
+      "FtVq2huUhU33TNmEbmEQb4kwDEfZeU9tFvBgk7mwWnBx"
+     ]
+    },
+    {
+     "pct": 6.481397672710186,
+     "wallets": [
+      "B3cL...GGbd"
+     ],
+     "owners": [
+      "B3cLCGSucGGAxwNcVq78cWh8UrdJipqx7xwdcKZLGGbd"
+     ]
+    },
+    {
+     "pct": 6.453306355445932,
+     "wallets": [
+      "BUMh...MwC1"
+     ],
+     "owners": [
+      "BUMh6YebpBvAh4by4oTGJUvzQ9CvH6dqPgrZvXFDMwC1"
+     ]
+    },
+    {
+     "pct": 1.5159991023906443,
+     "wallets": [
+      "CbWm...eZQG"
+     ],
+     "owners": [
+      "CbWmRY4cH6Jb7nxdSeeRixknznff9BsJWYjCuBYFeZQG"
+     ]
+    }
+   ],
+   "market_cap_usd": 993519.0,
+   "price_usd": 0.0009935,
+   "supply_ui": 999929988.763597,
+   "creator": {
+    "wallet": "8ZN71XTdVo8yRovnGLmNgW3Tgniw6A4J3JGLvPD686FP",
+    "short": "8ZN7...86FP",
+    "status": "exited",
+    "status_text": "The creator holds nothing at the last read.",
+    "balance_pct": 0.0
+   },
+   "cluster": {
+    "size": 34,
+    "holding": 0,
+    "members": [
+     {
+      "short": "8ZN7...86FP",
+      "role": "creator",
+      "pct": 0.0
+     },
+     {
+      "short": "8XFH...5tPj",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "nozY...kmzU",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "BntW...o9Lu",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "E7jS...2AuP",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "3diz...cwk7",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "DYdF...YuEo",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "EV84...g1AL",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "GTiz...LwhX",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "ENgM...q5oZ",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "nozi...iaG5",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "nozu...3kU4",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "jDdw...2tG7",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "jZnL...gNN7",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "jiJh...91L7",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "46qj...G8f9",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "jAjc...MUb7",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "G3fk...3f8B",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "Cu1c...y6yG",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "jxte...ZHM7",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "jzsZ...PFP7",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "jjVS...m6c7",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "jaUZ...smu7",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "ja6U...9xZ7",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "moon...96yj",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "moon...284s",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "moon...BBs8",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "moon...MY1C",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "moon...QY4c",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "moon...J3JA",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "moon...hn1u",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "moon...MB93",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "moon...Cb8V",
+      "role": "funded-live",
+      "pct": 0.0
+     },
+     {
+      "short": "devA...iAcM",
+      "role": "funded-live",
+      "pct": 0.0
+     }
+    ]
+   },
+   "created_ts": 1792453792.0,
+   "seeded_ts": 1794382673.6149724,
+   "pressure": {
+    "pct": null,
+    "display": null,
+    "short": null,
+    "events_24h": 0,
+    "basis": "zero countable E2 events in the trailing 24h, but 0 cluster member(s) still hold and 33 balance(s) are unread; the record cannot support a 24h movement figure yet"
+   },
+   "story": "No wallet is tied to the creator by funding evidence. The creator holds nothing."
+  },
+  {
+   "symbol": "BIG",
+   "name": "Big Guy",
+   "mint": "34DXEU2ttEtBSb1TqGJm7izgvYTTkqKcCoiNWdPDpump",
+   "tier": "SHOWCASE WATCH",
+   "status": "live",
+   "generated_ts": 1794780104.7191563,
+   "creator_wallet": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+   "snapshot_ts": 1794779749.9343886,
+   "snapshot_kind": "snapshot",
+   "concentration": {
+    "top10_merged_pct": 22.338483931075114,
+    "top10_raw_pct": 24.616957464642393,
+    "basis": "watcher snapshot; wallets that share one funder merged by the watcher's live funder map"
+   },
+   "top_holders": [
+    {
+     "pct": 4.077168252781553,
+     "wallets": [
+      "5Tec...QkYK"
+     ],
+     "owners": [
+      "5TecgcpFLdBnJvBrpjvk32UAYABPRA1HgeFPEUjQQkYK"
+     ]
+    },
+    {
+     "pct": 2.948784930594387,
+     "wallets": [
+      "GRfe...xzvP"
+     ],
+     "owners": [
+      "GRfezAnwjApQ3REHkhFb7tVcfT3Wk2AeLzZpV6bMxzvP"
+     ]
+    },
+    {
+     "pct": 2.790814283951519,
+     "wallets": [
+      "3J57...qwCZ"
+     ],
+     "owners": [
+      "3J57sDv5rCu4DSaaAoaD11UsCGZUhx5VQGnYm2ssqwCZ"
+     ]
+    },
+    {
+     "pct": 2.5886390614948525,
+     "wallets": [
+      "6paX...xHiD"
+     ],
+     "owners": [
+      "6paXMopBanCnQ77GbvTCPQoE7L6MyLFxhxnSn9PUxHiD"
+     ]
+    },
+    {
+     "pct": 2.4546911050711167,
+     "wallets": [
+      "GTRW...Spv4"
+     ],
+     "owners": [
+      "GTRWdhZGa9BCXRAiEM4ujSoYMJDaNFNv8ZhGQmUaSpv4"
+     ]
+    }
+   ],
+   "market_cap_usd": 407096.507217282,
+   "price_usd": 0.00042872858388255214,
+   "supply_ui": 949543656.573185,
+   "creator": {
+    "wallet": "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM",
+    "short": "TSLv...eokM",
+    "status": "exited",
+    "status_text": "The creator holds nothing at the last read.",
+    "balance_pct": 0.0
+   },
+   "cluster": {
+    "size": 1,
+    "holding": 0,
+    "members": [
+     {
+      "short": "TSLv...eokM",
+      "role": "creator",
+      "pct": 0.0
+     }
+    ]
+   },
+   "created_ts": 1794142003,
+   "seeded_ts": 1794394698.6506307,
+   "pressure": {
+    "pct": 0.0,
+    "short": "None in 24h",
+    "display": "pressure: no cluster movement recorded in 24h",
+    "events_24h": 0,
+    "basis": "zero countable E2 events in the trailing 24h, and every proven cluster member's latest balance read is zero or dust, so the cluster holds nothing it could have moved"
+   },
+   "story": "No wallet is tied to the creator by funding evidence. The creator holds nothing."
+  }
+ ]
+}

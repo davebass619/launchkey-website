@@ -1,0 +1,34 @@
+# launchkey.fun — Cloudflare Pages response headers.
+# Conservative by design: security headers everywhere, one-day
+# caching for images/fonts only. HTML and data files keep Pages'
+# defaults. No CSP (the worker-driven pages would break) and no
+# HSTS (TLS policy is managed at the zone level).
+
+# Security headers on every path.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+
+# Images and fonts: cache for a day. File names are not
+# content-hashed, so immutable / year-long caching would be wrong.
+/*.png
+  Cache-Control: public, max-age=86400
+/*.jpg
+  Cache-Control: public, max-age=86400
+/*.jpeg
+  Cache-Control: public, max-age=86400
+/*.gif
+  Cache-Control: public, max-age=86400
+/*.svg
+  Cache-Control: public, max-age=86400
+/*.webp
+  Cache-Control: public, max-age=86400
+/*.ico
+  Cache-Control: public, max-age=86400
+/*.woff
+  Cache-Control: public, max-age=86400
+/*.woff2
+  Cache-Control: public, max-age=86400
+/assets/*
+  Cache-Control: public, max-age=86400

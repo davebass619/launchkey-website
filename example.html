@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BONDED — One file, start to finish</title>
+<link rel="canonical" href="https://launchkey.fun/example">
+<meta name="description" content="One file, start to finish. This is how a grade is made, every step reproducible from public transactions.">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:#0a0a0c; color:#f2f2f0; font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; }
+  a { color:inherit; text-decoration:none; }
+  .wrap { max-width:1180px; margin:0 auto; padding:0 18px 60px; }
+  header { display:flex; align-items:center; justify-content:space-between; padding:18px 0 8px; }
+  .logo { font-size:27px; font-weight:900; letter-spacing:1.5px; }
+  .logo .key { color:#f0b90b; }
+  .logo small { display:block; font-size:10.5px; font-weight:600; letter-spacing:2.5px; color:#8b8b90; margin-top:1px; }
+  .logo small b { color:#e5484d; }
+  .btn { display:inline-block; border:none; cursor:pointer; font-weight:700; border-radius:12px; padding:12px 20px; font-size:15px; }
+  .btn-board { background:#1c1c21; color:#f0b90b; border:1px solid #f0b90b; }
+
+  /* standard site header (ported from the app pages, Oct 24 2026) */
+  header.site { position:sticky; top:0; z-index:20; padding:0; justify-content:initial;
+    background:rgba(10,10,12,.86); backdrop-filter:blur(10px); border-bottom:1px solid #232329; }
+  .header-in { max-width:1180px; margin:0 auto; padding:0 18px; min-height:64px;
+    display:flex; align-items:center; gap:18px; }
+  .wordmark { display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:1.6px;
+    font-size:19px; white-space:nowrap; font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif; }
+  .wordmark img { height:30px; width:30px; border-radius:8px; flex:none; }
+  .wordmark .key { color:#f0b90b; }
+  .wordmark small { display:block; font-size:9px; font-weight:600; letter-spacing:2.4px;
+    color:#8b8b90; line-height:1; margin-top:2px; }
+  .wordmark small b { color:#e5484d; }
+  nav.mainnav { margin-left:auto; display:flex; align-items:center; gap:22px; }
+  nav.mainnav a.nl { color:#9a9aa0; font-size:14.5px; font-weight:600; white-space:nowrap; }
+  nav.mainnav a.nl:hover { color:#f2f2f0; }
+  .btn-gold { background:#f0b90b; color:#161006; border:1px solid #f0b90b;
+    font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif; }
+  .btn-gold:hover { background:#ffc81f; }
+  @media (max-width:640px){
+    .header-in{ flex-wrap:wrap; height:auto; padding-top:10px; padding-bottom:10px; row-gap:6px; }
+    .header-in>.btn{ margin-left:auto; padding:9px 14px; font-size:14px; }
+    nav.mainnav{ order:3; width:100%; margin-left:0; gap:16px; }
+    nav.mainnav a.nl{ font-size:13.5px; }
+  }
+
+  .tagline { text-align:center; margin:44px 0 6px; font-size:38px; font-weight:900; line-height:1.2; }
+  .tagline .gold { color:#f0b90b; }
+  .sub { text-align:center; color:#9a9aa0; font-size:16px; line-height:1.55; max-width:680px; margin:0 auto 10px; }
+  .sec-title { font-size:13px; letter-spacing:2px; color:#8b8b90; text-transform:uppercase; margin:40px 0 16px; }
+  .card { background:#131318; border:1px solid #232329; border-radius:18px; padding:22px; margin-bottom:22px; }
+  .body-txt { color:#c9c9ce; font-size:15.5px; line-height:1.65; }
+  .body-txt b { color:#f2f2f0; }
+  .body-txt .gold { color:#f0b90b; font-weight:800; }
+  .wallet { font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:13.5px; color:#f0b90b; background:#0d0d10; border:1px solid #2a2a30; border-radius:10px; padding:10px 13px; word-break:break-all; margin:10px 0 4px; }
+  .case-name { font-size:21px; font-weight:900; }
+  .case-name .gold { color:#f0b90b; }
+  .step { display:flex; gap:13px; padding:13px 0; border-bottom:1px solid #1f1f25; }
+  .step:last-child { border-bottom:none; }
+  .step .num { flex:none; width:26px; height:26px; border-radius:50%; border:1px solid #f0b90b; color:#f0b90b; font-weight:900; font-size:13.5px; display:flex; align-items:center; justify-content:center; margin-top:2px; }
+  .step .stitle { font-size:12px; letter-spacing:2px; color:#8b8b90; text-transform:uppercase; margin-bottom:5px; }
+  .step .sbody { color:#c9c9ce; font-size:15px; line-height:1.6; }
+  .step .sbody b { color:#f2f2f0; }
+  .stat { display:inline-block; background:#0d0d10; border:1px solid #232329; border-radius:10px; padding:7px 12px; margin:0 7px 7px 0; font-size:14px; color:#c9c9ce; }
+  .stat b { color:#f2f2f0; font-size:16px; }
+  .stat.bad b { color:#ff6b6f; }
+  .tag { display:inline-block; font-size:11px; font-weight:800; letter-spacing:1px; border-radius:6px; padding:2px 7px; margin-right:7px; vertical-align:1px; }
+  .tag.obs { background:#14301d; color:#3fb96f; }
+  .tag.inf { background:#2e2408; color:#f0b90b; }
+  .tag.unr { background:#26262c; color:#9a9aa0; }
+  .grade-badge { display:inline-block; font-weight:900; letter-spacing:1.5px; font-size:17px; color:#0a0a0c; background:#f0b90b; border-radius:10px; padding:8px 16px; }
+  .grade-badge.adv { background:#e5484d; color:#fff; }
+  .priv div { color:#c9c9ce; font-size:14.5px; line-height:1.5; padding:3px 0; }
+  .priv div b { color:#f0b90b; font-weight:800; }
+  footer { text-align:center; margin-top:38px; }
+  footer .fline { color:#9a9aa0; font-size:14px; line-height:1.6; }
+  footer .fline b { color:#f2f2f0; }
+  footer .flinks { margin-top:11px; font-size:13.5px; }
+  footer .flinks a { color:#f0b90b; font-weight:700; }
+  footer .flinks span { color:#55555c; margin:0 8px; }
+  .demo { text-align:center; color:#55555c; font-size:12px; margin-top:26px; letter-spacing:1px; }
+  @media (max-width:820px){ .tagline{ font-size:31px; } }
+</style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://launchkey.fun/example">
+<meta property="og:title" content="BONDED — One file, start to finish">
+<meta property="og:description" content="One file, start to finish. This is how a grade is made, every step reproducible from public transactions.">
+<meta property="og:image" content="https://launchkey.fun/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BONDED — One file, start to finish">
+<meta name="twitter:description" content="One file, start to finish. This is how a grade is made, every step reproducible from public transactions.">
+<meta name="twitter:image" content="https://launchkey.fun/og-image.png">
+<style id="bonded-unify">
+/* ===== BONDED UNIFY (Nov 7 2026 site audit): shared theme layer — the
+   homepage (Proxima format) is the reference: near-black ground, steel
+   text, gold accents, Space Grotesk + IBM Plex Mono. Presentation only;
+   no wording on this page was changed. ===== */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;600;700&display=swap');
+body{background:linear-gradient(180deg,#070a10 0%,#050506 55%,#000000 100%)!important;background-color:#050506!important;color:#e8edf5!important;font-family:'Space Grotesk',-apple-system,'Segoe UI',Roboto,sans-serif!important}
+header.site{background:rgba(7,10,16,.88)!important;border-bottom:1px solid #232b38!important}
+header.site .wordmark,header.site .wordmark span{color:#fdfcf9!important;font-family:'Space Grotesk',sans-serif!important}
+header.site .wordmark .key{color:#f0b90b!important}
+header.site .wordmark small{color:#9aa7ba!important}
+header.site nav a,header.site .header-tag{color:#9aa7ba!important;font-family:'IBM Plex Mono',monospace}
+header.site .btn-gold,header.site a.btn[href="/door/"],header.site a.btn[href="/door"]{background:linear-gradient(180deg,#ffffff,#dfe8f4)!important;border-color:#dfe8f4!important;color:#0a0f16!important;border-radius:8px!important;font-family:'IBM Plex Mono',monospace!important}
+.pfoot{margin-top:26px;padding:22px 16px 8px;border-top:1px solid #232b38;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;color:#7d8698;line-height:1.9}
+.pfoot-a{color:#9cc8ff;text-decoration:none}
+.pfoot-a:hover{color:#5ea8ff}
+html,body{overflow-x:hidden}
+table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:640px){
+  .header-in{flex-wrap:wrap!important;height:auto!important;min-height:0!important;padding-top:10px!important;padding-bottom:10px!important;row-gap:8px!important}
+  .header-in>.btn{margin-left:auto;padding:9px 13px!important;font-size:13.5px!important}
+  nav.mainnav{order:3;width:100%;margin-left:0!important;gap:8px 16px!important;flex-wrap:wrap}
+  .header-right{flex-wrap:wrap;row-gap:6px}
+  .header-tag{display:none}
+  .wordmark{font-size:16px!important}
+  img,video,canvas,svg{max-width:100%}
+  input,select,textarea{max-width:100%}
+}
+header.site .wordmark,header.site nav.mainnav,header.site .header-in>.btn,header.site .header-right{display:none!important}
+header.site .wordmark,header.site nav.mainnav,header.site .header-in>.btn,header.site .header-right{display:none!important}
+.ptop-in{flex-wrap:wrap;row-gap:8px}.ptop-in>a{flex:none;white-space:nowrap}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="header-in"><div class="ptop-in" style="display:flex;align-items:center;gap:12px;max-width:1180px;margin:0 auto;padding:14px 18px 10px"><a href="/" aria-label="BONDED home" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#fdfcf9;font-weight:700;font-size:20px;letter-spacing:.02em;font-family:'Space Grotesk',sans-serif"><img src="/bonded-mark3.png" alt="" width="72" height="72" style="flex:none"></a><span class="ptop-nav" style="margin-left:auto;display:flex;gap:22px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:12.5px;flex-wrap:wrap;justify-content:flex-end"><a href="/" style="color:#9aa7ba;text-decoration:none">Home</a><a class="tellslink" href="/tells" style="color:#ffe98a;font-weight:700;letter-spacing:.08em;text-decoration:none">Tells App</a><a href="/bond-rules" style="color:#9aa7ba;text-decoration:none">Rules</a><a href="/methodology.html" style="color:#9aa7ba;text-decoration:none">Methodology</a><a href="/door/" style="color:#0a0f16;background:linear-gradient(180deg,#ffffff,#dfe8f4);border-radius:8px;padding:9px 16px;font-weight:700;text-decoration:none">Post a Bond</a></span></div>
+    <a class="wordmark" href="index.html"><img src="logo-mark.png" alt="Launchkey home"><span>BONDED</span></a>
+    <nav class="mainnav">
+      <a class="nl" href="/board/">The Board</a>
+      <a class="nl" href="/bonds/">Bonds</a>
+      <a class="nl" href="rules.html">Grading Rules</a>
+      <a class="nl" href="lookup.html">Check a key</a>
+      <a class="nl" href="/launches/">My Launches</a>
+    </nav>
+    <a class="btn btn-gold" href="/door/">Post a Bond</a>
+  </div></header>
+
+<div class="wrap">
+
+  <!-- TITLE -->
+  <div class="tagline">One file, <span class="gold">start to finish.</span></div>
+  <div class="sub">This is how a grade is made. Every step reproducible from public transactions. Two real wallets from the desk's records — one clear, one ambiguous — graded by the exact same chain.</div>
+
+  <!-- CASE 1 -->
+  <div class="sec-title">Worked Example 1 — The Clear Case</div>
+  <div class="card">
+    <div class="case-name">The HALO <span class="gold">dev</span></div>
+    <div class="wallet">CXoUJHtBGnuNR6zJ3zm8nTnNzCwXxFViXh29d1kTJQmK</div>
+
+    <div class="step"><div class="num">1</div><div>
+      <div class="stitle">Transactions — what the chain shows</div>
+      <div class="sbody">
+        <span class="stat"><b>500+</b> launches recorded</span><span class="stat"><b>20</b> launches in the last 24h</span><span class="stat"><b>16</b> graduated</span><span class="stat bad"><b>17</b> peak-and-collapse endings</span><span class="stat"><b>9</b> successes (ATH ≥ $100K)</span>
+        <div>The 500 count is a <b>lower bound</b> — the pulled history window truncates, and the file says so rather than bluffing a lifetime number.</div>
+      </div>
+    </div></div>
+
+    <div class="step"><div class="num">2</div><div>
+      <div class="stitle">Attribution — observed vs inferred</div>
+      <div class="sbody">
+        <div><span class="tag obs">OBSERVED</span>Every launch above names this wallet as its creator in the on-chain record. The counts are arithmetic on public transactions — anyone can recount them.</div>
+        <div style="margin-top:7px"><span class="tag inf">INFERRED</span>That one person or one team controls this wallet. The record attributes launches to the <b>wallet</b>. It does not establish who holds the keys, and the grade never claims it does.</div>
+      </div>
+    </div></div>
+
+    <div class="step"><div class="num">3</div><div>
+      <div class="stitle">Classifications — mechanical labels only</div>
+      <div class="sbody">
+        <div><b>17 prior coins carry the peak-and-collapse ending</b> under the desk's published proxy: ATH ≥ $20K, then a fall below 10% of ATH and under $5K. That is a measurement of how those coins ended — printed as measured, not as a claim about why.</div>
+        <div style="margin-top:7px">The cadence is also a measurement: <b>20 launches in 24 hours</b>, on top of 500+ recorded. Volume at that rate is itself record data.</div>
+      </div>
+    </div></div>
+
+    <div class="step"><div class="num">4</div><div>
+      <div class="stitle">Grade</div>
+      <div class="sbody">
+        <span class="grade-badge adv">PROBATION · ADVERSE RECORD</span>
+        <div style="margin-top:9px">The key exists — <b>everyone launches</b>. The grade sits at Probation and the adverse record prints on the file in the open: <b>500+ launches · 17 peak-and-collapse endings · 20 more in the last 24 hours.</b> The coin's story — a genuine news narrative — changes nothing. The grade reads the wallet, not the pitch.</div>
+      </div>
+    </div></div>
+
+    <div class="step"><div class="num">5</div><div>
+      <div class="stitle">The same for every key</div>
+      <div class="priv">
+        <div><b>Placement:</b> every launch lists the same way, newest first. Grades do not buy position.</div>
+        <div><b>Pairing:</b> the full catalog is open to every key from its first launch</div>
+      </div>
+      <div class="sbody" style="margin-top:8px">The way back is also mechanical: launch, don't produce exit events, build endings that aren't collapses — the record updates and the grade can climb. Nothing about this grade is permanent except the record underneath it.</div>
+    </div></div>
+  </div>
+
+  <!-- CASE 2 -->
+  <div class="sec-title">Worked Example 2 — The Ambiguous Case</div>
+  <div class="card">
+    <div class="case-name">The Zoo <span class="gold">dev</span></div>
+    <div class="wallet">7xXKejGTNdyz6iAisVzSt1oXPWgrASsbHzsqj9tNX2jw</div>
+    <div class="body-txt" style="font-size:13.5px;color:#8b8b90">Resolved from the Zoo mint <span style="font-family:ui-monospace,Menlo,Consolas,monospace">GwpXch98ft9MRQByRpjG36SV79mSKMt93L2oo3Pmpump</span>.</div>
+
+    <div class="step"><div class="num">1</div><div>
+      <div class="stitle">Transactions — what the chain shows</div>
+      <div class="sbody">
+        <span class="stat"><b>1</b> launch recorded</span><span class="stat"><b>1</b> graduated</span><span class="stat"><b>0</b> peak-and-collapse endings</span><span class="stat"><b>0</b> successes</span>
+        <div>That one coin graduated — ATH ≈ <b>$67.5K</b> — then fell to ≈ <b>$9.7K</b> within hours the same night. One data point. It proves neither skill nor intent, and the file says exactly that.</div>
+      </div>
+    </div></div>
+
+    <div class="step"><div class="num">2</div><div>
+      <div class="stitle">Attribution — observed vs inferred</div>
+      <div class="sbody">
+        <div><span class="tag obs">OBSERVED</span>The launch, the graduation, and the price path above.</div>
+        <div style="margin-top:7px"><span class="tag unr">UNREADABLE</span>The funding trail behind this wallet. The coin's birth sits under <b>≥42,000 signatures</b> — beyond the trace budget — so where this wallet's money came from could not be read. The method stops there and labels it, instead of guessing.</div>
+      </div>
+    </div></div>
+
+    <div class="step"><div class="num">3</div><div>
+      <div class="stitle">Classifications — mechanical labels only</div>
+      <div class="sbody">
+        <div><b>One GRADUATED ending.</b> No exit event is recorded. No liquidity withdrawal is recorded. No adverse classification applies — and none is invented to fill the gap.</div>
+        <div style="margin-top:7px">The provenance step returns <b>UNREADABLE</b>, which is a statement about our tooling, not about this dev.</div>
+      </div>
+    </div></div>
+
+    <div class="step"><div class="num">4</div><div>
+      <div class="stitle">Grade</div>
+      <div class="sbody">
+        <span class="grade-badge">PROVEN</span>
+        <div style="margin-top:9px"><b>An unreadable trail is not a verdict — and it is not a veto either.</b> No adverse finding is printed, because there is no adverse evidence. And the published rule asks only what the record shows: one launch, one real graduation — a launch that completed its curve without collapsing from its peak — and no adverse marks. That is PROVEN. The trail we could not read costs the key nothing; the graduation it earned carries it.</div>
+      </div>
+    </div></div>
+
+    <div class="step"><div class="num">5</div><div>
+      <div class="stitle">The same for every key</div>
+      <div class="priv">
+        <div><b>Placement:</b> every launch lists the same way, newest first. Grades do not buy position.</div>
+        <div><b>Pairing:</b> the full catalog is open to every key from its first launch</div>
+      </div>
+      <div class="sbody" style="margin-top:8px">Same two lines as the clear case — they hold for every key, this one included. This key's record is one real graduation and a question the chain hasn't answered yet. What it does next decides whether the grade holds, climbs, or falls — not what we couldn't read.</div>
+    </div></div>
+  </div>
+
+  <footer>
+    <div class="fline"><b>BONDED</b> — Worked Example · Methodology v2 · Data as of Oct 20, 2026, graded under the current published rules · Demo dataset: the desk's own records (12,019 coins / 2,094 creators at time of grading).</div>
+    <div class="flinks"><a href="index.html">← Back to BONDED</a><span>·</span><a href="rules.html">Grading Rules</a><span>·</span><a href="/door/">The Door</a><span>·</span><a href="/launches/">My Launches</a><span>·</span><a href="https://x.com/postthebond">@postthebond</a></div>
+  </footer>
+<div class="pfoot">BONDED · <a class="pfoot-a" href="/methodology.html">Methodology</a> · <a class="pfoot-a" href="/door/">Post a Bond</a></div>
+
+  <div class="demo">BONDED — WORKED EXAMPLE · METHODOLOGY v2</div>
+</div>
+</body>
+</html>

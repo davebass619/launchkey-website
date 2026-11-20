@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BONDED — Check the key before you buy the coin</title>
+<link rel="canonical" href="https://launchkey.fun/lookup">
+<meta name="description" content="Paste a dev wallet or a coin mint and read the key's graded record: launches, graduations, adverse exit findings and exit events from the desk snapshot.">
+<style>
+/* BONDED — design system (P9 production port of the approved P8 prototype).
+   ONE stylesheet for landing + launch + file + lookup. Master copy lives at
+   p1/src/design.css; each shipped page embeds the identical text inline (the
+   pages are single self-contained files — no external CSS or font fetches).
+   Tokens: ink #0a0a0c · off-white #f2f2f0 · gold #f0b90b (primary CTA + key mark
+   + grade accents ONLY) · red #e5484d only in the VET.O dot · green only on
+   the LIVE chip (brand surfaces). Hairline borders, generous spacing. */
+
+:root{
+  --ink:#0a0a0c;
+  --panel:#101014;
+  --panel2:#131318;
+  --line:rgba(242,242,240,.09);
+  --line2:rgba(242,242,240,.16);
+  --txt:#f2f2f0;
+  --mut:#9a9aa0;
+  --dim:#63636a;
+  --gold:#f0b90b;
+  --gold-ink:#161006;
+  --red:#e5484d;
+  --green:#3fb96f;
+  --r-lg:18px;
+  --r-md:14px;
+  --r-sm:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink); color:var(--txt);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  font-size:15.5px; line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.wordmark,.btn,.chip,.step-num{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif}
+a{color:inherit;text-decoration:none}
+img{display:block}
+.mono{font-family:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;word-break:break-all}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px 72px}
+.wrap-narrow{max-width:1060px}
+
+/* ---------- header ---------- */
+header.site{
+  position:sticky;top:0;z-index:20;
+  background:rgba(10,10,12,.86);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.header-in{max-width:1120px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;gap:18px}
+.wordmark{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:1.6px;font-size:19px;white-space:nowrap}
+.wordmark img{height:30px;width:30px;border-radius:8px;flex:none}
+.wordmark .key{color:var(--gold)}
+.wordmark small{font-size:9px;font-weight:600;letter-spacing:2.4px;color:var(--dim);display:block;line-height:1;margin-top:2px}
+.wordmark small b{color:var(--red)}
+nav.mainnav{margin-left:auto;display:flex;align-items:center;gap:22px}
+nav.mainnav a.nl{color:var(--mut);font-size:14.5px;font-weight:600}
+nav.mainnav a.nl:hover{color:var(--txt)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;cursor:pointer;
+  font-weight:700;border-radius:12px;padding:11px 20px;font-size:15px;line-height:1;white-space:nowrap}
+.btn-gold{background:var(--gold);color:var(--gold-ink)}
+.btn-gold:hover{background:#ffc81f}
+.btn-ghost{background:transparent;color:var(--txt);border-color:var(--line2)}
+.btn-ghost:hover{border-color:var(--mut)}
+.btn-quiet{background:var(--panel2);color:var(--txt);border-color:var(--line)}
+.btn-big{width:100%;padding:16px 20px;font-size:16.5px;border-radius:14px}
+.btn-sm{padding:8px 14px;font-size:13.5px;border-radius:10px}
+
+/* ---------- chips ---------- */
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;letter-spacing:1.2px;
+  padding:4px 10px;border-radius:999px;border:1px solid var(--line2);color:var(--mut);white-space:nowrap}
+.chip .dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.chip-live{color:var(--green);border-color:rgba(63,185,111,.45)}
+.chip-proven{color:var(--gold);border-color:rgba(240,185,11,.55)}
+.chip-pillar{background:var(--gold);color:var(--gold-ink);border-color:var(--gold)}
+.chip-probation{color:var(--mut)}
+.chip-config{color:var(--txt)}
+
+/* ---------- cards / sections ---------- */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px}
+.sec-label{font-size:12px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--dim);margin:46px 0 14px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.sec-head a{color:var(--gold);font-size:14px;font-weight:600}
+
+/* ---------- hero (landing) ---------- */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;padding:54px 0 8px}
+.hero h1{font-size:52px;font-weight:700;line-height:1.04;letter-spacing:-.5px}
+.hero h1 .gold{color:var(--gold)}
+.hero .sub{color:var(--mut);font-size:17px;line-height:1.55;max-width:460px;margin:16px 0 26px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.hero-note{color:var(--dim);font-size:13px;margin-top:14px}
+.launch-card{background:var(--panel);border:1px solid var(--line2);border-radius:var(--r-lg);padding:20px}
+.launch-card .lc-top{display:flex;gap:14px;align-items:center}
+.launch-card img.coin{width:64px;height:64px;border-radius:14px;border:1px solid var(--line2)}
+.lc-name{font-size:19px;font-weight:700;line-height:1.15}
+.lc-ticker{color:var(--mut);font-size:14px}
+.lc-rows{margin-top:16px;border-top:1px solid var(--line)}
+.lc-rows .r{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.lc-rows .r .k{color:var(--dim)}
+.lc-rows .r .v{font-weight:600;text-align:right}
+.lc-link{display:inline-block;margin-top:14px;color:var(--gold);font-weight:700;font-size:14.5px}
+
+/* ---------- steps / grades / file rows (landing) ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.benefit-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px}
+.benefit-card .b-big{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-size:19px;font-weight:700;line-height:1.25}
+.benefit-card .b-big .gold{color:var(--gold)}
+.benefit-card p{color:var(--mut);font-size:13.5px;line-height:1.55;margin-top:7px}
+.id-line{text-align:center;color:var(--mut);font-size:14.5px;margin-top:16px}
+.id-line b{color:var(--txt)}
+.step-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px}
+.step-num{width:28px;height:28px;border-radius:50%;border:1px solid rgba(240,185,11,.55);color:var(--gold);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13.5px;margin-bottom:12px}
+.step-card h3{font-size:16px;font-weight:700;margin-bottom:5px}
+.step-card p{color:var(--mut);font-size:14px;line-height:1.55}
+.grades{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grade-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px}
+.grade-card p{color:var(--mut);font-size:14px;line-height:1.55;margin-top:10px}
+.file-rows{border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.file-row{display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--panel);border-bottom:1px solid var(--line)}
+.file-row:last-child{border-bottom:none}
+.file-row:hover{background:var(--panel2)}
+.file-row img.coin{width:40px;height:40px;border-radius:10px;border:1px solid var(--line2)}
+.file-row .coin-tile{width:40px;height:40px;border-radius:10px;border:1px solid var(--line2);background:var(--panel2);
+  display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:700;font-size:13px;flex:none}
+.file-row .fr-main{flex:1;min-width:0}
+.file-row .fr-name{font-weight:700;font-size:15px}
+.file-row .fr-meta{color:var(--dim);font-size:13px}
+.file-row .fr-arrow{color:var(--gold);font-weight:700;font-size:14px;white-space:nowrap}
+.founding-strip{margin-top:46px;border:1px solid rgba(240,185,11,.4);border-radius:var(--r-lg);background:var(--panel);
+  padding:18px 22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.founding-strip .fs-txt{flex:1;min-width:240px;font-size:15px}
+.founding-strip .fs-txt b{color:var(--gold)}
+.founding-strip a{color:var(--gold);font-weight:700;font-size:14.5px;white-space:nowrap}
+
+/* ---------- footer ---------- */
+footer.site{border-top:1px solid var(--line);margin-top:56px;padding-top:22px;
+  display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+footer.site .fl{color:var(--dim);font-size:13.5px}
+footer.site .fl b{color:var(--mut)}
+footer.site .flinks{display:flex;gap:18px;flex-wrap:wrap;row-gap:8px}
+footer.site .flinks a{color:var(--mut);font-size:13.5px;font-weight:600}
+footer.site .flinks a:hover{color:var(--gold)}
+.standing-line{color:var(--dim);font-size:13px}
+
+/* ---------- launch page ---------- */
+.page-title{padding:34px 0 4px}
+.page-title h1{font-size:30px;font-weight:700;letter-spacing:-.3px}
+.page-title p{color:var(--mut);font-size:15px;margin-top:4px}
+.create-grid{display:grid;grid-template-columns:minmax(0,640px) minmax(0,1fr);gap:22px;align-items:start;margin-top:20px}
+.wallet-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--panel2);border:1px solid var(--line);
+  border-radius:var(--r-md);padding:12px 14px;margin-bottom:20px}
+.wallet-bar .wb-addr{font-weight:600}
+.wallet-bar .spacer{flex:1}
+.fld{display:block;margin-bottom:16px}
+.fld .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;font-weight:600;margin-bottom:7px}
+.fld .lab .hint{color:var(--dim);font-weight:500;font-size:12.5px}
+.fld input[type=text],.fld input[type=number],.fld textarea,.fld select{
+  width:100%;background:#0d0d10;border:1px solid var(--line2);border-radius:var(--r-sm);
+  color:var(--txt);font-size:15px;padding:12px 13px;font-family:inherit}
+.fld textarea{resize:vertical;min-height:74px}
+.fld input:focus,.fld textarea:focus{outline:none;border-color:var(--gold)}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:var(--r-sm);overflow:hidden;margin-bottom:8px}
+.seg-btn{appearance:none;background:transparent;border:none;color:var(--mut);font:inherit;font-size:13px;font-weight:600;padding:7px 13px;cursor:pointer}
+.seg-btn + .seg-btn{border-left:1px solid var(--line)}
+.seg-btn.seg-on{background:var(--panel2);color:var(--txt)}
+.readout{color:var(--mut);font-size:13.5px;margin-top:7px}
+.readout b{color:var(--txt)}
+.uploads{display:grid;grid-template-columns:104px 1fr;gap:14px;margin-bottom:16px}
+.tile{border:1.5px dashed var(--line2);border-radius:var(--r-md);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:5px;color:var(--mut);font-size:12px;font-weight:600;text-align:center;padding:10px;min-height:104px;background:#0d0d10}
+.tile.filled{border-style:solid;border-color:var(--line2);padding:0;overflow:hidden}
+.tile.filled img{width:100%;height:100%;object-fit:cover}
+.tile .plus{font-size:22px;color:var(--gold);line-height:1;font-weight:400}
+.tile-banner{min-height:104px;align-items:flex-start;text-align:left;justify-content:center;padding:14px}
+.tile-banner .plus{font-size:18px}
+.media-lab{font-size:13.5px;font-weight:600;margin-bottom:7px}
+.media-lab .hint{color:var(--dim);font-weight:500;font-size:12.5px}
+details.disclosure{border-top:1px solid var(--line);padding-top:14px;margin-top:4px;margin-bottom:16px}
+details.disclosure summary{cursor:pointer;color:var(--mut);font-size:14px;font-weight:600;list-style:none}
+details.disclosure summary::-webkit-details-marker{display:none}
+details.disclosure summary:hover{color:var(--txt)}
+details.disclosure .disc-body{margin-top:12px}
+.lock-row{display:flex;align-items:center;gap:12px;background:var(--panel2);border:1px solid var(--line);
+  border-radius:var(--r-md);padding:13px 14px}
+.lock-row .lr-txt{flex:1}
+.lock-row .lr-txt b{font-size:14.5px}
+.lock-row .lr-txt span{display:block;color:var(--mut);font-size:13px}
+.switch{position:relative;width:46px;height:26px;flex:none}
+.switch input{opacity:0;width:100%;height:100%;position:absolute;cursor:pointer;margin:0}
+.switch .tr{position:absolute;inset:0;background:#2a2a31;border-radius:999px;transition:.15s;pointer-events:none}
+.switch .tr::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#f2f2f0;transition:.15s}
+.switch input:checked + .tr{background:var(--gold)}
+.switch input:checked + .tr::after{transform:translateX(20px);background:var(--gold-ink)}
+.dur-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.dchip{border:1px solid var(--line2);background:transparent;color:var(--mut);border-radius:999px;
+  padding:7px 15px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit}
+.dchip.on{background:var(--gold);color:var(--gold-ink);border-color:var(--gold)}
+.pair-chips{display:flex;gap:8px;flex-wrap:wrap}
+.fee-line{display:flex;justify-content:space-between;gap:12px;align-items:baseline;border-top:1px solid var(--line);
+  padding-top:14px;margin-top:2px;font-size:14px;color:var(--mut)}
+.fee-line b{color:var(--txt)}
+.safety-line{text-align:center;color:var(--dim);font-size:13px;margin-top:12px;line-height:1.55}
+.adv summary{font-size:13px}
+.preview-card{position:sticky;top:82px}
+.preview-card h3{font-size:12px;letter-spacing:2.2px;text-transform:uppercase;color:var(--dim);margin-bottom:14px}
+.pv-head{display:flex;gap:12px;align-items:center;margin-bottom:6px}
+.pv-head img{width:46px;height:46px;border-radius:11px;border:1px solid var(--line2)}
+.pv-name{font-weight:700;font-size:16.5px;line-height:1.15}
+.pv-ticker{color:var(--mut);font-size:13.5px}
+.kv{border-top:1px solid var(--line);margin-top:12px}
+.kv .r{display:flex;justify-content:space-between;gap:14px;padding:8.5px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+/* both sides of a .kv row must be free to shrink and wrap: a coin
+   name can be a single unbroken word ("Alooooo…ong" in a key's coin
+   list) on the label side, and a full mint address sits on the
+   value side of the lookup's coin card — a rigid side pushes the
+   whole row, and the page, wide on phones (found by the P9.2
+   screenshot pass). */
+.kv .r .k{color:var(--dim);min-width:0;overflow-wrap:anywhere}
+.kv .r .v{font-weight:600;text-align:right;min-width:0}
+.pv-foot{color:var(--dim);font-size:12.5px;margin-top:12px}
+
+/* launch: token card preview (the coin as it will appear, drawn from
+   the same form state the launch submits — image, name, ticker,
+   description, pair; a preview only, never a control) */
+.token-card{display:flex;flex-wrap:wrap;gap:14px;background:var(--panel2);border:1px solid var(--line2);
+  border-radius:var(--r-md);padding:14px;margin-bottom:16px}
+/* the picked banner as a strip across the top of the card (finding
+   #6): full-width row above the logo row, shown only while a banner
+   is picked or hosted */
+.tc-banner{flex:1 1 100%;border-radius:var(--r-sm);overflow:hidden;border:1px solid var(--line2);
+  background:#0d0d10;line-height:0}
+.tc-banner img{width:100%;height:64px;object-fit:cover}
+.token-card img.tc-img{width:56px;height:56px;border-radius:12px;border:1px solid var(--line2);
+  object-fit:cover;background:#0d0d10;flex:none}
+.tc-tile{width:56px;height:56px;border-radius:12px;border:1px solid var(--line2);background:#0d0d10;
+  color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:19px;
+  font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;flex:none}
+.tc-main{flex:1;min-width:0}
+.tc-name{font-weight:700;font-size:17px;line-height:1.2;overflow-wrap:anywhere;
+  font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif}
+.tc-ticker{color:var(--mut);font-size:13.5px;margin-top:1px;overflow-wrap:anywhere}
+.tc-ph{color:var(--dim)}
+.tc-desc{color:var(--mut);font-size:13.5px;line-height:1.5;margin-top:7px;overflow-wrap:anywhere;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+/* the pair as a chip UP TOP, next to the name (owner's order,
+   Oct 22 2026) — it used to sit under the description in dim text */
+.tc-pair{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1.2px;color:var(--gold);
+  border:1px solid rgba(240,185,11,.55);border-radius:999px;padding:4px 10px;margin-top:8px;white-space:nowrap}
+/* the same chip on the public file page's header, plus the line
+   under it carrying the real quote held in the pool */
+.chip-pair{color:var(--gold);border-color:rgba(240,185,11,.55)}
+.ph-pool{margin-top:8px;font-size:13.5px;color:var(--off)}
+
+/* ---------- file page ---------- */
+.banner-slot{height:132px;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);margin-top:22px;position:relative;
+  background:radial-gradient(560px 190px at 82% 50%,rgba(240,185,11,.16),rgba(240,185,11,0) 62%),var(--panel)}
+.banner-slot img{position:absolute;right:34px;top:50%;transform:translateY(-50%);height:118px;width:auto;opacity:.5}
+.profile-head{display:flex;gap:16px;align-items:center;margin-top:-34px;padding:0 22px;position:relative}
+.profile-head img.coin{width:76px;height:76px;border-radius:16px;border:2px solid var(--ink);background:var(--ink)}
+.profile-head .ph-txt{padding-top:36px}
+.ph-name{font-size:24px;font-weight:700;line-height:1.1;font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif}
+.ph-sub{color:var(--mut);font-size:14.5px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.fact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);
+  border-radius:var(--r-lg);overflow:hidden;margin-top:24px}
+.fact{background:var(--panel);padding:16px 18px}
+.fact .fk{color:var(--dim);font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:5px}
+.fact .fv{font-size:15px;font-weight:600;line-height:1.45}
+.fact .fv .sub{display:block;color:var(--mut);font-weight:500;font-size:13.5px;margin-top:2px}
+.mono .sub{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+.fact.wide{grid-column:1 / -1}
+.link-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;padding-top:36px}
+  .hero h1{font-size:40px}
+  .create-grid{grid-template-columns:1fr}
+  .preview-card{position:static}
+  .benefits{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .steps,.grades,.benefits{grid-template-columns:1fr}
+  .fact-grid{grid-template-columns:1fr}
+  .hero h1{font-size:36px}
+  .uploads{grid-template-columns:96px 1fr}
+  .profile-head{padding:0 6px}
+  .card{padding:19px}
+  .file-row{flex-wrap:wrap;row-gap:8px}
+  .file-row .fr-main{flex:1 1 calc(100% - 54px)}
+  .file-row .fr-arrow{display:none}
+  .file-row .chip{margin-left:54px}
+}
+
+/* ================= production components (P9) =================
+   The classes the shipped pages' JS emits or the production markup
+   needs, in the same design language. Status tints on the app pages
+   (launch form guards, success/failure boxes) keep their semantic
+   colors — they are form feedback, not brand decoration. */
+
+/* header: ONE line at every width (founder's rule, Oct 21 2026) —
+   nav links never wrap internally; at phone width the header stacks
+   (wordmark + CTA on the first row, a single nav row under it)
+   instead of crowding or hiding links. */
+nav.mainnav a.nl{white-space:nowrap}
+@media (max-width:640px){
+  .header-in{flex-wrap:wrap;height:auto;padding-top:10px;padding-bottom:10px;row-gap:6px}
+  .header-in>.btn{margin-left:auto;padding:9px 14px;font-size:14px}
+  nav.mainnav{order:3;width:100%;margin-left:0;gap:16px}
+  nav.mainnav a.nl{font-size:13.5px}
+}
+
+/* Advanced, demoted (founder's rehearsal ruling, Oct 21 2026): a
+   quiet text-link line, not a section — the BYO-URI checkbox + field,
+   the metadata JSON preview, and the operator program line live
+   inside it, reachable but minor. */
+details.disclosure.quiet-disc{border-top:none;padding-top:0;margin-top:16px}
+details.disclosure.quiet-disc summary{color:var(--gold);font-size:13.5px}
+details.disclosure.quiet-disc summary:hover{color:#ffc81f}
+
+/* generic helpers */
+[hidden]{display:none!important}
+.hint{color:var(--dim);font-size:13px;font-weight:500;line-height:1.5}
+.gold{color:var(--gold)}
+a.txt-link{color:var(--gold);font-weight:600}
+.fact a,.key-box a,.receipt a,.result a,.standing a,.safety-note a{color:var(--gold);font-weight:600}
+/* bare .btn (the copy buttons the JS emits) gets the quiet treatment —
+   the :not() chain keeps it from ever overriding a named variant */
+.btn:not(.btn-gold):not(.btn-ghost):not(.btn-quiet){background:var(--panel2);color:var(--txt);border-color:var(--line)}
+.btn:disabled{background:#26262c;color:#77777f;border-color:transparent;cursor:not-allowed}
+.btn-gold:disabled{background:#26262c;color:#77777f}
+.btn-small{padding:6px 12px;font-size:13px;border-radius:9px}
+.btn-connect{margin:2px 8px 2px 0}
+.grind-status{margin-top:12px;font-size:15px;font-weight:700;color:var(--gold)}
+.lbl{margin:18px 0 6px;font-weight:700;font-size:13.5px}
+.sec-tag{font-size:12px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--dim);margin:28px 0 14px}
+.sec-tag:first-child{margin-top:0}
+section.blk{margin-bottom:6px}
+
+/* status boxes (JS-emitted on launch + file) */
+.ok-box{background:rgba(63,185,111,.09);border:1px solid rgba(63,185,111,.45);border-radius:var(--r-md);padding:12px 14px;margin:10px 0;font-size:14.5px;line-height:1.55}
+.warn-box{background:rgba(229,72,77,.09);border:1px solid rgba(229,72,77,.5);border-radius:var(--r-md);padding:12px 14px;margin:10px 0;font-size:14.5px;line-height:1.55}
+.note-box{background:rgba(240,185,11,.07);border:1px solid rgba(240,185,11,.4);border-radius:var(--r-md);padding:12px 14px;margin:10px 0;font-size:14.5px;line-height:1.55}
+.test-note{background:rgba(240,185,11,.09);border:1px solid rgba(240,185,11,.45);border-radius:var(--r-md);padding:12px 14px;font-size:14.5px;line-height:1.55}
+
+/* launch: wallet + key card */
+.wallet-bar .wb-addr.addr-none{color:var(--dim);font-weight:500}
+.wallet-bar .wb-addr{word-break:normal;overflow-wrap:anywhere;min-width:0}
+#wallet-buttons{display:contents}
+#program-line{margin-top:12px}
+.key-box{background:var(--panel2);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;margin-top:14px;font-size:14px;color:var(--mut);line-height:1.6}
+.key-box .key-grade{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-size:17px;font-weight:700;color:var(--txt);margin-bottom:5px}
+.safety-note{margin-top:10px}
+
+/* launch: form bits the prototype drew statically */
+.tile{position:relative;overflow:hidden;cursor:pointer}
+.tile input[type=file]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.tile:focus-within{border-color:var(--gold)}
+.tile img.tile-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tile .tile-cap{display:flex;flex-direction:column;align-items:center;gap:5px}
+.tile-banner .tile-cap{align-items:flex-start;text-align:left}
+#logo-note,#banner-note{margin-top:8px}
+.fld input[type=text].mono{font-family:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px}
+.checkline{display:flex;gap:10px;align-items:flex-start;margin:12px 0;font-size:14.5px;line-height:1.5}
+.checkline input{margin-top:3px;width:17px;height:17px;accent-color:var(--gold);flex:none}
+#lock-days-row{margin:2px 0 16px 58px}
+#lock-days{width:auto;min-width:150px}
+span.dchip{cursor:default}
+.dchip.dim{opacity:.55}
+.guard-box{border-radius:var(--r-md);padding:12px 14px;margin-top:14px;font-size:14px;line-height:1.6}
+.guard-box div{margin-top:3px}
+.guard-ok{background:rgba(63,185,111,.08);border:1px solid rgba(63,185,111,.4)}
+.guard-warn{background:rgba(240,185,11,.08);border:1px solid rgba(240,185,11,.4)}
+.guard-refuse{background:rgba(229,72,77,.09);border:1px solid rgba(229,72,77,.45)}
+#devbuy-readout{margin:7px 0 6px}
+.buy-hint{margin-bottom:18px}
+.fact .fee-box{border-top:none;margin-top:0;padding-top:0}
+
+/* launch: preview, fees, metadata, result, receipt, log */
+#file-preview>div{padding:7px 0;border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.55}
+#file-preview>div:first-child{padding-top:0}
+#file-preview .rec-not-promise{border-bottom:none;color:var(--dim);font-size:12.5px;padding-top:10px}
+.fee-box{border-top:1px solid var(--line);margin-top:16px;padding-top:14px;font-size:13.5px;color:var(--mut);line-height:1.65}
+.fee-box b{color:var(--txt)}
+.fee-box .fee-total{color:var(--txt);font-weight:700;margin-top:4px}
+.fee-box .hint{margin-top:6px}
+pre.params{background:#0d0d10;border:1px solid var(--line);border-radius:var(--r-sm);padding:12px;overflow-x:auto;font-size:12.5px;line-height:1.5;white-space:pre-wrap;word-break:break-all;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+.result{margin-top:14px;font-size:14.5px;line-height:1.6}
+.result pre{background:#0d0d10;border:1px solid var(--line);border-radius:var(--r-sm);padding:12px;overflow-x:auto;font-size:12.5px;white-space:pre-wrap;word-break:break-all;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+.review-art{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap;margin:10px 0}
+.review-art img.review-logo{width:72px;height:72px;object-fit:cover;border-radius:var(--r-sm);border:1px solid var(--line2)}
+.review-art img.review-banner{max-width:320px;max-height:90px;object-fit:cover;border-radius:var(--r-sm);border:1px solid var(--line2)}
+.receipt{background:#0d0d10;border:1px solid rgba(240,185,11,.45);border-radius:var(--r-md);padding:16px;margin-top:12px}
+.receipt .r-title{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-size:16.5px;font-weight:700;margin-bottom:10px}
+.receipt .r-keyline{font-size:14.5px;margin-bottom:10px}
+.receipt .r-row{margin:9px 0;font-size:14.5px;line-height:1.55}
+.receipt .r-lbl{display:block;color:var(--dim);font-weight:700;font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:2px}
+.receipt .r-mintbox{background:var(--ink);border:1px solid var(--line2);border-radius:var(--r-sm);padding:9px 11px;font-size:13.5px}
+.receipt .r-close{color:var(--dim);font-size:13px;margin-top:12px}
+.receipt .r-key{color:var(--gold);font-weight:700;margin-top:10px}
+#log{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:12px;line-height:1.6;max-height:260px;overflow-y:auto;margin-top:10px}
+#log[hidden]{display:none}
+.log-line{padding:2px 0;border-bottom:1px dashed rgba(242,242,240,.07);word-break:break-all}
+.log-ok{color:var(--green)} .log-err{color:#ff8589} .log-warn{color:var(--gold)}
+#rpc-active{margin-top:10px}
+#test-panel{border-color:rgba(240,185,11,.5)}
+#test-panel .btn{margin:4px 8px 4px 0}
+
+/* file page */
+#file-status-panel{margin-top:22px;background:transparent;border:none;padding:0}
+#file-status-panel .ok-box,#file-status-panel .warn-box,#file-status-panel .note-box{margin:0}
+.banner-slot img.banner-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;transform:none;right:auto;top:0}
+.profile-head .coin-tile{width:76px;height:76px;border-radius:16px;border:2px solid var(--ink);background:var(--panel2);
+  display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:700;font-size:22px;flex:none;
+  font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif}
+.profile-head h2.ph-name{margin:0}
+.fact .fv{word-break:break-word}
+.standing{margin-top:18px;color:var(--txt);font-size:14.5px;font-weight:600}
+.standing span{display:block;color:var(--dim);font-weight:400;font-size:13px;margin-top:3px}
+#program-line.quiet{margin-top:16px;text-align:left}
+
+/* lookup page */
+.lk-form{display:flex;gap:10px;margin-top:22px}
+.lk-form input{flex:1;min-width:0;background:#0d0d10;border:1px solid var(--line2);border-radius:var(--r-sm);color:var(--txt);font-size:15px;padding:13px 14px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+.lk-form input:focus{outline:none;border-color:var(--gold)}
+.sample-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.sample-row .s-lab{color:var(--dim);font-size:13px;font-weight:600}
+#lookup-result{margin-top:22px}
+.key-card .kc-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.key-card .kc-key{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-size:21px;font-weight:700}
+.key-card .kc-wallet{margin-top:8px}
+.birth-line{font-size:15px;line-height:1.6}
+.birth-line .bl-name{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-size:19px;font-weight:700}
+.lk-note{color:var(--mut);font-size:14px;line-height:1.6}
+.lk-note b{color:var(--txt)}
+.snapshot-line{color:var(--dim);font-size:12.5px;margin-top:14px}
+/* coin card (P9.2): two labeled groups — the desk record (snapshot)
+   and the live market (fetched at view time) — never blended */
+.coin-card .grp{margin-top:18px}
+.coin-card .grp-head{font-size:11.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--dim);margin-bottom:2px}
+.coin-card .grp-head .live-dot{color:var(--green)}
+.mint-copy{cursor:pointer;border-bottom:1px dotted var(--line2)}
+.copy-hint{font-size:12px}
+/* the founding doorbell carries the full verbatim sentence (P6b) —
+   unlike the prototype's short link it must be allowed to wrap */
+.founding-strip a.doorbell,.season-panel a.doorbell{white-space:normal;line-height:1.5}
+
+/* ---------- season panel (landing, P9.4, retired; quiet
+   rebuild P9.5) ---------- The record is the headline; the season
+   is plain fact lines in the same gold-bordered card language.
+   Nothing on the panel is a promotion — the terms read like a
+   fee schedule, and their full text lives on the rules page.
+   Every number it shows is refreshed from the desk data by the
+   landing's inline script — nothing is typed in by hand. */
+.season-panel{margin-top:46px;border:1px solid rgba(240,185,11,.4);border-radius:var(--r-lg);background:var(--panel);padding:22px 24px}
+.season-panel .sp-label{font-size:12px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.season-panel .sp-head{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-size:20px;font-weight:600;line-height:1.35}
+.season-panel .sp-seats{color:var(--mut);font-size:14px;font-weight:600;margin-top:8px}
+.season-panel .sp-line{color:var(--mut);font-size:14.5px;line-height:1.6;margin-top:7px}
+.season-panel .sp-balance{font-size:15px;font-weight:700;margin-top:10px}
+.season-panel .sp-cta{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:14px}
+.season-panel a.doorbell{color:var(--gold);font-weight:700;font-size:14.5px}
+.season-panel a.sp-ladder{color:var(--mut);font-weight:600;font-size:14.5px;white-space:nowrap}
+.season-panel a.sp-ladder:hover{color:var(--gold)}
+
+/* ---------- the ladder (P9.4) ----------
+   The public key ranking: one row per key inside the shared
+   .file-rows shell — rank, key + wallet, grade chip, then the
+   record counts in plain words. */
+.lad-row{display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--panel);border-bottom:1px solid var(--line)}
+.lad-row:last-child{border-bottom:none}
+.lad-row:hover{background:var(--panel2)}
+.lad-rank{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-weight:700;font-size:15px;color:var(--dim);width:36px;flex:none}
+.lad-main{flex:1;min-width:0}
+.lad-key{font-weight:700;font-size:15.5px}
+.lad-key a:hover{color:var(--gold)}
+.lad-wallet{color:var(--dim);font-size:13px;margin-top:1px}
+.lad-stats{color:var(--mut);font-size:13.5px;text-align:right;line-height:1.55}
+.lad-stats b{color:var(--txt)}
+.chip-adv{color:var(--txt)}
+@media (max-width:640px){
+  .lad-row{flex-wrap:wrap;row-gap:6px}
+  .lad-main{flex:1 1 calc(100% - 50px)}
+  .lad-stats{flex:1 1 100%;text-align:left;margin-left:50px}
+}
+
+@media (max-width:640px){
+  .lk-form{flex-direction:column}
+  #lock-days-row{margin-left:0}
+  .key-box .key-grade{font-size:16px}
+}
+
+/* ---------- my launches page (fix batch, Oct 22 2026) ----------
+   The wallet's own launches + fee claims. One card per launch in
+   the shared card language; facts in .kv rows like the public
+   file's preview; Claim buttons are the page's one action. */
+.ml-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px}
+.ml-head .spacer{flex:1}
+.ml-card{margin-top:16px}
+.ml-top{display:flex;gap:14px;align-items:center}
+.ml-top img.ml-img{width:52px;height:52px;border-radius:12px;border:1px solid var(--line2);
+  object-fit:cover;background:#0d0d10;flex:none}
+.ml-tile{width:52px;height:52px;border-radius:12px;border:1px solid var(--line2);background:#0d0d10;
+  color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;
+  font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;flex:none}
+.ml-name{font-weight:700;font-size:17px;line-height:1.2;overflow-wrap:anywhere;
+  font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif}
+.ml-ticker{color:var(--mut);font-size:13.5px;margin-top:1px}
+.ml-claim-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;
+  border-top:1px solid var(--line);padding-top:14px}
+.ml-claim-row .ml-claimable{font-size:14.5px}
+.ml-claim-row .ml-claimable b{font-size:16px}
+.ml-status{font-size:14.5px;line-height:1.6;margin-top:12px}
+.ml-pot-note{color:var(--mut);font-size:13.5px;line-height:1.55;margin-top:10px}
+</style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://launchkey.fun/lookup">
+<meta property="og:title" content="BONDED — Check the key before you buy the coin">
+<meta property="og:description" content="Paste a dev wallet or a coin mint and read the key's graded record: launches, graduations, adverse exit findings and exit events from the desk snapshot.">
+<meta property="og:image" content="https://launchkey.fun/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BONDED — Check the key before you buy the coin">
+<meta name="twitter:description" content="Paste a dev wallet or a coin mint and read the key's graded record: launches, graduations, adverse exit findings and exit events from the desk snapshot.">
+<meta name="twitter:image" content="https://launchkey.fun/og-image.png">
+<style id="bonded-unify">
+/* ===== BONDED UNIFY (Nov 7 2026 site audit): shared theme layer — the
+   homepage (Proxima format) is the reference: near-black ground, steel
+   text, gold accents, Space Grotesk + IBM Plex Mono. Presentation only;
+   no wording on this page was changed. ===== */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;600;700&display=swap');
+body{background:linear-gradient(180deg,#070a10 0%,#050506 55%,#000000 100%)!important;background-color:#050506!important;color:#e8edf5!important;font-family:'Space Grotesk',-apple-system,'Segoe UI',Roboto,sans-serif!important}
+header.site{background:rgba(7,10,16,.88)!important;border-bottom:1px solid #232b38!important}
+header.site .wordmark,header.site .wordmark span{color:#fdfcf9!important;font-family:'Space Grotesk',sans-serif!important}
+header.site .wordmark .key{color:#f0b90b!important}
+header.site .wordmark small{color:#9aa7ba!important}
+header.site nav a,header.site .header-tag{color:#9aa7ba!important;font-family:'IBM Plex Mono',monospace}
+header.site .btn-gold,header.site a.btn[href="/door/"],header.site a.btn[href="/door"]{background:linear-gradient(180deg,#ffffff,#dfe8f4)!important;border-color:#dfe8f4!important;color:#0a0f16!important;border-radius:8px!important;font-family:'IBM Plex Mono',monospace!important}
+.pfoot{margin-top:26px;padding:22px 16px 8px;border-top:1px solid #232b38;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;color:#7d8698;line-height:1.9}
+.pfoot-a{color:#9cc8ff;text-decoration:none}
+.pfoot-a:hover{color:#5ea8ff}
+html,body{overflow-x:hidden}
+table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:640px){
+  .header-in{flex-wrap:wrap!important;height:auto!important;min-height:0!important;padding-top:10px!important;padding-bottom:10px!important;row-gap:8px!important}
+  .header-in>.btn{margin-left:auto;padding:9px 13px!important;font-size:13.5px!important}
+  nav.mainnav{order:3;width:100%;margin-left:0!important;gap:8px 16px!important;flex-wrap:wrap}
+  .header-right{flex-wrap:wrap;row-gap:6px}
+  .header-tag{display:none}
+  .wordmark{font-size:16px!important}
+  img,video,canvas,svg{max-width:100%}
+  input,select,textarea{max-width:100%}
+}
+header.site .wordmark,header.site nav.mainnav,header.site .header-in>.btn,header.site .header-right{display:none!important}
+header.site .wordmark,header.site nav.mainnav,header.site .header-in>.btn,header.site .header-right{display:none!important}
+.ptop-in{flex-wrap:wrap;row-gap:8px}.ptop-in>a{flex:none;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-in"><div class="ptop-in" style="display:flex;align-items:center;gap:12px;max-width:1180px;margin:0 auto;padding:14px 18px 10px"><a href="/" aria-label="BONDED home" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#fdfcf9;font-weight:700;font-size:20px;letter-spacing:.02em;font-family:'Space Grotesk',sans-serif"><img src="/bonded-mark3.png" alt="" width="72" height="72" style="flex:none"></a><span class="ptop-nav" style="margin-left:auto;display:flex;gap:22px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:12.5px;flex-wrap:wrap;justify-content:flex-end"><a href="/" style="color:#9aa7ba;text-decoration:none">Home</a><a class="tellslink" href="/tells" style="color:#ffe98a;font-weight:700;letter-spacing:.08em;text-decoration:none">Tells App</a><a href="/bond-rules" style="color:#9aa7ba;text-decoration:none">Rules</a><a href="/methodology.html" style="color:#9aa7ba;text-decoration:none">Methodology</a><a href="/door/" style="color:#0a0f16;background:linear-gradient(180deg,#ffffff,#dfe8f4);border-radius:8px;padding:9px 16px;font-weight:700;text-decoration:none">Post a Bond</a></span></div>
+    <a class="wordmark" href="/">
+      <img src="logo-mark.png" alt="Launchkey home">
+      <span>BONDED</span>
+    </a>
+    <nav class="mainnav">
+      <a class="nl" href="/board/">The Board</a>
+      <a class="nl" href="/bonds/">Bonds</a>
+      <a class="nl" href="rules.html">Grading Rules</a>
+      <a class="nl" href="/launches/">My Launches</a>
+    </nav>
+    <a class="btn btn-gold" href="/door/">Post a Bond</a>
+  </div></header>
+
+<div class="wrap wrap-narrow">
+
+  <div class="page-title">
+    <h1>Check the key before you buy the coin</h1>
+    <p>Paste a dev wallet or a coin mint (CA). What comes back is the desk record — the key's grade and the counts behind it — read from the same snapshot the launch page and the public files use. A grade is a record under a published method (<a class="txt-link" href="rules.html">the rules</a> · <a class="txt-link" href="methodology.html">the methodology</a>), not a verdict on a person and not a promise about any coin.</p>
+  </div>
+
+  <form class="lk-form" id="lookup-form">
+    <input id="lookup-input" type="text" placeholder="Dev wallet or coin mint (CA)…" autocomplete="off" spellcheck="false" />
+    <button class="btn btn-gold" type="submit">Look it up</button>
+  </form>
+  <div class="sample-row">
+    <span class="s-lab">Try:</span>
+    <button class="btn btn-quiet btn-sm" type="button" data-sample="GxqBAbcWGo7fNdgHaytDBApJhGGyn5jJbmVgQ214mR4P">Key #001's wallet</button>
+    <button class="btn btn-quiet btn-sm" type="button" data-sample="CXoUJHtBGnuNR6zJ3zm8nTnNzCwXxFViXh29d1kTJQmK">The HALO dev's wallet</button>
+    <button class="btn btn-quiet btn-sm" type="button" data-sample="AZ73FAwGS3PDef5QAw3N1NDAQhMwy38nqXVDe6VmhWcC">REDACTED's mint</button>
+  </div>
+
+  <div id="lookup-result" aria-live="polite"></div>
+
+  <footer class="site">
+    <div class="fl"><b>BONDED</b> · Every launch has a record.</div>
+    <div class="flinks">
+      <a href="rules.html">Grading Rules</a>
+      <a href="/door/">The Door</a>
+      <a href="methodology.html">Methodology</a>
+      <a href="https://x.com/postthebond">@postthebond</a>
+    </div>
+  </footer>
+<div class="pfoot">BONDED · <a class="pfoot-a" href="/methodology.html">Methodology</a> · <a class="pfoot-a" href="/door/">Post a Bond</a></div>
+
+</div>
+
+<script>
+// BONDED — public dev lookup. Client-side only: it reads the two
+// desk snapshots the whole site already publishes (data/keys.json,
+// data/names.json) and prints what they hold. Nothing in the record
+// is filled in by guesswork: in the current snapshot format each key
+// carries its name-index coin list and each named coin carries its
+// creator where the desk record has one — so a mint resolves to its
+// dev key. Where the record stops (a creator the desk never
+// recorded, or an older snapshot without those fields), the page
+// says so instead of guessing.
+// A coin links to its file page ONLY when the snapshot flags it
+// Launchkey-born (names row, 5th element = 1) — the file page serves
+// just those coins. Every other coin links to its own lookup
+// record, so no link on this page dead-ends; a missing flag (older
+// snapshot) fails safe toward the record.
+// The coin card's "Right now" group is the one live element: it is
+// fetched from the DexScreener public token API at view time and
+// labeled with its source and fetch time, in its own group, so the
+// historical record and the live numbers never blend. A failed or
+// empty live fetch prints the same honest absence as a missing
+// record field — never an error wall.
+(function () {
+  var input = document.querySelector('#lookup-input');
+  var result = document.querySelector('#lookup-result');
+  var B58 = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/;
+
+  // The pad's own launches. Their dev wallets are this site's own
+  // public record (each coin's file names its dev), so these mints
+  // resolve to a key here. Both rows also carry the snapshot's
+  // Launchkey-born flag (names row, 5th element).
+  var PAD_COINS = {
+    'AZ73FAwGS3PDef5QAw3N1NDAQhMwy38nqXVDe6VmhWcC': {
+      name: 'REDACTED', symbol: 'REDACTED',
+      dev: 'GxqBAbcWGo7fNdgHaytDBApJhGGyn5jJbmVgQ214mR4P',
+      line: 'Launchkey Launch #001 · born Oct 20, 2026 · paired SOL',
+    },
+    '6DNbxxPQ2tu9caEWRnzBF6jSMMn9rvVnYidw74TYB4f4': {
+      name: 'LAUNCHKEY DUST TEST', symbol: 'LKDUST',
+      dev: '46CwjEsFog6QQ9nb7P8tWmfMA1XVUUdBFYWf5dDRKuXR',
+      line: 'Launchkey platform dust test · Oct 20, 2026 · paired SOL',
+    },
+  };
+
+  var keysData = null, keysMeta = null, namesList = null, namesMeta = null, namesByMint = {}, linksData = null, loadPromise = null, boardFileByMint = {};
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function chipClass(grade) {
+    return { PROVEN: 'chip-proven', PILLAR: 'chip-pillar', PROBATION: 'chip-probation' }[grade] || 'chip-probation';
+  }
+  // Identity layer: the name the dev goes by, next to the key
+  // number — the handle links to the X profile. No label in the
+  // snapshot = nothing printed: the key stands alone.
+  function labelHtml(entry) {
+    var l = entry && entry.label;
+    if (!l || (!l.name && !l.handle)) return '';
+    var parts = [];
+    if (l.name) parts.push(esc(l.name));
+    if (l.handle) parts.push('<a class="txt-link" href="https://x.com/' + esc(l.handle) + '" target="_blank" rel="noopener">@' + esc(l.handle) + '</a>');
+    return '<span style="color:var(--mut);font-size:15px;font-weight:600">' + parts.join(' · ') + '</span>';
+  }
+  function fmtDate(unix) {
+    if (!unix) return '—';
+    return new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles', month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(unix * 1000));
+  }
+  function snapshotLine() {
+    if (!keysMeta) return '';
+    var keys = keysData ? Object.keys(keysData).length.toLocaleString('en-US') : '—';
+    var coins = namesMeta && namesMeta.count ? Number(namesMeta.count).toLocaleString('en-US') : '—';
+    return 'Desk snapshot · methodology ' + esc(keysMeta.methodology || '—') + ' · generated ' + fmtDate(keysMeta.generatedAt) + ' · ' + keys + ' keys · ' + coins + ' named coins';
+  }
+
+  // ---- coin record (snapshot format P9.2) -------------------------
+  // A names row is [name, symbol, mint, creator] plus, in order, the
+  // optional born flag (the integer 1) and the optional record
+  // object. The record is the row's only object-typed element, so it
+  // is found by type — an older snapshot simply has none.
+  function rowFlag(row) {
+    return !!row && row.length > 4 && row[4] === 1;
+  }
+  function rowRecord(row) {
+    if (!row) return null;
+    for (var i = 4; i < row.length; i++) {
+      if (row[i] && typeof row[i] === 'object') return row[i];
+    }
+    return null;
+  }
+  // The methodology's mechanical endings, in plain words. Values
+  // are this page's own copy (the harmful-exit and rug lines carry
+  // their methodology pointer, as published).
+  var ENDINGS = {
+    G: 'Graduated',
+    Q: 'Quiet death',
+    H: 'Adverse exit finding — see <a class="txt-link" href="methodology.html">methodology</a>',
+    A: 'Still open at last record',
+    U: 'Undetermined',
+    R: 'Rug — recorded in the desk\'s first pass; see <a class="txt-link" href="methodology.html">methodology</a>',
+  };
+  function fmtUsd(v) {
+    if (v == null || v === '' || !isFinite(Number(v))) return '—';
+    v = Number(v);
+    if (v === 0) return '$0';
+    if (v >= 1e9) return '$' + parseFloat((v / 1e9).toPrecision(3)) + 'B';
+    if (v >= 1e6) return '$' + parseFloat((v / 1e6).toPrecision(3)) + 'M';
+    if (v >= 1e3) return '$' + parseFloat((v / 1e3).toPrecision(3)) + 'K';
+    if (v >= 1) return '$' + v.toFixed(2);
+    return '$' + v.toPrecision(2);
+  }
+  function fmtPrice(p) {
+    var v = parseFloat(p);
+    if (!isFinite(v)) return '—';
+    if (v === 0) return '$0';
+    if (v >= 1) return '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+    if (v >= 0.01) return '$' + v.toFixed(4);
+    return '$' + v.toPrecision(3);
+  }
+  function kvRows(rows) {
+    return '<div class="kv">' + rows.map(function (r) {
+      return '<div class="r"><span class="k">' + r[0] + '</span><span class="v">' + r[1] + '</span></div>';
+    }).join('') + '</div>';
+  }
+
+  // The coin card: the coin's own page-within-the-page. Group one,
+  // "The record", is the desk snapshot (dated). Group two,
+  // "Right now", is fetched live from DexScreener after render (see
+  // fillLive) and labeled with its fetch time. The two groups are
+  // separate by construction — historical and live numbers never
+  // share a row or a label.
+  function coinCardHtml(mint, opts) {
+    var row = opts.row || null;
+    var rec = rowRecord(row);
+    var born = rowFlag(row) || !!opts.pad;
+    var html = '<div class="card coin-card" style="margin-bottom:16px">';
+    html += '<div class="birth-line"><span class="bl-name">' + esc(opts.name) + '</span> ' +
+      '<span style="color:var(--mut)">$' + esc(opts.symbol) + '</span></div>';
+    if (opts.pad) html += '<p class="lk-note" style="margin-top:6px">' + esc(opts.pad.line) + '</p>';
+    // -- the record --
+    var recRows = [
+      ['Mint', '<span class="mono mint-copy" data-copy="' + esc(mint) + '" title="Tap to copy">' + esc(mint) + '</span> ' +
+        '<span class="hint copy-hint">tap to copy</span> ' +
+        '<a class="txt-link" href="https://solscan.io/token/' + esc(mint) + '" target="_blank" rel="noopener">Solscan ↗</a>'],
+      ['Born', rec && rec.born ? esc(fmtDate(rec.born)) : 'not in the record'],
+      ['All-time high (market cap)', rec && rec.ath != null ? esc(fmtUsd(rec.ath)) : 'not in the record'],
+      ['Ending', rec && rec.end ? (ENDINGS[rec.end] || 'See <a class="txt-link" href="methodology.html">methodology</a>') : 'not in the record'],
+      ['Paired', opts.pad ? 'SOL' : (rec && rec.pair ? esc(rec.pair) : 'not in the record')],
+    ];
+    html += '<div class="grp"><div class="grp-head">The record · desk snapshot ' +
+      esc(keysMeta ? fmtDate(keysMeta.generatedAt) : '—') + '</div>' + kvRows(recRows) + '</div>';
+    // -- right now (filled by fillLive after render) --
+    html += '<div class="grp live-slot"><div class="grp-head live-head">Right now</div>' +
+      '<div class="live-body"><p class="lk-note">Fetching the live market…</p></div></div>';
+    // A Launchkey-born coin's chain-read file complements this card;
+    // it never replaces it.
+    if (born) {
+      var boardFile = boardFileByMint[mint] || null;
+      if (boardFile && boardFile.indexOf('file.html') === -1) {
+        html += '<p style="margin-top:14px"><a class="txt-link" href="' + esc(boardFile) + '" target="_blank" rel="noopener">See it on pump.fun →</a></p>';
+      } else {
+        html += '<p style="margin-top:14px"><a class="txt-link" href="' + (boardFile ? esc(boardFile) : 'file.html?mint=' + esc(mint)) + '">Read its full file →</a></p>';
+      }
+    }
+    if (opts.bridge) {
+      html += '<p class="lk-note" style="margin-top:12px">This mint resolves to its dev key:</p>';
+    }
+    html += '</div>';
+    return html;
+  }
+
+  // Fill a rendered coin card's live group from the DexScreener
+  // public token API. Best pair = the deepest-priced pair by
+  // reported liquidity. No pair, an empty answer, or a failed fetch
+  // all print the same honest absence; the record group above is
+  // untouched either way.
+  function fillLive(mint) {
+    var slot = result.querySelector('.live-slot');
+    if (!slot) return;
+    var head = slot.querySelector('.live-head');
+    var body = slot.querySelector('.live-body');
+    var absence = '<p class="lk-note">No live market found for this mint right now.</p>';
+    fetch('https://api.dexscreener.com/latest/dex/tokens/' + encodeURIComponent(mint))
+      .then(function (r) { if (!r.ok) throw new Error('live HTTP ' + r.status); return r.json(); })
+      .then(function (j) {
+        var pairs = (j && j.pairs) || [];
+        var best = null;
+        for (var i = 0; i < pairs.length; i++) {
+          var p = pairs[i];
+          if (!p || p.priceUsd == null) continue;
+          var liq = p.liquidity && typeof p.liquidity.usd === 'number' ? p.liquidity.usd : 0;
+          var bestLiq = best && best.liquidity && typeof best.liquidity.usd === 'number' ? best.liquidity.usd : 0;
+          if (!best || liq > bestLiq) best = p;
+        }
+        var t = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+        head.innerHTML = '<span class="live-dot">●</span> Right now · live from DexScreener · fetched ' + esc(t);
+        if (!best) { body.innerHTML = absence; return; }
+        var mcRow = best.marketCap != null
+          ? ['Market cap', esc(fmtUsd(best.marketCap))]
+          : ['FDV (as returned)', esc(fmtUsd(best.fdv))];
+        var rows = [
+          ['Price', esc(fmtPrice(best.priceUsd))],
+          mcRow,
+          ['Liquidity', esc(fmtUsd(best.liquidity ? best.liquidity.usd : null))],
+          ['Volume, 24h', esc(fmtUsd(best.volume ? best.volume.h24 : null))],
+          ['Market', esc(best.dexId || '—') + (best.quoteToken && best.quoteToken.symbol ? ' · ' + esc(best.quoteToken.symbol) + ' pair' : '')],
+        ];
+        body.innerHTML = kvRows(rows);
+      })
+      .catch(function () {
+        body.innerHTML = absence;
+      });
+  }
+
+  // The names snapshot ships as a manifest + shard files (Oct 26 2026):
+  // fetch the manifest, then every shard, merged into one document.
+  function fetchNamesDoc() {
+    return fetch('data/names.json').then(function (r) { if (!r.ok) throw new Error('names HTTP ' + r.status); return r.json(); }).then(function (m) {
+      if (m.coins) return m;
+      return Promise.all(m.shards.map(function (s) {
+        return fetch('data/' + s).then(function (r) { if (!r.ok) throw new Error('names shard HTTP ' + r.status); return r.json(); });
+      })).then(function (parts) {
+        var coins = [];
+        for (var i = 0; i < parts.length; i++) coins = coins.concat(parts[i].coins || []);
+        return { generatedAt: m.generatedAt, cap: m.cap, count: m.count, coins: coins };
+      });
+    });
+  }
+
+  // The keys snapshot ships as a manifest + shard files too (same
+  // Oct 26 2026 split as names): fetch the manifest, then every
+  // shard, merging the keys objects into one document. Reading the
+  // manifest alone yields zero keys — the bug this loader fixes.
+  function fetchKeysDoc() {
+    return fetch('data/keys.json').then(function (r) { if (!r.ok) throw new Error('keys HTTP ' + r.status); return r.json(); }).then(function (m) {
+      if (m.keys) return m;
+      return Promise.all(m.shards.map(function (s) {
+        return fetch('data/' + s).then(function (r) { if (!r.ok) throw new Error('keys shard HTTP ' + r.status); return r.json(); });
+      })).then(function (parts) {
+        var keys = {};
+        for (var i = 0; i < parts.length; i++) {
+          var part = parts[i].keys || {};
+          for (var k in part) keys[k] = part[k];
+        }
+        var out = {};
+        for (var f in m) out[f] = m[f];
+        out.keys = keys;
+        return out;
+      });
+    });
+  }
+
+  function loadData() {
+    if (loadPromise) return loadPromise;
+    loadPromise = Promise.all([
+      fetchKeysDoc(),
+      fetchNamesDoc(),
+      // The linked-wallets snapshot is additive: an older deploy
+      // without it (or a failed fetch) leaves linksData null and
+      // every lookup behaves exactly as it did before the lane.
+      fetch('data/links.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+      // The board's per-mint file target is the site's own word on
+      // where a born coin's file lives: a file.html page for founding
+      // births, the pump.fun page for pump-door births (which have no
+      // file here yet). Best-effort; absent the board, the card falls
+      // back to the file.html link it always used.
+      fetch('data/board.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+    ]).then(function (both) {
+      keysMeta = both[0]; keysData = both[0].keys || {};
+      namesMeta = both[1]; namesList = both[1].coins || [];
+      linksData = both[2] && typeof both[2] === 'object' ? both[2] : null;
+      boardFileByMint = {};
+      if (both[3] && Array.isArray(both[3].entries)) {
+        for (var bi = 0; bi < both[3].entries.length; bi++) {
+          if (both[3].entries[bi].mint && both[3].entries[bi].file) boardFileByMint[both[3].entries[bi].mint] = both[3].entries[bi].file;
+        }
+      }
+      namesByMint = {};
+      for (var i = 0; i < namesList.length; i++) namesByMint[namesList[i][2]] = namesList[i];
+    });
+    return loadPromise;
+  }
+
+  function attestationFor(launchWallet) {
+    if (!linksData || !Array.isArray(linksData.attestations)) return null;
+    for (var i = 0; i < linksData.attestations.length; i++) {
+      if (linksData.attestations[i].launchWallet === launchWallet) return linksData.attestations[i];
+    }
+    return null;
+  }
+
+  function linkNoticeHtml(att, keyEntry) {
+    var num = keyEntry ? String(keyEntry.key).padStart(3, '0') : null;
+    var when = fmtDate(att.timestamp);
+    var head = num
+      ? 'This wallet is a launch wallet of <b>KEY #' + num + '</b>.'
+      : 'This wallet is linked to a key by signed attestation.';
+    return '<div class="card"><p class="lk-note" style="margin:0"><b>Linked wallet.</b> ' + head +
+      ' The key wallet signed an attestation on ' + esc(when) + ' binding this wallet to its key.' +
+      ' Launches this wallet made at or after the attestation count on the key below; a launch made' +
+      ' before it keeps its own birth record and carries the link as an annotation on its file.' +
+      ' The signed message is published in <span class="mono">data/links.json</span> — anyone can verify it.' +
+      '</p></div>';
+  }
+
+  function keyCardHtml(addr, entry) {
+    var num = String(entry.key).padStart(3, '0');
+    var rows = [
+      ['Launches', entry.launches],
+      ['Graduated', entry.graduated],
+      ['Successes', entry.successes],
+      ['Adverse exit findings', entry.harmfulExits],
+    ];
+    // Exit events are a v2-snapshot field: the row prints only when
+    // the snapshot carries it (absence is printed as absence — the
+    // row is omitted, never zero-filled). The adverse exit findings
+    // count above is the single print of that number: the snapshot's
+    // adverseItems field carries the same value by construction
+    // (gen-snapshots-v3.py assigns it from the same count), so it
+    // gets no second row.
+    if (typeof entry.exitEvents === 'number') rows.push(['Exit events', entry.exitEvents]);
+    rows.push(['Peak-collapse exits', entry.peakCollapse]);
+    rows.push(['First launch in the record', fmtDate(entry.firstLaunch)]);
+    var html = '<div class="card key-card">';
+    html += '<div class="kc-head"><span class="kc-key">KEY #' + num + '</span>' +
+      labelHtml(entry) +
+      '<span class="chip ' + chipClass(entry.grade) + '">' + esc(entry.grade) + '</span>' +
+      (entry.founder ? '<span class="chip chip-config">FOUNDING KEY</span>' : '') + '</div>';
+    html += '<div class="kc-wallet mono"><a class="txt-link" href="https://solscan.io/account/' + esc(addr) + '" target="_blank" rel="noopener">' + esc(addr) + '</a></div>';
+    if (entry.adverse) {
+      html += '<p class="lk-note" style="margin-top:12px"><b>Adverse record on file.</b> This key carries adverse exit findings under the published method — the counts are the record, below. What counts as an adverse exit finding is defined in the <a class="txt-link" href="methodology.html">methodology</a>.</p>';
+    }
+    html += '<div class="kv">' + rows.map(function (r) {
+      return '<div class="r"><span class="k">' + r[0] + '</span><span class="v">' + esc(r[1]) + '</span></div>';
+    }).join('') + '</div>';
+    // Linked launch wallets (linked-wallets Phase 1): present only
+    // when the key carries verified attestations in the snapshot.
+    if (Array.isArray(entry.linkedWallets) && entry.linkedWallets.length) {
+      html += '<div class="lbl">Linked launch wallets (' + entry.linkedWallets.length + ')</div>';
+      html += '<div class="kv">' + entry.linkedWallets.map(function (lw) {
+        return '<div class="r"><span class="k mono">' + esc(lw) + '</span>' +
+          '<span class="v"><a class="txt-link" href="lookup.html?wallet=' + esc(lw) + '">See the link →</a></span></div>';
+      }).join('') + '</div>';
+      html += '<p class="hint" style="margin-top:8px">Each launch wallet above is bound to this key by the key wallet\'s own signed attestation, published in <span class="mono">data/links.json</span>. Its launches at or after the attestation are counted in this key\'s record; earlier launches keep their own birth record.</p>';
+    }
+    // The key's name-index coin list (snapshot format v3). Absent on
+    // an older snapshot: the section is omitted, never faked.
+    if (Array.isArray(entry.coins) && entry.coins.length) {
+      var total = typeof entry.coinsTotal === 'number' ? entry.coinsTotal : entry.coins.length;
+      var shown = entry.coins.slice(0, 100);
+      html += '<div class="lbl">Coins in the name index (' + total + ')</div>';
+      html += '<div class="kv">' + shown.map(function (m) {
+        var row = namesByMint[m];
+        var label = row
+          ? esc(row[0]) + ' <span style="color:var(--mut)">$' + esc(row[1]) + '</span>'
+          : esc(m.slice(0, 8)) + '…' + esc(m.slice(-6));
+        // Only a Launchkey-born coin (the row's flag element) has a
+        // file on this site — it alone links to the file page. Every
+        // other coin links to its own lookup record: a file link for
+        // a coin born elsewhere lands on the file page's empty
+        // state, a dead end from a promised link. No flag (an older
+        // snapshot) fails safe toward the record.
+        var born = rowFlag(row);
+        var link = born
+          ? '<a class="txt-link" href="file.html?mint=' + esc(m) + '">Read its file →</a>'
+          : '<a class="txt-link" href="lookup.html?mint=' + esc(m) + '">See its record →</a>';
+        return '<div class="r"><span class="k">' + label + '</span><span class="v">' + link + '</span></div>';
+      }).join('') +
+        (total > shown.length
+          ? '<div class="r"><span class="k">…and ' + (total - shown.length) + ' more in the name index</span><span class="v"></span></div>'
+          : '') +
+        '</div>';
+      html += '<p class="hint" style="margin-top:8px">The name index lists a key\'s notable coins (graduated, $10K+ ATH, or recent) — the launch count above can be higher.</p>';
+    }
+    html += '<p class="pv-foot">Counts are the desk\'s mechanical measures, reproducible from public chain data under the published method. A grade summarizes a wallet\'s observed record — it is not a character verdict, and it says nothing about the next launch. <a class="txt-link" href="rules.html">Grading Rules</a> · <a class="txt-link" href="methodology.html">Methodology</a></p>';
+    html += '<div class="snapshot-line">' + esc(snapshotLine()) + '</div>';
+    html += '</div>';
+    return html;
+  }
+
+  function noRecordHtml(extra) {
+    return '<div class="note-box"><b>No record yet</b> — this key has no graded history on the desk. That is not a clean bill; it is an absence.' +
+      (extra ? '<br/><span style="color:var(--mut)">' + extra + '</span>' : '') + '</div>';
+  }
+
+  function run(rawValue, opts) {
+    var q = String(rawValue == null ? '' : rawValue).trim();
+    // finish() is the single render exit. A deep-link arrival
+    // (opts.scroll — ?mint= / ?wallet= / ?q=, which is where every
+    // coin-row link lands) also brings the rendered record into
+    // view: the visitor followed a link to THIS record, so the page
+    // puts it in front of them instead of leaving it below the fold.
+    var finish = function (html) {
+      result.innerHTML = html;
+      if (opts && opts.scroll) {
+        var y = result.getBoundingClientRect().top + window.scrollY - 76; // 60px sticky header + air
+        window.scrollTo(0, Math.max(0, y));
+      }
+    };
+    if (!q) {
+      finish('<div class="note-box">Nothing to look up yet — paste a dev wallet or a coin mint above.</div>');
+      return;
+    }
+    if (!B58.test(q)) {
+      finish('<div class="warn-box"><b>That doesn\'t parse as a Solana address.</b> A wallet or a mint is 32–44 base58 characters — check for spaces, a missing character, or a whole link pasted by mistake, and try again.</div>');
+      return;
+    }
+    result.innerHTML = '<p class="lk-note">Reading the desk record…</p>';
+    // Usage counter: one aggregate count per resolved lookup attempt,
+    // fired and forgotten. Only the counter name is sent — never the
+    // address — and any failure is swallowed: counting can never
+    // affect the lookup.
+    try {
+      var hitP = fetch('/hit?k=lookup', { method: 'POST', keepalive: true });
+      if (hitP && hitP.catch) hitP.catch(function () {});
+    } catch (e) { /* no counter, no consequence */ }
+    loadData().then(function () {
+      // Linked launch wallet: land on its key's record, with the
+      // link shown. The launch wallet's own entry (its pre-attestation
+      // record, where one exists) still renders below — a birth
+      // record is never hidden by a later link.
+      var att = attestationFor(q);
+      if (att) {
+        var keyEntry = keysData[att.keyWallet];
+        var ownEntry = keysData[q];
+        if (keyEntry) {
+          finish(linkNoticeHtml(att, keyEntry) + keyCardHtml(att.keyWallet, keyEntry) +
+            (ownEntry && att.keyWallet !== q ? keyCardHtml(q, ownEntry) : ''));
+          return;
+        }
+        finish(linkNoticeHtml(att, null) + (ownEntry
+          ? keyCardHtml(q, ownEntry)
+          : noRecordHtml('The key wallet for this link is <span class="mono">' + esc(att.keyWallet) + '</span> — it has no graded history on the desk yet, so there is no key record to land on.')));
+        return;
+      }
+      var entry = keysData[q];
+      if (entry) {
+        finish(keyCardHtml(q, entry));
+        return;
+      }
+      var pad = PAD_COINS[q];
+      if (pad) {
+        var devEntry = keysData[pad.dev];
+        finish(coinCardHtml(q, {
+          name: pad.name, symbol: pad.symbol, row: namesByMint[q] || null, pad: pad,
+          bridge: !!devEntry,
+        }) + (devEntry
+          ? keyCardHtml(pad.dev, devEntry)
+          : noRecordHtml('The dev wallet for this coin is <span class="mono">' + esc(pad.dev) + '</span> — it has no graded history on the desk yet.')));
+        fillLive(q);
+        return;
+      }
+      var coin = null;
+      for (var i = 0; i < namesList.length; i++) {
+        if (namesList[i][2] === q) { coin = namesList[i]; break; }
+      }
+      if (coin) {
+        // Snapshot format v3: the row's 4th element is the coin's
+        // creator where the desk record has one (null — or absent
+        // entirely on an older snapshot — means unrecorded).
+        var creator = coin.length > 3 ? coin[3] : null;
+        if (creator) {
+          var devAddr2 = creator;
+          var devEntry2 = keysData[creator];
+          // A coin credited through a link: its creator is an
+          // attested launch wallet with no entry of its own — the
+          // key it was credited to is the record (links.json coin map).
+          if (!devEntry2 && linksData && linksData.coins && linksData.coins[q]
+              && linksData.coins[q].launchWallet === creator) {
+            devAddr2 = linksData.coins[q].keyWallet;
+            devEntry2 = keysData[devAddr2];
+          }
+          finish(coinCardHtml(q, {
+            name: coin[0], symbol: coin[1], row: coin, bridge: !!devEntry2,
+          }) + (devEntry2
+            ? keyCardHtml(devAddr2, devEntry2)
+            : noRecordHtml('The dev wallet for this coin is <span class="mono">' + esc(creator) + '</span> — it has no graded history on the desk yet.')));
+          fillLive(q);
+          return;
+        }
+        finish(coinCardHtml(q, { name: coin[0], symbol: coin[1], row: coin }) +
+          '<div class="card"><p class="lk-note">This coin is in the desk\'s name index, and its record is above. It does not record the coin\'s creator, so no key can be shown for it from the snapshot alone. For a Launchkey coin, its <b>public file</b> names the dev wallet; paste that wallet here to see its key.</p>' +
+          '<div class="snapshot-line">' + esc(snapshotLine()) + '</div></div>');
+        fillLive(q);
+        return;
+      }
+      finish(noRecordHtml('The same address is not in the desk\'s name index as a coin mint either. If it launched somewhere the desk does not read, or after the snapshot below was taken, it will not be here. ' + snapshotLine()));
+    }).catch(function () {
+      finish('<div class="warn-box"><b>The desk snapshot could not be loaded from this page.</b> The record itself is unchanged — reload and try again.</div>');
+    });
+  }
+
+  // Tap-to-copy for the coin card's mint (and any future [data-copy]
+  // element the result renders). Delegated: the result is re-rendered
+  // on every lookup. Failure (no clipboard API, permission denied)
+  // leaves the hint as-is — the mint stays selectable text.
+  result.addEventListener('click', function (e) {
+    var t = e.target && e.target.closest ? e.target.closest('[data-copy]') : null;
+    if (!t || !navigator.clipboard || !navigator.clipboard.writeText) return;
+    navigator.clipboard.writeText(t.getAttribute('data-copy')).then(function () {
+      var hint = t.parentNode ? t.parentNode.querySelector('.copy-hint') : null;
+      if (hint) hint.textContent = 'copied';
+    }, function () { /* leave the hint unchanged */ });
+  });
+
+  document.querySelector('#lookup-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    run(input.value);
+  });
+  document.querySelectorAll('[data-sample]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      input.value = b.getAttribute('data-sample');
+      run(input.value);
+    });
+  });
+
+  var qs = new URLSearchParams(location.search);
+  var prefill = qs.get('wallet') || qs.get('mint') || qs.get('q');
+  if (prefill) {
+    input.value = prefill;
+    run(prefill, { scroll: true });
+  }
+
+  // Test hook (same convention as the other pages): lets the render
+  // suite drive lookups and read the outcome without chain access.
+  window.__LK_LOOKUP__ = { run: run, resultText: function () { return result.textContent; }, attestationFor: attestationFor, linksData: function () { return linksData; } };
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /rpc
+
+Sitemap: https://launchkey.fun/sitemap.xml

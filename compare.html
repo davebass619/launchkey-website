@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BONDED — Compare: two ways to launch a coin</title>
+<link rel="canonical" href="https://launchkey.fun/compare">
+<meta name="description" content="A plain side by side: a standard instant launch against a launch through the BONDED door. Who can launch, what buyers can check, what the record keeps, and what it costs.">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:#0a0a0c; color:#f2f2f0; font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; }
+  a { color:inherit; text-decoration:none; }
+  .wrap { max-width:1180px; margin:0 auto; padding:0 18px 60px; }
+
+  /* header */
+  header { display:flex; align-items:center; justify-content:space-between; padding:18px 0 8px; }
+  .logo { font-size:27px; font-weight:900; letter-spacing:1.5px; }
+  .logo .key { color:#f0b90b; }
+  .logo small { display:block; font-size:10.5px; font-weight:600; letter-spacing:2.5px; color:#8b8b90; margin-top:1px; }
+  .logo small b { color:#e5484d; }
+  .btn { display:inline-block; border:none; cursor:pointer; font-weight:700; border-radius:12px; padding:12px 20px; font-size:15px; }
+  .btn-board { background:#1c1c21; color:#f0b90b; border:1px solid #f0b90b; }
+
+  /* standard site header (ported from the app pages, Oct 24 2026) */
+  header.site { position:sticky; top:0; z-index:20; padding:0; justify-content:initial;
+    background:rgba(10,10,12,.86); backdrop-filter:blur(10px); border-bottom:1px solid #232329; }
+  .header-in { max-width:1180px; margin:0 auto; padding:0 18px; min-height:64px;
+    display:flex; align-items:center; gap:18px; }
+  .wordmark { display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:1.6px;
+    font-size:19px; white-space:nowrap; font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif; }
+  .wordmark img { height:30px; width:30px; border-radius:8px; flex:none; }
+  .wordmark .key { color:#f0b90b; }
+  .wordmark small { display:block; font-size:9px; font-weight:600; letter-spacing:2.4px;
+    color:#8b8b90; line-height:1; margin-top:2px; }
+  .wordmark small b { color:#e5484d; }
+  nav.mainnav { margin-left:auto; display:flex; align-items:center; gap:22px; }
+  nav.mainnav a.nl { color:#9a9aa0; font-size:14.5px; font-weight:600; white-space:nowrap; }
+  nav.mainnav a.nl:hover { color:#f2f2f0; }
+  .btn-gold { background:#f0b90b; color:#161006; border:1px solid #f0b90b;
+    font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif; }
+  .btn-gold:hover { background:#ffc81f; }
+  @media (max-width:640px){
+    .header-in{ flex-wrap:wrap; height:auto; padding-top:10px; padding-bottom:10px; row-gap:6px; }
+    .header-in>.btn{ margin-left:auto; padding:9px 14px; font-size:14px; }
+    nav.mainnav{ order:3; width:100%; margin-left:0; gap:16px; }
+    nav.mainnav a.nl{ font-size:13.5px; }
+  }
+
+
+  /* title */
+  .tagline { text-align:center; margin:44px 0 6px; font-size:38px; font-weight:900; line-height:1.2; }
+  .tagline .gold { color:#f0b90b; }
+  .sub { text-align:center; color:#9a9aa0; font-size:16px; line-height:1.55; max-width:640px; margin:0 auto 10px; }
+
+  /* sections */
+  .sec-title { font-size:13px; letter-spacing:2px; color:#8b8b90; text-transform:uppercase; margin:40px 0 16px; }
+  .card { background:#131318; border:1px solid #232329; border-radius:18px; padding:22px; margin-bottom:22px; }
+  .body-txt { color:#c9c9ce; font-size:15.5px; line-height:1.65; }
+  .body-txt b { color:#f2f2f0; }
+  .body-txt .gold { color:#f0b90b; font-weight:800; }
+  .body-txt + .body-txt { margin-top:12px; }
+
+  /* read list */
+  .item { display:flex; gap:13px; padding:11px 0; border-bottom:1px solid #1f1f25; font-size:15px; line-height:1.55; color:#c9c9ce; }
+  .item:last-child { border-bottom:none; }
+  .item .dot { flex:none; color:#f0b90b; font-weight:900; margin-top:1px; }
+  .item b { color:#f2f2f0; }
+
+  /* table */
+  table { width:100%; border-collapse:collapse; font-size:14px; color:#c9c9ce; margin-top:6px; }
+  th { text-align:left; color:#8b8b90; font-size:12px; letter-spacing:1px; text-transform:uppercase; padding:8px 8px 8px 0; border-bottom:1px solid #232329; }
+  td { padding:8px 8px 8px 0; border-bottom:1px solid #1f1f25; line-height:1.5; }
+  tr:last-child td { border-bottom:none; }
+  td b, th b { color:#f2f2f0; }
+
+  /* compare table (this page only) */
+  .cmp-wrap { overflow-x:auto; }
+  table.cmp { min-width:640px; font-size:14.5px; }
+  table.cmp th.col-lk { color:#f0b90b; }
+  table.cmp td.row-name { color:#f2f2f0; font-weight:700; white-space:nowrap; padding-right:14px; }
+  table.cmp td.col-lk { background:rgba(240,185,11,.045); padding-left:10px; }
+  table.cmp th.col-lk { padding-left:10px; }
+
+  /* cta row */
+  .cta-row { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:6px; }
+  .btn-ghost { background:#1c1c21; color:#f0b90b; border:1px solid #f0b90b; }
+  .btn-ghost:hover { background:#232329; }
+
+  /* footer */
+  footer { text-align:center; margin-top:38px; }
+  footer .fline { color:#9a9aa0; font-size:14px; line-height:1.6; }
+  footer .fline b { color:#f2f2f0; }
+  footer .flinks { margin-top:11px; font-size:13.5px; }
+  footer .flinks a { color:#f0b90b; font-weight:700; }
+  footer .flinks span { color:#55555c; margin:0 8px; }
+  .demo { text-align:center; color:#55555c; font-size:12px; margin-top:26px; letter-spacing:1px; }
+  @media (max-width:820px){ .tagline{ font-size:31px; } }
+</style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://launchkey.fun/compare">
+<meta property="og:title" content="BONDED — Compare: two ways to launch a coin">
+<meta property="og:description" content="A plain side by side: a standard instant launch against a launch through the BONDED door. Who can launch, what buyers can check, what the record keeps, and what it costs.">
+<meta property="og:image" content="https://launchkey.fun/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BONDED — Compare: two ways to launch a coin">
+<meta name="twitter:description" content="A plain side by side: a standard instant launch against a launch through the BONDED door. Who can launch, what buyers can check, what the record keeps, and what it costs.">
+<meta name="twitter:image" content="https://launchkey.fun/og-image.png">
+<style id="bonded-unify">
+/* ===== BONDED UNIFY (Nov 7 2026 site audit): shared theme layer — the
+   homepage (Proxima format) is the reference: near-black ground, steel
+   text, gold accents, Space Grotesk + IBM Plex Mono. Presentation only;
+   no wording on this page was changed. ===== */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;600;700&display=swap');
+body{background:linear-gradient(180deg,#070a10 0%,#050506 55%,#000000 100%)!important;background-color:#050506!important;color:#e8edf5!important;font-family:'Space Grotesk',-apple-system,'Segoe UI',Roboto,sans-serif!important}
+header.site{background:rgba(7,10,16,.88)!important;border-bottom:1px solid #232b38!important}
+header.site .wordmark,header.site .wordmark span{color:#fdfcf9!important;font-family:'Space Grotesk',sans-serif!important}
+header.site .wordmark .key{color:#f0b90b!important}
+header.site .wordmark small{color:#9aa7ba!important}
+header.site nav a,header.site .header-tag{color:#9aa7ba!important;font-family:'IBM Plex Mono',monospace}
+header.site .btn-gold,header.site a.btn[href="/door/"],header.site a.btn[href="/door"]{background:linear-gradient(180deg,#ffffff,#dfe8f4)!important;border-color:#dfe8f4!important;color:#0a0f16!important;border-radius:8px!important;font-family:'IBM Plex Mono',monospace!important}
+.pfoot{margin-top:26px;padding:22px 16px 8px;border-top:1px solid #232b38;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;color:#7d8698;line-height:1.9}
+.pfoot-a{color:#9cc8ff;text-decoration:none}
+.pfoot-a:hover{color:#5ea8ff}
+html,body{overflow-x:hidden}
+table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:640px){
+  .header-in{flex-wrap:wrap!important;height:auto!important;min-height:0!important;padding-top:10px!important;padding-bottom:10px!important;row-gap:8px!important}
+  .header-in>.btn{margin-left:auto;padding:9px 13px!important;font-size:13.5px!important}
+  nav.mainnav{order:3;width:100%;margin-left:0!important;gap:8px 16px!important;flex-wrap:wrap}
+  .header-right{flex-wrap:wrap;row-gap:6px}
+  .header-tag{display:none}
+  .wordmark{font-size:16px!important}
+  img,video,canvas,svg{max-width:100%}
+  input,select,textarea{max-width:100%}
+}
+header.site .wordmark,header.site nav.mainnav,header.site .header-in>.btn,header.site .header-right{display:none!important}
+header.site .wordmark,header.site nav.mainnav,header.site .header-in>.btn,header.site .header-right{display:none!important}
+.ptop-in{flex-wrap:wrap;row-gap:8px}.ptop-in>a{flex:none;white-space:nowrap}
+</style>
+</head>
+<body>
+<!-- STAGED DRAFT (Oct 28, 2026) — NOT DEPLOYED and not in landing/.
+     On David's approval: copy this file to landing/compare.html,
+     add /compare to landing/sitemap.xml, and link it from the
+     homepage footer. Do not deploy before approval. -->
+<header class="site">
+  <div class="header-in"><div class="ptop-in" style="display:flex;align-items:center;gap:12px;max-width:1180px;margin:0 auto;padding:14px 18px 10px"><a href="/" aria-label="BONDED home" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#fdfcf9;font-weight:700;font-size:20px;letter-spacing:.02em;font-family:'Space Grotesk',sans-serif"><img src="/bonded-mark3.png" alt="" width="72" height="72" style="flex:none"></a><span class="ptop-nav" style="margin-left:auto;display:flex;gap:22px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:12.5px;flex-wrap:wrap;justify-content:flex-end"><a href="/" style="color:#9aa7ba;text-decoration:none">Home</a><a class="tellslink" href="/tells" style="color:#ffe98a;font-weight:700;letter-spacing:.08em;text-decoration:none">Tells App</a><a href="/bond-rules" style="color:#9aa7ba;text-decoration:none">Rules</a><a href="/methodology.html" style="color:#9aa7ba;text-decoration:none">Methodology</a><a href="/door/" style="color:#0a0f16;background:linear-gradient(180deg,#ffffff,#dfe8f4);border-radius:8px;padding:9px 16px;font-weight:700;text-decoration:none">Post a Bond</a></span></div>
+    <a class="wordmark" href="index.html"><img src="logo-mark.png" alt="Launchkey home"><span>BONDED</span></a>
+    <nav class="mainnav">
+      <a class="nl" href="/board/">The Board</a>
+      <a class="nl" href="/bonds/">Bonds</a>
+      <a class="nl" href="rules.html">Grading Rules</a>
+      <a class="nl" href="lookup.html">Check a key</a>
+      <a class="nl" href="/launches/">My Launches</a>
+    </nav>
+    <a class="btn btn-gold" href="/door/">Post a Bond</a>
+  </div></header>
+
+<div class="wrap">
+
+  <!-- TITLE -->
+  <div class="tagline">Two ways to launch <span class="gold">a coin.</span></div>
+  <div class="sub">Underneath, both run the same way: a token on a curve, trading from the first second. The difference is what is known about the dev, what gets printed at birth, and what stays printed after.</div>
+
+  <!-- THE TABLE -->
+  <div class="sec-title">Side by Side</div>
+  <div class="card">
+    <div class="cmp-wrap">
+    <table class="cmp">
+      <tr><th></th><th>A standard launch</th><th class="col-lk">Through the door</th></tr>
+      <tr>
+        <td class="row-name">Who can launch</td>
+        <td>Anyone with a wallet. Nothing is asked, and nothing is attached to the wallet.</td>
+        <td class="col-lk">Anyone with a wallet. New keys start at PROBATION and launch from day one. There is no application and no approval step.</td>
+      </tr>
+      <tr>
+        <td class="row-name">What a buyer can check</td>
+        <td>The coin's chart, its holders, and whatever the dev claims in the coin's own links. The dev's history on other coins is not shown.</td>
+        <td class="col-lk">The key's grade and full record: every launch the wallet has made, its graduations, and any adverse exit findings or exit events. <b id="lk-keys">67,794</b> keys are graded, and any wallet can be checked free on the lookup page.</td>
+      </tr>
+      <tr>
+        <td class="row-name">The record page</td>
+        <td>A trading page: price, holders, transactions. When the dev moves on, nothing about the dev stays behind.</td>
+        <td class="col-lk">A public file on every launch through the door: the dev buy and its share of supply at birth, the pair, lock positions read from chain, the dev's exits, and the outcome. Files stay up, including the bad endings.</td>
+      </tr>
+      <tr>
+        <td class="row-name">The dev's next launch</td>
+        <td>A new wallet starts with no past. Yesterday's record, good or bad, does not follow it.</td>
+        <td class="col-lk">The record follows the key. A fresh wallet reliably funded by a wallet with measured exit events can start at the bottom tier, and its record prints the transfers, the rule applied, and the uncertainty.</td>
+      </tr>
+      <tr>
+        <td class="row-name">Names</td>
+        <td>Any name the form accepts, including names that claim a real brand or a real person.</td>
+        <td class="col-lk">A name check runs before launch. Names that claim a real brand, product, or person, and clones of a specific existing coin, are refused. The refusal states the rule it applied.</td>
+      </tr>
+      <tr>
+        <td class="row-name">Fees</td>
+        <td>Trading fees set by the venue, under the venue's terms.</td>
+        <td class="col-lk">Trades run on pump.fun at pump.fun's own rates, and the door adds no platform fee. What the door adds is a grade and a public file at birth. BONDED, the live feature, adds the bond.</td>
+      </tr>
+      <tr>
+        <td class="row-name">The bond</td>
+        <td>No bond. Nothing is posted, nothing is held, and nothing is paid out when a dev walks away.</td>
+        <td class="col-lk">The live BONDED feature adds one standard bond: 5 SOL posted before birth and held for 24 hours. Keep the published terms and it returns in full. Break them and the forfeited share of the bond, plus the same share of the creator's fees still held in the vault, pays the holders automatically.</td>
+      </tr>
+    </table>
+    </div>
+  </div>
+
+  <!-- STREAMFLOW QUESTION -->
+  <div class="sec-title">One Question</div>
+  <div class="card">
+    <div class="body-txt"><b>How is this different from locking a dev buy in Streamflow for 24 hours?</b></div>
+    <div class="body-txt">A lock is a timer on the dev's own tokens. A bond is SOL the holders can actually collect.</div>
+    <div class="body-txt">A lock always pays the dev back at expiry, whatever he did. A bond is forfeit on a confirmed breach, and the SOL splits between holders by the program.</div>
+    <div class="body-txt">A lock covers one wallet's tokens and says nothing about side wallets or creator fees. The bond measures the creator position against a frozen baseline, and escrows creator fees in the coin's own vault, releasing in quarters at the checkpoints. On a confirmed breach, the same forfeited share of the creator fees still held pays out to the holders with the bond.</div>
+    <div class="body-txt">A lock is any amount and duration the dev chooses. The bond is one flat standard, 5 SOL and 24 hours, terms printed before the coin exists, and the outcome published either way.</div>
+    <div class="body-txt">The limit, plainly: both end. BONDED sells one window where breaking your word costs real SOL, not lifetime safety.</div>
+  </div>
+
+  <!-- WHAT A GRADE IS NOT -->
+  <div class="sec-title">What a Grade Is Not</div>
+  <div class="card">
+    <div class="item"><div class="dot">●</div><div><b>Not a promise.</b> A grade is a record, not a claim that a coin is safe or a dev is trustworthy. The <a href="methodology.html" style="color:#f0b90b;font-weight:700">methodology</a> prints what the grading rule gets wrong, in its own numbers.</div></div>
+    <div class="item"><div class="dot">●</div><div><b>PROBATION is not a ban.</b> It is where every new key starts, and it launches from day one.</div></div>
+    <div class="item"><div class="dot">●</div><div><b>PILLAR is not an endorsement.</b> It is the strongest measured record on the pad. Records change as new launches land.</div></div>
+    <div class="item"><div class="dot">●</div><div><b>The record has limits, and they are printed.</b> Exits routed through wallets the published criteria do not link are outside the measurement, and the Grading Rules say so.</div></div>
+  </div>
+
+  <!-- CTA -->
+  <div class="sec-title">Start Either Way</div>
+  <div class="card">
+    <div class="body-txt" style="text-align:center">Look up any wallet first. It costs nothing, and it reads the record the desk has already measured.</div>
+    <div class="cta-row" style="margin-top:16px">
+      <a class="btn btn-gold" href="/door/">Post a Bond</a>
+      <a class="btn btn-ghost" href="lookup.html">Check a key</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="fline"><b>BONDED</b> — Compare: two ways to launch a coin.</div>
+    <div class="flinks"><a href="index.html">← Back to BONDED</a><span>·</span><a href="rules.html">Grading Rules</a><span>·</span><a href="methodology.html">Methodology</a><span>·</span><a href="/door/">The Door</a><span>·</span><a href="https://x.com/postthebond">@postthebond</a></div>
+  </footer>
+<div class="pfoot">BONDED · <a class="pfoot-a" href="/methodology.html">Methodology</a> · <a class="pfoot-a" href="/door/">Post a Bond</a></div>
+
+  <div class="demo">BONDED — COMPARE</div>
+</div>
+<script>
+  // Keys graded, rendered from the desk snapshot (data/board.json) —
+  // the same pattern the homepage uses. If the snapshot cannot be
+  // fetched, the printed figure above stands (Oct 28, 2026 snapshot).
+  (async () => {
+    const el = document.getElementById('lk-keys');
+    if (!el) return;
+    try {
+      const res = await fetch('data/board.json');
+      if (!res.ok) return;
+      const b = await res.json();
+      if (typeof b.keysGraded === 'number') {
+        el.textContent = b.keysGraded.toLocaleString('en-US');
+      }
+    } catch { /* the printed figure stands */ }
+  })();
+</script>
+</body>
+</html>

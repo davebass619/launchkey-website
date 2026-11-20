@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TELLS X-ray · The TELLS Read on a Coin</title>
+<link rel="canonical" href="https://launchkey.fun/tells/xray">
+<meta name="description" content="The TELLS read on a coin: who created it, whether the creator still holds, how big the dev cluster is, and how concentrated the top holders really are.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+/* TELLS page. Same production design tokens as the rest of the site:
+   ink #0a0a0c, off-white #f2f2f0, site gold #f0b90b, plus the TELLS
+   gold #edc966 for this product's own accents. Static page. No
+   wallet code, no forms, nothing collected here. */
+:root{
+  --ink:#0a0a0c;
+  --panel:#101014;
+  --panel2:#131318;
+  --line:rgba(242,242,240,.09);
+  --line2:rgba(242,242,240,.16);
+  --txt:#f2f2f0;
+  --mut:#9a9aa0;
+  --dim:#63636a;
+  --gold:#f0b90b;
+  --tgold:#edc966;
+  --gold-ink:#161006;
+  --red:#e5484d;
+  --green:#3fb96f;
+  --r-lg:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink); color:var(--txt);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  font-size:15.5px; line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.wordmark,.btn,.chip{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px 72px}
+
+/* ---------- header ---------- */
+header.site{
+  position:sticky;top:0;z-index:20;
+  background:rgba(10,10,12,.86);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.header-in{max-width:1120px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;gap:18px}
+.wordmark{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:1.6px;font-size:19px;white-space:nowrap}
+.wordmark .mark-tile{width:30px;height:30px;border-radius:8px;flex:none;background:var(--panel2);
+  border:1px solid rgba(240,185,11,.55);display:flex;align-items:center;justify-content:center}
+.wordmark .key{color:var(--gold)}
+.wordmark small{font-size:9px;font-weight:600;letter-spacing:2.4px;color:var(--dim);display:block;line-height:1;margin-top:2px}
+.wordmark small b{color:var(--red)}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:16px}
+.header-tag{color:var(--mut);font-size:13.5px;font-weight:600;white-space:nowrap}
+.header-tag b{color:var(--txt)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;cursor:pointer;
+  font-weight:700;border-radius:12px;padding:11px 20px;font-size:15px;line-height:1;white-space:nowrap}
+.btn-ghost{background:transparent;color:var(--txt);border-color:var(--line2)}
+.btn-ghost:hover{border-color:var(--mut)}
+.btn-tgold{background:var(--tgold);color:var(--gold-ink);border-color:var(--tgold)}
+.btn-tgold:hover{filter:brightness(1.07)}
+.btn-sm{padding:8px 14px;font-size:13.5px;border-radius:10px}
+
+/* ---------- chips ---------- */
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;letter-spacing:1.2px;
+  padding:4px 10px;border-radius:999px;border:1px solid var(--line2);color:var(--mut);white-space:nowrap}
+.chip .dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.chip-live{color:var(--green);border-color:rgba(63,185,111,.45)}
+.chip-tgold{color:var(--tgold);border-color:rgba(237,201,102,.55)}
+
+/* ---------- sections ---------- */
+.sec-label{font-size:12px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--dim);margin:46px 0 14px}
+
+/* ---------- back link ---------- */
+.back-line{margin-top:24px;font-size:14px;color:var(--dim)}
+.back-line a{color:var(--gold);font-weight:600}
+.back-line a:hover{text-decoration:underline}
+
+/* ---------- hero ---------- */
+.hero{padding:34px 0 6px;max-width:760px}
+.hero .eye{width:124px;height:124px;border-radius:22px;display:block;margin-bottom:22px}
+.hero h1{font-size:50px;font-weight:700;line-height:1.05;letter-spacing:-.5px}
+.hero h1 .gold{color:var(--tgold)}
+.hero .sub{color:var(--mut);font-size:17px;line-height:1.6;margin-top:16px}
+.hero .sub b{color:var(--txt)}
+.hero .chips{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+
+/* ---------- prose ---------- */
+.prose{max-width:720px}
+.prose p{color:var(--mut);font-size:15.5px;line-height:1.65;margin-top:12px}
+.prose p:first-child{margin-top:0}
+.prose p b{color:var(--txt)}
+.prose .big{font-size:19px;color:var(--txt);font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-weight:600;line-height:1.45}
+
+/* ---------- cards ---------- */
+.includes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.benefit-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px}
+.benefit-card .b-big{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-size:19px;font-weight:700;line-height:1.25}
+.benefit-card .b-big .gold{color:var(--tgold)}
+.benefit-card p{color:var(--mut);font-size:13.5px;line-height:1.55;margin-top:7px}
+.benefit-card p b{color:var(--txt)}
+
+/* ---------- separation panel ---------- */
+.sep-panel{background:var(--panel);border:1px solid rgba(237,201,102,.35);border-radius:var(--r-lg);padding:22px;max-width:760px}
+.sep-panel p{font-size:17px;line-height:1.6;color:var(--txt)}
+.sep-panel p b{color:var(--tgold)}
+
+/* ---------- close ---------- */
+.close-line{font-family:'Space Grotesk','Avenir Next','Segoe UI',system-ui,sans-serif;font-size:30px;font-weight:700;line-height:1.25;max-width:720px;margin-top:10px}
+.close-line .gold{color:var(--tgold)}
+.cta-row{margin-top:22px}
+
+/* ---------- footer ---------- */
+footer.site{border-top:1px solid var(--line);margin-top:56px;padding-top:22px}
+footer.site .fl{color:var(--dim);font-size:13.5px;line-height:1.6;max-width:720px}
+footer.site .fl b{color:var(--mut)}
+
+/* ---------- responsive ---------- */
+@media (max-width:720px){
+  .hero{padding-top:26px}
+  .hero h1{font-size:36px}
+  .hero .eye{width:96px;height:96px}
+  .header-tag{display:none}
+  .includes{grid-template-columns:1fr}
+  .close-line{font-size:25px}
+}
+
+</style>
+<style>
+
+.mono{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+.life-strip{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:12px 16px;font-size:12.5px;color:var(--mut);line-height:1.9;margin-top:22px}
+.life-strip b{color:var(--txt);letter-spacing:1.2px}
+.life-strip .ok{color:var(--green)}
+.life-strip .wait{color:var(--tgold)}
+.paste-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;max-width:720px}
+.paste-row input{flex:1;min-width:260px;background:var(--panel);border:1px solid var(--line2);
+  border-radius:12px;color:var(--txt);padding:12px 14px;font-size:13.5px}
+.paste-row input:focus{outline:none;border-color:var(--tgold)}
+.paste-msg{color:var(--mut);font-size:14.5px;line-height:1.6;margin-top:14px;max-width:720px;display:none}
+.paste-msg b{color:var(--txt)}
+.coin-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.coin-panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px}
+.coin-panel.hl{border-color:var(--tgold)}
+.cp-head{display:flex;align-items:flex-start;gap:10px}
+.cp-sym{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;line-height:1.1}
+.cp-sym .gold{color:var(--tgold)}
+.cp-name{color:var(--mut);font-size:13.5px;margin-top:2px}
+.cp-head .chip{margin-left:auto}
+.cp-mc{font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:700;margin-top:16px}
+.cp-mc span{font-size:12px;font-weight:600;letter-spacing:1.6px;color:var(--dim);display:block;margin-top:2px}
+.kv{display:flex;gap:10px;padding:9px 0;border-top:1px solid var(--line);font-size:14px;align-items:baseline}
+.kv:first-of-type{margin-top:14px}
+.kv .k{color:var(--dim);flex:none;width:118px;font-size:12px;font-weight:700;letter-spacing:1.2px}
+.kv .v{color:var(--txt)}
+.kv .v .sub{color:var(--mut);font-size:13px}
+.st{font-weight:700;letter-spacing:.6px}
+.st-holds{color:var(--green)} .st-moved{color:var(--tgold)}
+.st-exited{color:var(--red)} .st-unknown{color:var(--mut)}
+.holders{list-style:none;margin-top:6px}
+.holders li{display:flex;justify-content:space-between;gap:10px;font-size:13px;
+  padding:5px 0;border-top:1px solid var(--line);color:var(--mut)}
+.holders li b{color:var(--txt);font-weight:600}
+.joinbox{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.joinbox p{color:var(--mut);font-size:13.5px;margin-bottom:10px}
+.breakall{word-break:break-all}
+.seed-pick{width:100%;max-width:720px;background:var(--panel);border:1px solid var(--line2);
+  border-radius:12px;color:var(--txt);padding:12px 14px;font-size:13.5px;margin-top:6px}
+.seed-pick:focus{outline:none;border-color:var(--tgold)}
+.shelf-count{color:var(--mut);font-size:13.5px;margin-top:10px}
+#lookup-result{margin-top:18px;max-width:720px}
+#lookup-result .coin-panel{max-width:720px}
+.birth-note{color:var(--mut);font-size:13.5px;line-height:1.6;margin-top:14px;
+  border-top:1px solid var(--line);padding-top:12px}
+.birth-note b{color:var(--txt)}
+@media (max-width:720px){.coin-grid{grid-template-columns:1fr}.kv .k{width:96px}}
+
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<p class="back-line"><a href="/tells">&larr; TELLS</a></p>
+<section class="hero">
+  <img class="eye" src="/tells-eye-web-v1.png" alt="The TELLS eye">
+  <h1>The TELLS <span class="gold">read</span>.</h1>
+  <p class="sub">Pick a watched coin, or paste a contract address. You get what TELLS sees: <b>who created it, whether the creator still holds, how big the proven cluster is, and how concentrated the top holders really are</b> once wallets that share one funder count as one holder.</p>
+  <div class="chips">
+    <span class="chip chip-live"><span class="dot"></span>PILOT LIVE</span>
+    <span class="chip chip-tgold">GRADED THROUGH NOV 24</span>
+    <span class="chip">X-RAY</span>
+  </div>
+  <div class="cta-row">
+    <a class="btn btn-tgold" href="https://t.me/tellsapp_alerts_bot?start=xray">Get TELLS alerts on Telegram</a>
+  </div>
+  <div class="cta-row" style="margin-top:12px">
+    <a class="btn btn-tgold" href="https://discord.gg/8wD4H64uf7">Get TELLS alerts on Discord</a>
+  </div>
+  <p class="sub" style="font-size:15px;margin-top:14px">TELLS is in beta and open. Join the alerts bot and you get alerts on the coins TELLS watches, plus the Sunday digest. Beta means it can be wrong. Corrections are published in the open.</p>
+  <div class="life-strip mono"><b>WATCHER STATUS</b><br>PUSSY · last check <span class="ok">1:58 PM PT</span><br>FLOAT · last check <span class="ok">1:59 PM PT</span><br>Dacity · last check <span class="ok">1:51 PM PT</span><br>X · last check <span class="ok">1:52 PM PT</span><br>GTA · last check <span class="ok">1:53 PM PT</span><br>mihao · last check <span class="ok">1:59 PM PT</span><br>HOLD · last check <span class="ok">1:54 PM PT</span><br>AgenC · last check <span class="ok">1:54 PM PT</span><br>BIG · last check <span class="ok">1:55 PM PT</span></div>
+</section>
+
+<div class="sec-label">Look up a coin</div>
+<section class="prose">
+  <p>Paste a contract address, or pick from the shelf below. If TELLS watches the coin, its live read is underneath. If the coin was mapped at birth, you get its birth map instead. A birth map is not a live watch: nobody is monitoring those coins, and their balance reads are as of seeding.</p>
+</section>
+<div class="paste-row">
+  <input id="ca" class="mono" type="text" spellcheck="false" placeholder="Paste a Solana contract address">
+  <button class="btn btn-tgold" onclick="xrayGo()">Read it</button>
+</div>
+<p class="paste-msg" id="paste-msg"></p>
+<div id="lookup-result"></div>
+<section class="prose" style="margin-top:26px">
+  <p><b>Mapped at birth.</b> Every night TELLS maps the clusters of the day's pump.fun graduations and every coin that crossed $100K market cap, ranked by volume, while the history is short and the funding trail is fresh. Those maps sit on this shelf.</p>
+</section>
+<select id="seed-pick" class="seed-pick mono" onchange="pickSeed()">
+  <option value="">Loading the shelf...</option>
+</select>
+<p class="shelf-count" id="shelf-count"></p>
+
+<div class="sec-label">Watched coins</div>
+<section class="coin-grid">
+<article class="coin-panel" id="panel-PUSSY">
+  <div class="cp-head"><div><div class="cp-sym">$PUSSY</div><div class="cp-name">Pussycoin</div></div><span class="chip chip-tgold">GRADED PILOT COIN</span></div>
+  <div class="cp-mc">$153,520<span>MARKET CAP</span></div>
+  <div class="kv"><span class="k">CREATOR</span><span class="v mono">WLHv...JVVh</span></div>
+  <div class="kv"><span class="k">STATUS</span><span class="v"><span class="st st-exited">EXITED</span> <span class="sub">The creator holds nothing at the last read.</span></span></div>
+  <div class="kv"><span class="k">CLUSTER</span><span class="v">1 proven wallet <span class="sub">tied to the creator by funding. 0 still hold the coin.</span></span></div>
+  <div class="kv"><span class="k">TOP 10</span><span class="v">17.5% of supply <span class="sub">with shared funders merged. Unmerged it reads 39.6%.</span></span></div>
+  <div class="kv"><span class="k">PRESSURE</span><span class="v">Pressure: no cluster movement recorded in 24h <span class="sub">zero countable E2 events in the trailing 24h, and every proven cluster member&#x27;s latest balance read is zero or dust, so the cluster holds nothing it could have moved</span></span></div>
+  <div class="kv"><span class="k">THE STORY</span><span class="v">No wallet is tied to the creator by funding evidence. The creator holds nothing.</span></div>
+  <div class="kv"><span class="k">TOP HOLDERS</span><span class="v sub">merged by funder</span></div><ul class="holders"><li><span class="mono">GpMZ...xFbL</span><b>23.19%</b></li><li><span class="mono">6zMV...wNti</span><b>3.43%</b></li><li><span class="mono">HTeC...bG4R</span><b>2.31%</b></li><li><span class="mono">HA6E...4XWh</span><b>2.19%</b></li><li><span class="mono">DdM1...Tf7d</span><b>2.14%</b></li></ul>
+  <div class="kv"><span class="k">LAST SNAPSHOT</span><span class="v">Nov 15, 1:58 PM PT</span></div>
+  <div class="kv"><span class="k">BASIS</span><span class="v sub">watcher snapshot; wallets that share one funder merged by the watcher&#x27;s live funder map</span></div>
+  <div class="joinbox"><p>Get alerts on this coin. TELLS is in beta and open.</p><a class="btn btn-tgold btn-sm" href="https://t.me/tellsapp_alerts_bot?start=xray_PUSSY">Get alerts on Telegram</a> <a class="btn btn-tgold btn-sm" href="https://discord.gg/8wD4H64uf7">Get alerts on Discord</a></div>
+</article>
+<article class="coin-panel" id="panel-FLOAT">
+  <div class="cp-head"><div><div class="cp-sym">$FLOAT</div><div class="cp-name">FLOAT</div></div><span class="chip chip-tgold">SHOWCASE WATCH</span></div>
+  <div class="cp-mc">$2,841,620<span>MARKET CAP</span></div>
+  <div class="kv"><span class="k">CREATOR</span><span class="v mono">WLHv...JVVh</span></div>
+  <div class="kv"><span class="k">STATUS</span><span class="v"><span class="st st-holds">HOLDS</span> <span class="sub">Creator still holds 0.12% of supply.</span></span></div>
+  <div class="kv"><span class="k">CLUSTER</span><span class="v">1 proven wallet <span class="sub">tied to the creator by funding. 1 still holds the coin.</span></span></div>
+  <div class="kv"><span class="k">TOP 10</span><span class="v">26.9% of supply <span class="sub">with shared funders merged. Unmerged it reads 31.3%.</span></span></div>
+  
+  <div class="kv"><span class="k">THE STORY</span><span class="v">No wallet is tied to the creator by funding evidence. The creator still holds 0.11% of supply.</span></div>
+  <div class="kv"><span class="k">TOP HOLDERS</span><span class="v sub">merged by funder</span></div><ul class="holders"><li><span class="mono">GpMZ...xFbL</span><b>6.09%</b></li><li><span class="mono">EEAB...T52G</span><b>5.75%</b></li><li><span class="mono">6zMV...wNti</span><b>4.09%</b></li><li><span class="mono">BHRE...2AtX</span><b>2.99%</b></li><li><span class="mono">zV18...dcgi</span><b>2.85%</b></li></ul>
+  <div class="kv"><span class="k">LAST SNAPSHOT</span><span class="v">Nov 15, 1:59 PM PT</span></div>
+  <div class="kv"><span class="k">BASIS</span><span class="v sub">watcher snapshot; wallets that share one funder merged by the watcher&#x27;s live funder map</span></div>
+  <div class="joinbox"><p>Get alerts on this coin. TELLS is in beta and open.</p><a class="btn btn-tgold btn-sm" href="https://t.me/tellsapp_alerts_bot?start=xray_FLOAT">Get alerts on Telegram</a> <a class="btn btn-tgold btn-sm" href="https://discord.gg/8wD4H64uf7">Get alerts on Discord</a></div>
+</article>
+<article class="coin-panel" id="panel-Dacity">
+  <div class="cp-head"><div><div class="cp-sym">$Dacity</div><div class="cp-name">Dacity</div></div><span class="chip chip-tgold">SHOWCASE WATCH</span></div>
+  <div class="cp-mc">$484,103<span>MARKET CAP</span></div>
+  <div class="kv"><span class="k">CREATOR</span><span class="v mono">EUA3...PNKA</span></div>
+  <div class="kv"><span class="k">STATUS</span><span class="v"><span class="st st-exited">EXITED</span> <span class="sub">The creator holds nothing at the last read.</span></span></div>
+  <div class="kv"><span class="k">CLUSTER</span><span class="v">15 proven wallets <span class="sub">tied to the creator by funding. 0 still hold the coin.</span></span></div>
+  <div class="kv"><span class="k">TOP 10</span><span class="v">21.0% of supply <span class="sub">with shared funders merged. Unmerged it reads 26.9%.</span></span></div>
+  
+  <div class="kv"><span class="k">THE STORY</span><span class="v">No wallet is tied to the creator by funding evidence. The creator holds nothing.</span></div>
+  <div class="kv"><span class="k">TOP HOLDERS</span><span class="v sub">merged by funder</span></div><ul class="holders"><li><span class="mono">G2Uu...6y4b</span><b>6.98%</b></li><li><span class="mono">DoLq...hypg</span><b>5.24%</b></li><li><span class="mono">9CNy...vND2</span><b>2.48%</b></li><li><span class="mono">HWYp...NWKR</span><b>2.39%</b></li><li><span class="mono">AGdt...ii9v</span><b>2.23%</b></li></ul>
+  <div class="kv"><span class="k">LAST SNAPSHOT</span><span class="v">Nov 15, 1:51 PM PT</span></div>
+  <div class="kv"><span class="k">BASIS</span><span class="v sub">watcher snapshot; wallets that share one funder merged by the watcher&#x27;s live funder map</span></div>
+  <div class="joinbox"><p>Get alerts on this coin. TELLS is in beta and open.</p><a class="btn btn-tgold btn-sm" href="https://t.me/tellsapp_alerts_bot?start=xray_Dacity">Get alerts on Telegram</a> <a class="btn btn-tgold btn-sm" href="https://discord.gg/8wD4H64uf7">Get alerts on Discord</a></div>
+</article>
+<article class="coin-panel" id="panel-X">
+  <div class="cp-head"><div><div class="cp-sym">$X</div><div class="cp-name">apeonx</div></div><span class="chip chip-tgold">SHOWCASE WATCH</span></div>
+  <div class="cp-mc">$16,281<span>MARKET CAP</span></div>
+  <div class="kv"><span class="k">CREATOR</span><span class="v mono">TSLv...eokM</span></div>
+  <div class="kv"><span class="k">STATUS</span><span class="v"><span class="st st-exited">EXITED</span> <span class="sub">The creator holds nothing at the last read.</span></span></div>
+  <div class="kv"><span class="k">CLUSTER</span><span class="v">1 proven wallet <span class="sub">tied to the creator by funding. 0 still hold the coin.</span></span></div>
+  <div class="kv"><span class="k">TOP 10</span><span class="v">25.3% of supply <span class="sub">with shared funders merged. Unmerged it reads 59.3%.</span></span></div>
+  <div class="kv"><span class="k">PRESSURE</span><span class="v">Pressure: no cluster movement recorded in 24h <span class="sub">zero countable E2 events in the trailing 24h, and every proven cluster member&#x27;s latest balance read is zero or dust, so the cluster holds nothing it could have moved</span></span></div>
+  <div class="kv"><span class="k">THE STORY</span><span class="v">No wallet is tied to the creator by funding evidence. The creator holds nothing.</span></div>
+  <div class="kv"><span class="k">TOP HOLDERS</span><span class="v sub">merged by funder</span></div><ul class="holders"><li><span class="mono">6Mdm...rDzQ</span><b>35.58%</b></li><li><span class="mono">BM9C...jvMN</span><b>4.92%</b></li><li><span class="mono">4Dyo...u7tF</span><b>3.07%</b></li><li><span class="mono">Hhhm...g22N</span><b>2.73%</b></li><li><span class="mono">97fB...yrQm</span><b>2.49%</b></li></ul>
+  <div class="kv"><span class="k">LAST SNAPSHOT</span><span class="v">Nov 15, 1:52 PM PT</span></div>
+  <div class="kv"><span class="k">BASIS</span><span class="v sub">watcher snapshot; wallets that share one funder merged by the watcher&#x27;s live funder map</span></div>
+  <div class="joinbox"><p>Get alerts on this coin. TELLS is in beta and open.</p><a class="btn btn-tgold btn-sm" href="https://t.me/tellsapp_alerts_bot?start=xray_X">Get alerts on Telegram</a> <a class="btn btn-tgold btn-sm" href="https://discord.gg/8wD4H64uf7">Get alerts on Discord</a></div>
+</article>
+<article class="coin-panel" id="panel-GTA">
+  <div class="cp-head"><div><div class="cp-sym">$GTA</div><div class="cp-name">GTA memes</div></div><span class="chip chip-tgold">SHOWCASE WATCH</span></div>
+  <div class="cp-mc">$809,899<span>MARKET CAP</span></div>
+  <div class="kv"><span class="k">CREATOR</span><span class="v mono">TSLv...eokM</span></div>
+  <div class="kv"><span class="k">STATUS</span><span class="v"><span class="st st-exited">EXITED</span> <span class="sub">The creator holds nothing at the last read.</span></span></div>
+  <div class="kv"><span class="k">CLUSTER</span><span class="v">1 proven wallet <span class="sub">tied to the creator by funding. 0 still hold the coin.</span></span></div>
+  <div class="kv"><span class="k">TOP 10</span><span class="v">20.3% of supply <span class="sub">with shared funders merged. Unmerged it reads 24.5%.</span></span></div>
+  <div class="kv"><span class="k">PRESSURE</span><span class="v">Pressure: no cluster movement recorded in 24h <span class="sub">zero countable E2 events in the trailing 24h, and every proven cluster member&#x27;s latest balance read is zero or dust, so the cluster holds nothing it could have moved</span></span></div>
+  <div class="kv"><span class="k">THE STORY</span><span class="v">No wallet is tied to the creator by funding evidence. The creator holds nothing.</span></div>
+  <div class="kv"><span class="k">TOP HOLDERS</span><span class="v sub">merged by funder</span></div><ul class="holders"><li><span class="mono">5iSV...tLii</span><b>5.77%</b></li><li><span class="mono">7CP4...iu9z</span><b>3.15%</b></li><li><span class="mono">CcmC...uNMs</span><b>2.36%</b></li><li><span class="mono">GRPn...7H2o</span><b>2.23%</b></li><li><span class="mono">9ujR...KYhR</span><b>2.16%</b></li></ul>
+  <div class="kv"><span class="k">LAST SNAPSHOT</span><span class="v">Nov 15, 1:53 PM PT</span></div>
+  <div class="kv"><span class="k">BASIS</span><span class="v sub">watcher snapshot; wallets that share one funder merged by the watcher&#x27;s live funder map</span></div>
+  <div class="joinbox"><p>Get alerts on this coin. TELLS is in beta and open.</p><a class="btn btn-tgold btn-sm" href="https://t.me/tellsapp_alerts_bot?start=xray_GTA">Get alerts on Telegram</a> <a class="btn btn-tgold btn-sm" href="https://discord.gg/8wD4H64uf7">Get alerts on Discord</a></div>
+</article>
+<article class="coin-panel" id="panel-mihao">
+  <div class="cp-head"><div><div class="cp-sym">$mihao</div><div class="cp-name">ni hao cat</div></div><span class="chip chip-tgold">SHOWCASE WATCH</span></div>
+  <div class="cp-mc">$15,120,774<span>MARKET CAP</span></div>
+  <div class="kv"><span class="k">CREATOR</span><span class="v mono">9tH2...amAp</span></div>
+  <div class="kv"><span class="k">STATUS</span><span class="v"><span class="st st-moved">MOVED</span> <span class="sub">Creator held 8.93% of supply when the watch was seeded. Holds 3.20% now.</span></span></div>
+  <div class="kv"><span class="k">CLUSTER</span><span class="v">9 proven wallets <span class="sub">tied to the creator by funding. 1 still holds the coin.</span></span></div>
+  <div class="kv"><span class="k">TOP 10</span><span class="v">21.6% of supply <span class="sub">with shared funders merged. Unmerged it reads 22.0%.</span></span></div>
+  
+  <div class="kv"><span class="k">THE STORY</span><span class="v">No wallet is tied to the creator by funding evidence. The creator still holds 8.93% of supply.</span></div>
+  <div class="kv"><span class="k">TOP HOLDERS</span><span class="v sub">merged by funder</span></div><ul class="holders"><li><span class="mono">CLoF...6NWU</span><b>5.74%</b></li><li><span class="mono">9tH2...amAp</span><b>3.20%</b></li><li><span class="mono">2EJP...Dpht</span><b>2.78%</b></li><li><span class="mono">AvGi...GdMP</span><b>2.08%</b></li><li><span class="mono">Be24...nRR6</span><b>1.74%</b></li></ul>
+  <div class="kv"><span class="k">LAST SNAPSHOT</span><span class="v">Nov 15, 1:59 PM PT</span></div>
+  <div class="kv"><span class="k">BASIS</span><span class="v sub">watcher snapshot; wallets that share one funder merged by the watcher&#x27;s live funder map</span></div>
+  <div class="joinbox"><p>Get alerts on this coin. TELLS is in beta and open.</p><a class="btn btn-tgold btn-sm" href="https://t.me/tellsapp_alerts_bot?start=xray_mihao">Get alerts on Telegram</a> <a class="btn btn-tgold btn-sm" href="https://discord.gg/8wD4H64uf7">Get alerts on Discord</a></div>
+</article>
+<article class="coin-panel" id="panel-HOLD">
+  <div class="cp-head"><div><div class="cp-sym">$HOLD</div><div class="cp-name">Hold</div></div><span class="chip chip-tgold">SHOWCASE WATCH</span></div>
+  <div class="cp-mc">$16,308<span>MARKET CAP</span></div>
+  <div class="kv"><span class="k">CREATOR</span><span class="v mono">TSLv...eokM</span></div>
+  <div class="kv"><span class="k">STATUS</span><span class="v"><span class="st st-exited">EXITED</span> <span class="sub">The creator holds nothing at the last read.</span></span></div>
+  <div class="kv"><span class="k">CLUSTER</span><span class="v">1 proven wallet <span class="sub">tied to the creator by funding. 0 still hold the coin.</span></span></div>
+  <div class="kv"><span class="k">TOP 10</span><span class="v">20.6% of supply <span class="sub">with shared funders merged. Unmerged it reads 55.4%.</span></span></div>
+  <div class="kv"><span class="k">PRESSURE</span><span class="v">Pressure: no cluster movement recorded in 24h <span class="sub">zero countable E2 events in the trailing 24h, and every proven cluster member&#x27;s latest balance read is zero or dust, so the cluster holds nothing it could have moved</span></span></div>
+  <div class="kv"><span class="k">THE STORY</span><span class="v">No wallet is tied to the creator by funding evidence. The creator holds nothing.</span></div>
+  <div class="kv"><span class="k">TOP HOLDERS</span><span class="v sub">merged by funder</span></div><ul class="holders"><li><span class="mono">GUsi...Ujbb</span><b>35.93%</b></li><li><span class="mono">DuAR...c6s6</span><b>4.31%</b></li><li><span class="mono">JCU9...qUJN</span><b>3.62%</b></li><li><span class="mono">DBbu...hrmt</span><b>3.21%</b></li><li><span class="mono">5gn6...e7oC</span><b>1.68%</b></li></ul>
+  <div class="kv"><span class="k">LAST SNAPSHOT</span><span class="v">Nov 15, 1:54 PM PT</span></div>
+  <div class="kv"><span class="k">BASIS</span><span class="v sub">watcher snapshot; wallets that share one funder merged by the watcher&#x27;s live funder map</span></div>
+  <div class="joinbox"><p>Get alerts on this coin. TELLS is in beta and open.</p><a class="btn btn-tgold btn-sm" href="https://t.me/tellsapp_alerts_bot?start=xray_HOLD">Get alerts on Telegram</a> <a class="btn btn-tgold btn-sm" href="https://discord.gg/8wD4H64uf7">Get alerts on Discord</a></div>
+</article>
+<article class="coin-panel" id="panel-AgenC">
+  <div class="cp-head"><div><div class="cp-sym">$AgenC</div><div class="cp-name">AgenC</div></div><span class="chip chip-tgold">SHOWCASE WATCH</span></div>
+  <div class="cp-mc">$993,519<span>MARKET CAP</span></div>
+  <div class="kv"><span class="k">CREATOR</span><span class="v mono">8ZN7...86FP</span></div>
+  <div class="kv"><span class="k">STATUS</span><span class="v"><span class="st st-exited">EXITED</span> <span class="sub">The creator holds nothing at the last read.</span></span></div>
+  <div class="kv"><span class="k">CLUSTER</span><span class="v">34 proven wallets <span class="sub">tied to the creator by funding. 0 still hold the coin.</span></span></div>
+  <div class="kv"><span class="k">TOP 10</span><span class="v">55.1% of supply <span class="sub">with shared funders merged. Unmerged it reads 60.7%.</span></span></div>
+  
+  <div class="kv"><span class="k">THE STORY</span><span class="v">No wallet is tied to the creator by funding evidence. The creator holds nothing.</span></div>
+  <div class="kv"><span class="k">TOP HOLDERS</span><span class="v sub">merged by funder</span></div><ul class="holders"><li><span class="mono">9SY5...k6ra</span><b>30.00%</b></li><li><span class="mono">FtVq...WnBx</span><b>10.33%</b></li><li><span class="mono">B3cL...GGbd</span><b>6.48%</b></li><li><span class="mono">BUMh...MwC1</span><b>6.45%</b></li><li><span class="mono">CbWm...eZQG</span><b>1.52%</b></li></ul>
+  <div class="kv"><span class="k">LAST SNAPSHOT</span><span class="v">Nov 15, 1:54 PM PT</span></div>
+  <div class="kv"><span class="k">BASIS</span><span class="v sub">watcher snapshot; wallets that share one funder merged by the watcher&#x27;s live funder map</span></div>
+  <div class="joinbox"><p>Get alerts on this coin. TELLS is in beta and open.</p><a class="btn btn-tgold btn-sm" href="https://t.me/tellsapp_alerts_bot?start=xray_AgenC">Get alerts on Telegram</a> <a class="btn btn-tgold btn-sm" href="https://discord.gg/8wD4H64uf7">Get alerts on Discord</a></div>
+</article>
+<article class="coin-panel" id="panel-BIG">
+  <div class="cp-head"><div><div class="cp-sym">$BIG</div><div class="cp-name">Big Guy</div></div><span class="chip chip-tgold">SHOWCASE WATCH</span></div>
+  <div class="cp-mc">$407,097<span>MARKET CAP</span></div>
+  <div class="kv"><span class="k">CREATOR</span><span class="v mono">TSLv...eokM</span></div>
+  <div class="kv"><span class="k">STATUS</span><span class="v"><span class="st st-exited">EXITED</span> <span class="sub">The creator holds nothing at the last read.</span></span></div>
+  <div class="kv"><span class="k">CLUSTER</span><span class="v">1 proven wallet <span class="sub">tied to the creator by funding. 0 still hold the coin.</span></span></div>
+  <div class="kv"><span class="k">TOP 10</span><span class="v">22.3% of supply <span class="sub">with shared funders merged. Unmerged it reads 24.6%.</span></span></div>
+  <div class="kv"><span class="k">PRESSURE</span><span class="v">Pressure: no cluster movement recorded in 24h <span class="sub">zero countable E2 events in the trailing 24h, and every proven cluster member&#x27;s latest balance read is zero or dust, so the cluster holds nothing it could have moved</span></span></div>
+  <div class="kv"><span class="k">THE STORY</span><span class="v">No wallet is tied to the creator by funding evidence. The creator holds nothing.</span></div>
+  <div class="kv"><span class="k">TOP HOLDERS</span><span class="v sub">merged by funder</span></div><ul class="holders"><li><span class="mono">5Tec...QkYK</span><b>4.08%</b></li><li><span class="mono">GRfe...xzvP</span><b>2.95%</b></li><li><span class="mono">3J57...qwCZ</span><b>2.79%</b></li><li><span class="mono">6paX...xHiD</span><b>2.59%</b></li><li><span class="mono">GTRW...Spv4</span><b>2.45%</b></li></ul>
+  <div class="kv"><span class="k">LAST SNAPSHOT</span><span class="v">Nov 15, 1:55 PM PT</span></div>
+  <div class="kv"><span class="k">BASIS</span><span class="v sub">watcher snapshot; wallets that share one funder merged by the watcher&#x27;s live funder map</span></div>
+  <div class="joinbox"><p>Get alerts on this coin. TELLS is in beta and open.</p><a class="btn btn-tgold btn-sm" href="https://t.me/tellsapp_alerts_bot?start=xray_BIG">Get alerts on Telegram</a> <a class="btn btn-tgold btn-sm" href="https://discord.gg/8wD4H64uf7">Get alerts on Discord</a></div>
+</article>
+</section>
+
+<div class="sec-label">Latest reads</div>
+<section class="prose">
+  <p><b>READS — one-time wallet reads, not live watches.</b> Each read below is a one-time forensic read at the time stated. Nobody is monitoring these coins, and a read does not update.</p>
+</section>
+<section class="coin-grid">
+<article class="coin-panel" style="border-style:dashed">
+  <div class="cp-head"><div><div class="cp-sym">$DACITY</div><div class="cp-name">GTAVI AudaCity (the second Dacity)</div></div><span class="chip">ONE-TIME READ</span></div>
+  <div class="kv"><span class="k">THE READ</span><span class="v">Second coin on the ticker. Dev holds zero, no whale on top: the biggest wallets are identical 0.18% slivers, top ten just 1.76% combined.</span></div>
+  <div class="kv"><span class="k">READ ON</span><span class="v">Nov 10, 4:57 PM PT</span></div>
+  <div class="kv"><span class="k">SOURCE</span><span class="v">Radar pull + hand read, Nov 10 2026</span></div>
+  <div class="kv"><span class="k">MINT</span><span class="v mono">5tBX...pump</span></div>
+  <div class="kv"><span class="k">THE POST</span><span class="v"><a href="https://x.com/TELLSAPP/status/2120324389262795163">Read it on X</a></span></div>
+  <p class="birth-note"><b>A one-time read, not a live watch. Nobody is monitoring this coin.</b> The verdict is what the read found at the time stated. It does not update. A watched coin gets live alerts; a read coin gets this and nothing more, until it is watched.</p>
+  <div class="joinbox"><p>This coin was read once. It is not watched. Join the bot for alerts on the coins TELLS watches, plus the Sunday digest.</p><a class="btn btn-tgold btn-sm" href="https://t.me/tellsapp_alerts_bot?start=xray_DACITY">Get alerts on Telegram</a> <a class="btn btn-tgold btn-sm" href="https://discord.gg/8wD4H64uf7">Get alerts on Discord</a></div>
+</article>
+</section>
+
+<div class="sep-panel" style="margin-top:38px"><div class="sec-label" style="margin:0 0 10px">One line of separation</div>
+<p>TELLS is not BONDED. A TELLS alert says something moved. It says nothing about any bond. The two products share a builder and nothing else.</p>
+<p>Every dev has a tell. Now something is watching for it.</p>
+</div>
+<div class="cta-row">
+  <a class="btn btn-tgold" href="/tells/log">Read the public catch log</a>
+  <a class="btn btn-ghost" href="/tells/article">The full story</a>
+  <a class="btn btn-ghost" href="/tells/security">Security</a>
+</div>
+<footer class="site">
+    <p class="fl"><b>TELLS watches and reports. It does not trade, and it does not promise.</b> Most coins go to zero. A guard is not a guarantee. Reads on this page are generated from live chain data and refresh periodically. Last generated Nov 15, 2:01 PM PT.</p>
+  </footer>
+<div class="pfoot">BONDED · <a class="pfoot-a" href="/methodology.html">Methodology</a> · <a class="pfoot-a" href="/door/">Post a Bond</a></div>
+
+</div>
+<script>
+var WATCHED = {"FZxHLUGiGchY5uvvoeqh1EKiXTrGdN67WUBhUc1fLoat": "PUSSY", "Bv1a7cEj5aRnJQhMw4kRQqAFesMSd5LwcDnUzq52BMmr": "FLOAT", "nxPqZ4F7ux8Vph5NFu25rEP6Kx9Gr1U6Fmj36Rjpump": "Dacity", "9VZerdNL1x6EjetDqRnh5bYcdmk1y8sLAGs1ybzGpump": "X", "EJv8TgQfN6gtYN8Z6KGyBeNPbVYmogmudfxiRA2Fpump": "GTA", "4CxjZyMNoF1p6eXHXHv1TWpS2X47CuUmLwtGe18spump": "mihao", "4iJ7xEQrUvVUQH9KVStvw3FaY2PZDd7RtR4L9zx2pump": "HOLD", "5yC9BM8KUsJTPbWPLfA2N8qH1s9V8DQ3Vcw1G6Jdpump": "AgenC", "34DXEU2ttEtBSb1TqGJm7izgvYTTkqKcCoiNWdPDpump": "BIG"};
+var PRESEED = null;   // null while the shelf loads, false if it failed
+var PRESEED_BY_MINT = {};
+var ROLE_LABEL = {creator: 'the creator', funded: 'funded by the creator',
+  'funded-live': 'funded by the creator (live)', funder: 'funders of cluster wallets'};
+var ROLE_ORDER = ['creator', 'funded', 'funded-live', 'funder'];
+
+function esc(s){
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; });
+}
+function fmtDate(ts){
+  var d = new Date(ts * 1000);
+  return d.toLocaleDateString('en-US', {timeZone:'America/Los_Angeles', month:'short', day:'numeric', year:'numeric'}) +
+    ', ' + d.toLocaleTimeString('en-US', {timeZone:'America/Los_Angeles', hour:'numeric', minute:'2-digit'}) + ' PT';
+}
+function fmtBal(v){
+  if (v === 0) return '0';
+  if (v >= 0.01) return v.toLocaleString('en-US', {maximumFractionDigits: 2});
+  return String(v);
+}
+function loadShelf(){
+  fetch('preseed-data.json').then(function(r){
+    if(!r.ok) throw new Error(r.status);
+    return r.json();
+  }).then(function(data){
+    PRESEED = data.coins || [];
+    PRESEED.forEach(function(e){ PRESEED_BY_MINT[e.mint] = e; });
+    fillPicker(PRESEED);
+  }).catch(function(){
+    PRESEED = false;
+    document.getElementById('seed-pick').innerHTML = '<option value="">The shelf could not be loaded</option>';
+  });
+}
+function fillPicker(coins){
+  var shelf = coins.filter(function(e){ return !e.watched; });
+  var sel = document.getElementById('seed-pick');
+  var count = document.getElementById('shelf-count');
+  if (!shelf.length){
+    sel.innerHTML = '<option value="">No birth maps on the shelf yet</option>';
+    count.textContent = 'TELLS maps every graduation the night it happens. New maps land by morning.';
+    return;
+  }
+  var shown = shelf.slice(0, 50);
+  var opts = ['<option value="">Pick a mapped coin, newest first</option>'];
+  shown.forEach(function(e){
+    opts.push('<option value="' + esc(e.mint) + '">$' + esc(e.symbol || '?') +
+      (e.seeded_ts ? ' · mapped ' + esc(fmtDate(e.seeded_ts)) : '') + '</option>');
+  });
+  if (shelf.length > shown.length){
+    opts.push('<option value="" disabled>...and ' + (shelf.length - shown.length) +
+      ' more mapped coins. Paste a contract address to look one up.</option>');
+  }
+  sel.innerHTML = opts.join('');
+  count.textContent = shelf.length + ' coin' + (shelf.length === 1 ? '' : 's') + ' mapped at birth so far.';
+}
+function pickSeed(){
+  var sel = document.getElementById('seed-pick');
+  if (!sel.value) return;
+  document.getElementById('ca').value = sel.value;
+  xrayGo();
+}
+function roleBreakdown(e){
+  var by = e.members_by_role || {};
+  var parts = [];
+  ROLE_ORDER.forEach(function(r){ if (by[r]) parts.push(by[r] + ' ' + ROLE_LABEL[r]); });
+  for (var r in by){ if (ROLE_ORDER.indexOf(r) < 0) parts.push(by[r] + ' ' + r); }
+  return parts.join(' · ');
+}
+function renderBirthCard(e){
+  var statusRow = '';
+  if (e.creator_status){
+    var cls = e.creator_status === 'holds' ? 'st-holds' : 'st-exited';
+    var lbl = e.creator_status === 'holds' ? 'HOLDS' : 'EXITED';
+    var bal = (e.creator_balance_ui != null) ? ' Balance read at seeding: ' + fmtBal(e.creator_balance_ui) + ' tokens.' : '';
+    statusRow = '<div class="kv"><span class="k">CREATOR STATUS</span><span class="v"><span class="st ' + cls + '">' + lbl +
+      '</span> <span class="sub">at seeding.' + esc(bal) + '</span></span></div>';
+  }
+  var bornRow = e.created_ts ? '<div class="kv"><span class="k">COIN BORN</span><span class="v">' + esc(fmtDate(e.created_ts)) + '</span></div>' : '';
+  var mappedRow = e.seeded_ts ? '<div class="kv"><span class="k">MAPPED</span><span class="v">' + esc(fmtDate(e.seeded_ts)) + '</span></div>' : '';
+  var mcRow = (e.mc_at_seed_usd != null) ? '<div class="kv"><span class="k">MC AT SEED</span><span class="v">$' +
+    Number(e.mc_at_seed_usd).toLocaleString('en-US', {maximumFractionDigits: 0}) + '</span></div>' : '';
+  return '<article class="coin-panel">' +
+    '<div class="cp-head"><div><div class="cp-sym">$' + esc(e.symbol || '?') +
+    '</div><div class="cp-name">preseeded at birth</div></div><span class="chip">BIRTH MAP</span></div>' +
+    '<div class="kv"><span class="k">MINT</span><span class="v mono breakall">' + esc(e.mint) + '</span></div>' +
+    '<div class="kv"><span class="k">CREATOR</span><span class="v mono breakall">' + esc(e.creator) + '</span></div>' +
+    statusRow +
+    '<div class="kv"><span class="k">CLUSTER</span><span class="v">' + e.cluster_size + ' proven wallet' +
+    (e.cluster_size === 1 ? '' : 's') + ' at birth <span class="sub">' + esc(roleBreakdown(e)) + '</span></span></div>' +
+    bornRow + mappedRow + mcRow +
+    '<p class="birth-note"><b>This is a birth map, not a live watch. Nobody is monitoring this coin.</b> ' +
+    'Balances are as read at seeding and do not update. A watched coin gets live alerts; a mapped coin gets this snapshot and nothing more, until it is watched.</p>' +
+    '<div class="joinbox"><p>This coin is mapped, not watched. Join the bot for alerts on the coins TELLS watches, plus the Sunday digest.</p>' +
+    '<a class="btn btn-tgold btn-sm" href="https://t.me/tellsapp_alerts_bot?start=xray_' + esc(e.symbol || 'lookup') + '">Get alerts on Telegram</a> ' +
+    '<a class="btn btn-tgold btn-sm" href="https://discord.gg/8wD4H64uf7">Get alerts on Discord</a>' +
+    '</div>' +
+    '</article>';
+}
+function renderNotMapped(){
+  return '<article class="coin-panel">' +
+    '<div class="cp-head"><div><div class="cp-sym">Not mapped yet</div></div><span class="chip">NO SEED</span></div>' +
+    '<p class="birth-note" style="border-top:none;padding-top:4px">Not mapped yet. TELLS maps every graduation the night it happens. ' +
+    'If this coin graduated, its map lands by morning. If it never graduated, it may never be mapped: the shelf follows graduations, not launches.</p>' +
+    '<div class="joinbox"><p>Join the alerts bot and you get alerts on the coins TELLS watches, plus the Sunday digest.</p>' +
+    '<a class="btn btn-tgold btn-sm" href="https://t.me/tellsapp_alerts_bot?start=xray_lookup">Get TELLS alerts on Telegram</a> ' +
+    '<a class="btn btn-tgold btn-sm" href="https://discord.gg/8wD4H64uf7">Get alerts on Discord</a>' +
+    '</div>' +
+    '</article>';
+}
+function pointAtPanel(sym, msg){
+  var panel = document.getElementById('panel-' + sym);
+  if (panel){ panel.classList.add('hl'); panel.scrollIntoView({behavior:'smooth', block:'start'}); }
+  msg.innerHTML = '<b>TELLS watches this coin.</b> Its read is highlighted below.';
+  msg.style.display = 'block';
+}
+function xrayGo(){
+  var v = document.getElementById('ca').value.trim();
+  var msg = document.getElementById('paste-msg');
+  var out = document.getElementById('lookup-result');
+  document.querySelectorAll('.coin-panel').forEach(function(p){ p.classList.remove('hl'); });
+  var sym = WATCHED[v];
+  if (!sym){
+    var up = v.toUpperCase().replace(/^\$/, '');
+    for (var k in WATCHED){ if (WATCHED[k] === up){ sym = up; break; } }
+  }
+  if (sym){
+    out.innerHTML = '';
+    pointAtPanel(sym, msg);
+    return;
+  }
+  var entry = PRESEED_BY_MINT[v];
+  if (!entry && PRESEED){
+    var upv = v.toUpperCase().replace(/^\$/, '');
+    for (var i = 0; i < PRESEED.length; i++){
+      if ((PRESEED[i].symbol || '').toUpperCase() === upv){ entry = PRESEED[i]; break; }
+    }
+  }
+  if (entry && !entry.watched){
+    out.innerHTML = renderBirthCard(entry);
+    msg.style.display = 'none';
+    out.scrollIntoView({behavior:'smooth', block:'start'});
+    return;
+  }
+  if (entry && entry.watched){
+    out.innerHTML = '';
+    pointAtPanel(entry.symbol, msg);
+    return;
+  }
+  out.innerHTML = '';
+  if (PRESEED === false){
+    msg.innerHTML = '<b>Not a watched coin, and the birth-map shelf could not be loaded.</b> The watched coins are below. Try the lookup again in a moment.';
+  } else if (PRESEED === null){
+    msg.innerHTML = '<b>Not a watched coin.</b> The birth-map shelf is still loading. Give it a second and read it again.';
+  } else {
+    out.innerHTML = renderNotMapped();
+    msg.style.display = 'none';
+    out.scrollIntoView({behavior:'smooth', block:'start'});
+    return;
+  }
+  msg.style.display = 'block';
+}
+document.getElementById('ca').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ xrayGo(); } });
+loadShelf();
+</script>
+</body>
+</html>
